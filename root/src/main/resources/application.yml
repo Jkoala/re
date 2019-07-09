@@ -20,6 +20,17 @@ spring:
       max-open-prepared-statements: 20
       username: root
       password: root
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+    enabled: true
+
+
 # 配置debug模式
 debug: true
 #配置mybatis相关
@@ -27,21 +38,6 @@ mybatis:
   configuration:
     # 配置打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-# 配置服务器相关
+    # 配置服务器相关
 server:
   port: 80
-# 配置日志
-#person:
-#  lastName: zhangshan
-#  age: 11
-#  boss: false
-#  birth: 2017/12/12
-#  maps: {k1: v1, k2: v2}
-#  lists:
-#    - lisi
-#    - zhaoliu
-#  dog: {name: 1, age: 2}
-#logging:
-#  level: root: info
-#  pattern:
-#    console:

@@ -5,8 +5,13 @@ import cn.ljtnono.root.mapper.ReBlogDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * 用于演示
@@ -15,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  *  @version 1.0
  *
 */
-@RestController
+@Controller
 public class DemoController {
 
     @Autowired
@@ -24,8 +29,17 @@ public class DemoController {
     private Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     @GetMapping("/hello")
+    @ResponseBody
     public ReBlog hello() {
         logger.debug("hello");
         return reBlogDao.selectByPrimaryKey(1);
     }
+
+    @GetMapping("/s")
+    public String success(HttpServletRequest request) {
+        request.setAttribute("name", "haozz");
+        return "success";
+    }
+
+
 }
