@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 */
 @SpringBootApplication
 @MapperScan(value = {"cn.ljtnono.root.mapper"})
-public class RootApplication {
+public class ReApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RootApplication.class, args);
+        SpringApplication.run(ReApplication.class, args);
     }
 }
