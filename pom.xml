@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.ljtnono</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>re</artifactId>
     <version>1.0.0</version>
-    <name>root</name>
+    <name>re</name>
 <!--  版本管理  -->
     <properties>
         <java.version>1.8</java.version>
