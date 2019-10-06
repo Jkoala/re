@@ -1,56 +1,67 @@
 package cn.ljtnono.root.entity;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.util.Date;
 
 /**
- * re_user
- * @author 
- */
-public class ReUser implements Serializable {
+ *  用户实体对象
+ *  @author 凌家童
+ *  @date 2019/10/6
+ *  @version 1.0
+ *
+*/
+public class ReUser {
+
     private Integer id;
 
-    /**
-     * 用户名
-     */
     private String username;
 
-    /**
-     * 密码
-     */
+    @TableField("`password`")
     private String password;
 
-    /**
-     * qq
-     */
     private String qq;
 
-    /**
-     * 电话
-     */
     private String tel;
 
-    /**
-     * 邮箱
-     */
     private String email;
 
-    /**
-     * 创建时间
-     */
     private Date createTime;
 
-    /**
-     * 最后修改时间
-     */
     private Date modifyTime;
 
-    /**
-     * 0 已删除 1 正常
-     */
-    private Boolean delete;
+    @TableField("`delete`")
+    private Integer delete;
 
-    private static final long serialVersionUID = 1L;
+    private ReUser(Builder builder) {
+        setId(builder.id);
+        setUsername(builder.username);
+        setPassword(builder.password);
+        setQq(builder.qq);
+        setTel(builder.tel);
+        setEmail(builder.email);
+        setCreateTime(builder.createTime);
+        setModifyTime(builder.modifyTime);
+        setDelete(builder.delete);
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public static Builder newBuilder(ReUser copy) {
+        Builder builder = new Builder();
+        builder.id = copy.getId();
+        builder.username = copy.getUsername();
+        builder.password = copy.getPassword();
+        builder.qq = copy.getQq();
+        builder.tel = copy.getTel();
+        builder.email = copy.getEmail();
+        builder.createTime = copy.getCreateTime();
+        builder.modifyTime = copy.getModifyTime();
+        builder.delete = copy.getDelete();
+        return builder;
+    }
 
     public Integer getId() {
         return id;
@@ -116,70 +127,79 @@ public class ReUser implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-    public Boolean getDelete() {
+    public Integer getDelete() {
         return delete;
     }
 
-    public void setDelete(Boolean delete) {
+    public void setDelete(Integer delete) {
         this.delete = delete;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
+
+    public static final class Builder {
+        private Integer id;
+        private String username;
+        private String password;
+        private String qq;
+        private String tel;
+        private String email;
+        private Date createTime;
+        private Date modifyTime;
+        private Integer delete;
+
+        private Builder() {
         }
-        if (that == null) {
-            return false;
+
+        public Builder id(Integer val) {
+            id = val;
+            return this;
         }
-        if (getClass() != that.getClass()) {
-            return false;
+
+        public Builder username(String val) {
+            username = val;
+            return this;
         }
-        ReUser other = (ReUser) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getQq() == null ? other.getQq() == null : this.getQq().equals(other.getQq()))
-            && (this.getTel() == null ? other.getTel() == null : this.getTel().equals(other.getTel()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getModifyTime() == null ? other.getModifyTime() == null : this.getModifyTime().equals(other.getModifyTime()))
-            && (this.getDelete() == null ? other.getDelete() == null : this.getDelete().equals(other.getDelete()));
+
+        public Builder password(String val) {
+            password = val;
+            return this;
+        }
+
+        public Builder qq(String val) {
+            qq = val;
+            return this;
+        }
+
+        public Builder tel(String val) {
+            tel = val;
+            return this;
+        }
+
+        public Builder email(String val) {
+            email = val;
+            return this;
+        }
+
+        public Builder createTime(Date val) {
+            createTime = val;
+            return this;
+        }
+
+        public Builder modifyTime(Date val) {
+            modifyTime = val;
+            return this;
+        }
+
+        public Builder delete(Integer val) {
+            delete = val;
+            return this;
+        }
+
+        public ReUser build() {
+            return new ReUser(this);
+        }
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getQq() == null) ? 0 : getQq().hashCode());
-        result = prime * result + ((getTel() == null) ? 0 : getTel().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + ((getModifyTime() == null) ? 0 : getModifyTime().hashCode());
-        result = prime * result + ((getDelete() == null) ? 0 : getDelete().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", qq=").append(qq);
-        sb.append(", tel=").append(tel);
-        sb.append(", email=").append(email);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", modifyTime=").append(modifyTime);
-        sb.append(", delete=").append(delete);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public ReUser() {
     }
 }

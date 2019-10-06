@@ -1,27 +1,54 @@
 package cn.ljtnono.root.controller;
 
-import cn.ljtnono.root.service.ReBlogService;
+
+import cn.ljtnono.root.pojo.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import cn.ljtnono.root.controller.common.BaseController;
 
 /**
- *  博客类的controller
- *  @author 凌家童
- *  @date 2019/7/8
- *  @version 1.0
+ * <p>
+ *  前端控制器
+ * </p>
  *
-*/
-@Controller
-public class ReBlogController {
+ * @author ljt
+ * @since 2019-10-06
+ */
+@RestController
+@RequestMapping("/root/re-blog")
+public class ReBlogController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(ReBlogController.class);
 
-    @Autowired
-    private ReBlogService reBlogService;
+    @GetMapping("/{id}")
+    public JsonResult getBlogById(@PathVariable String id) {
 
+        return null;
+    }
 
+    @GetMapping("/")
+    public JsonResult getBlogAll() {
 
+        return null;
+    }
 
+    @GetMapping("/page/{page}")
+    public JsonResult getBlogPageList(@PathVariable String page) {
+
+        return null;
+    }
+
+    @PostMapping("/publish")
+    public JsonResult publishBlog() {
+
+        return null;
+    }
+
+    @PostMapping("/update")
+    public JsonResult updateBlog() {
+
+        return null;
+    }
 }

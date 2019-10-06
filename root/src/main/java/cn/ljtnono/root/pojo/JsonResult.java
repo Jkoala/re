@@ -126,14 +126,15 @@ public class JsonResult implements Serializable {
     }
 
     /**
-     * 通用的fial类型
-     * @return fail
+     * 通用的fail类型
+     * @param status 请求返回的状态响应码
+     * @return JsonResult对象
      */
-    public static JsonResult fail(Integer status,String message) {
+    public static JsonResult fail(Integer status) {
         JsonResult fail = new JsonResult();
         fail.setRequest("fail");
         fail.setStatus(status);
-        fail.setMessage(message);
+        fail.setMessage("请求失败！");
         fail.setData(null);
         fail.setTotalCount(null);
         return fail;
@@ -195,6 +196,5 @@ public class JsonResult implements Serializable {
             return new JsonResult(this);
         }
     }
-    private JsonResult() {
-    }
+    private JsonResult() {}
 }

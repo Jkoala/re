@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  @version 1.0
  *
 */
-@SpringBootApplication  // SpringBootApplication 注解告诉springboot这是一个springboot主程序
+@SpringBootApplication
 @MapperScan(value = {"cn.ljtnono.root.mapper"})
 public class RootApplication {
     public static void main(String[] args) {
