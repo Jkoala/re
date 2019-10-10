@@ -31,7 +31,7 @@ public class ReUser {
     private Date modifyTime;
 
     @TableField("`delete`")
-    private Integer delete;
+    private byte delete;
 
     private ReUser(Builder builder) {
         setId(builder.id);
@@ -127,14 +127,16 @@ public class ReUser {
         this.modifyTime = modifyTime;
     }
 
-    public Integer getDelete() {
+    public byte getDelete() {
         return delete;
     }
 
-    public void setDelete(Integer delete) {
+    public void setDelete(byte delete) {
         this.delete = delete;
     }
 
+    public ReUser() {
+    }
 
     public static final class Builder {
         private Integer id;
@@ -145,7 +147,7 @@ public class ReUser {
         private String email;
         private Date createTime;
         private Date modifyTime;
-        private Integer delete;
+        private byte delete;
 
         private Builder() {
         }
@@ -190,7 +192,7 @@ public class ReUser {
             return this;
         }
 
-        public Builder delete(Integer val) {
+        public Builder delete(byte val) {
             delete = val;
             return this;
         }
@@ -198,8 +200,5 @@ public class ReUser {
         public ReUser build() {
             return new ReUser(this);
         }
-    }
-
-    public ReUser() {
     }
 }
