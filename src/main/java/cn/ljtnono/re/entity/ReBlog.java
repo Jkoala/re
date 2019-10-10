@@ -8,5 +8,9 @@ package cn.ljtnono.re.entity;
  */
 public class ReBlog {
 
+    private Integer id;
+
+    private String title;
+
 
 }
