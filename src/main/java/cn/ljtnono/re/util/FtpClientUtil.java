@@ -3,6 +3,11 @@ package cn.ljtnono.re.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * @author ljt
  * @date 2019/10/15
@@ -33,8 +38,20 @@ public class FtpClientUtil {
     /** ftp服务器基础目录*/
     public static String FTP_SERVER_DIR_BASE = "";
 
+
     static {
         //TODO 读取properties文件，并且将这些值都设置好
+        Properties properties = new Properties();
+        try {
+            properties.load(FtpClientUtil.class.getResourceAsStream("/ftpconfig.properties"));
+            FTP_SERVER_ADDR = properties.getProperty("ftp.server.addr");
+            FTP_SERVER_PORT = Integer.parseInt(properties.getProperty("ftp.server.port"));
+            FTP_SERVER_USER = properties.getProperty("ftp.server.user");
+            FTP_SERVER_PASSWORD = properties.getProperty("ftp.server.password");
+            FTP_SERVER_DIR_BASE = properties.getProperty("ftp.server.dir.base");
+        } catch (IOException e) {
+            logger.info("ftp配置文件路径错误");
+        }
     }
 
     public static boolean uploadFile() {
@@ -47,4 +64,7 @@ public class FtpClientUtil {
 
     }
 
+    public static void main(String[] args) {
+        System.out.println(FtpClientUtil.FTP_SERVER_ADDR);
+    }
 }
