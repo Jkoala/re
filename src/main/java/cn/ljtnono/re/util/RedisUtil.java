@@ -1,5 +1,7 @@
 package cn.ljtnono.re.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
@@ -21,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     private RedisTemplate<String, Object> redisTemplate;
+
+    private Logger logger = LoggerFactory.getLogger(RedisUtil.class);
     /**
      * 默认缓存时间 1天
      */

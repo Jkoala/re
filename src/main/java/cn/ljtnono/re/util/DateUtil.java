@@ -13,6 +13,12 @@ import java.util.Date;
 */
 public class DateUtil {
 
+
+    public enum DateStyleEnum {
+
+    }
+
+
     private static final Integer MINUTE = 60;
 
     /**
