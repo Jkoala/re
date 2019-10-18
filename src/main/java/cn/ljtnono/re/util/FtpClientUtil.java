@@ -1,13 +1,12 @@
 package cn.ljtnono.re.util;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -60,15 +59,21 @@ public class FtpClientUtil {
         }
     }
 
-    public static boolean uploadFile(final byte[] fileBytes) {
+    public static boolean uploadFile(String ftpFileName) {
         FTPClient ftpClient = new FTPClient();
+        InputStream in;
         try {
+            in = new BufferedInputStream(new FileInputStream("C:\\Users\\GEEK\\Desktop\\tf.doc"));
             ftpClient.connect(FTP_SERVER_ADDR, FTP_SERVER_PORT);
             boolean login = ftpClient.login(FTP_SERVER_USER, FTP_SERVER_PASSWORD);
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            ftpClient.enterLocalPassiveMode();
+            boolean b = ftpClient.storeFile(ftpFileName, in);
+            return b;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return true;
     }
 
 
@@ -78,6 +83,6 @@ public class FtpClientUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(uploadFile(null));
+        System.out.println(uploadFile("tc.doc"));
     }
 }
