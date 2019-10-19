@@ -8,7 +8,9 @@ package cn.ljtnono.re.entity;
  */
 public class ReBlog {
 
+    /** 博客的id */
     private Integer id;
+
 
     private String title;
 
