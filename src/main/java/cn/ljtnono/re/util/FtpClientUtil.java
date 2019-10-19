@@ -1,12 +1,9 @@
 package cn.ljtnono.re.util;
 
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -24,7 +21,7 @@ public class FtpClientUtil {
     private FtpClientUtil(){}
 
     /** 配置文件路径 */
-    public static final String FTP_CONFIG_PATH = "/ftpconfig.properties";
+    public static final String WEB_PROPERTIES_PATH = "/web.properties";
 
     /** 日志记录器 */
     private static Logger logger = LoggerFactory.getLogger(FtpClientUtil.class);
@@ -49,7 +46,7 @@ public class FtpClientUtil {
         //TODO 读取properties文件，并且将这些值都设置好
         Properties properties = new Properties();
         try {
-            properties.load(FtpClientUtil.class.getResourceAsStream(FTP_CONFIG_PATH));
+            properties.load(FtpClientUtil.class.getResourceAsStream(WEB_PROPERTIES_PATH));
             FTP_SERVER_ADDR = properties.getProperty("ftp.server.addr");
             FTP_SERVER_PORT = Integer.parseInt(properties.getProperty("ftp.server.port"));
             FTP_SERVER_USER = properties.getProperty("ftp.server.user");
