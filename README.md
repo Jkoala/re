@@ -9,8 +9,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/ljtnono/re.svg)](https://github.com/ljtnono/re/issues)
 
 
-**Java**：Spring、Spring MVC、Mybatis <br>
-**前端**：Bootstrap、Jquery、Echarts、WowSlider（图片切换）、layui <br>
+**Java**：SpringBoot、Mybatis-plus <br>
+**前端**：Bootstrap、Jquery、Echarts、swiper（图片切换） <br>
 **图片存储**：fastdfs分布式图片框架 <br>
 **缓存**：Redis <br>
 **数据库**：MySQL   <br>
