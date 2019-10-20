@@ -46,6 +46,10 @@ abbr, acronym {
   border: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #cccccc;
+}
 /*基础样式*/
 html, body {
   margin: 0;
@@ -91,12 +95,20 @@ html, body {
   position: absolute;
 }
 
+.pf {
+  position: fixed;
+}
+
 .hidden {
   visibility: hidden;
 }
 
 .none {
   display: none;
+}
+
+.f10 {
+  font-size: 10px;
 }
 
 .f12 {
