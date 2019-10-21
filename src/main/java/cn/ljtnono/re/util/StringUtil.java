@@ -35,7 +35,4 @@ public class StringUtil {
         return isEmpty(str.trim());
     }
 
-
-
-
 }
