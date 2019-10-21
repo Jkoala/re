@@ -304,7 +304,6 @@
   left: -100%;
 }
 
-
 .message {
   height: auto;
   margin: 0 auto;
@@ -323,7 +322,6 @@
     }
   }
 }
-
 
 /*footer部分*/
 #footer {
@@ -344,6 +342,20 @@
     text-decoration: none;
     color: inherit;
   }
+}
+
+/*to-top*/
+.roll-top {
+  background-color: #e97e67;
+  right: 10px;
+  bottom: 100px;
+  &:hover {
+    background-color: #e99279;
+  }
+  a {
+    color: #ffffff;
+  }
+  z-index: 999;
 }
 
 /*ipad 768px以上*/

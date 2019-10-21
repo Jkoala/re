@@ -62,6 +62,7 @@ public class FtpClientUtil {
         try {
             ftpClient.connect(FTP_SERVER_ADDR, FTP_SERVER_PORT);
             boolean login = ftpClient.login(FTP_SERVER_USER, FTP_SERVER_PASSWORD);
+            return login;
         } catch (IOException e) {
             e.printStackTrace();
         }
