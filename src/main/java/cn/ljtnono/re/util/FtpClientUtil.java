@@ -1,13 +1,13 @@
 package cn.ljtnono.re.util;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -24,7 +24,7 @@ public class FtpClientUtil {
     private FtpClientUtil(){}
 
     /** 配置文件路径 */
-    public static final String FTP_CONFIG_PATH = "/ftpconfig.properties";
+    public static final String FTP_CONFIG_PATH = "/web.properties";
 
     /** 日志记录器 */
     private static Logger logger = LoggerFactory.getLogger(FtpClientUtil.class);
@@ -46,7 +46,6 @@ public class FtpClientUtil {
 
 
     static {
-        //TODO 读取properties文件，并且将这些值都设置好
         Properties properties = new Properties();
         try {
             properties.load(FtpClientUtil.class.getResourceAsStream(FTP_CONFIG_PATH));
@@ -60,24 +59,63 @@ public class FtpClientUtil {
         }
     }
 
-    public static boolean uploadFile(final byte[] fileBytes) {
-        FTPClient ftpClient = new FTPClient();
+
+
+
+    public static boolean uploadFile(String host, int port, String username, String password, String basePath,
+                                     String filePath, String filename, InputStream input) {
+        boolean result = false;
+        FTPClient ftp = new FTPClient();
         try {
-            ftpClient.connect(FTP_SERVER_ADDR, FTP_SERVER_PORT);
-            boolean login = ftpClient.login(FTP_SERVER_USER, FTP_SERVER_PASSWORD);
+            int reply;
+            ftp.connect(host, port);// 连接FTP服务器
+            // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
+            ftp.login(username, password);// 登录
+            reply = ftp.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                ftp.disconnect();
+                return result;
+            }
+            //切换到上传目录
+            if (!ftp.changeWorkingDirectory(basePath+filePath)) {
+                //如果目录不存在创建目录
+                String[] dirs = filePath.split("/");
+                String tempPath = basePath;
+                for (String dir : dirs) {
+                    if (null == dir || "".equals(dir)) continue;
+                    tempPath += "/" + dir;
+                    if (!ftp.changeWorkingDirectory(tempPath)) {
+                        if (!ftp.makeDirectory(tempPath)) {
+                            return result;
+                        } else {
+                            ftp.changeWorkingDirectory(tempPath);
+                        }
+                    }
+                }
+            }
+            //设置上传文件的类型为二进制类型
+            ftp.setFileType(FTP.BINARY_FILE_TYPE);
+            ftp.enterLocalPassiveMode();
+            //上传文件
+            if (!ftp.storeFile(filename, input)) {
+                return result;
+            }
+            input.close();
+            ftp.logout();
+            result = true;
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                }
+            }
         }
-        return false;
+        return result;
     }
-
-
-
-    private static void getConnection() {
-
-    }
-
-    public static void main(String[] args) {
-        System.out.println(uploadFile(null));
+    public static void main(String[] args) throws FileNotFoundException {
+        uploadFile(FTP_SERVER_ADDR, FTP_SERVER_PORT,FTP_SERVER_USER, FTP_SERVER_PASSWORD, "/home/ftpadmin/", "/","68cab7c01342526257936a6bf8db448f.png", new FileInputStream("C:\\Users\\GEEK\\Desktop\\训练模型.log"));
     }
 }
