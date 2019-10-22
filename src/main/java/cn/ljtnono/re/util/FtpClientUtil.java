@@ -95,7 +95,9 @@ public class FtpClientUtil {
             }
             //设置上传文件的类型为二进制类型
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
+            ftp.setBufferSize(1024 * 1024 * 10);
             ftp.enterLocalPassiveMode();
+            ftp.setControlEncoding("UTF-8");
             //上传文件
             if (!ftp.storeFile(filename, input)) {
                 return result;
@@ -116,6 +118,6 @@ public class FtpClientUtil {
         return result;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        uploadFile(FTP_SERVER_ADDR, FTP_SERVER_PORT,FTP_SERVER_USER, FTP_SERVER_PASSWORD, "/home/ftpadmin/", "/","68cab7c01342526257936a6bf8db448f.png", new FileInputStream("C:\\Users\\GEEK\\Desktop\\训练模型.log"));
+        uploadFile(FTP_SERVER_ADDR, FTP_SERVER_PORT,FTP_SERVER_USER, FTP_SERVER_PASSWORD, "/home/ftpadmin/", "/","hlbxcx.zip", new BufferedInputStream(new FileInputStream("C:\\Users\\GEEK\\Desktop\\hlbxcx.zip")));
     }
 }
