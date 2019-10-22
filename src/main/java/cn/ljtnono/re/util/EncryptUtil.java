@@ -1,7 +1,7 @@
 package cn.ljtnono.re.util;
 
 /**
- *  加密工具
+ *  文本加解密工具
  *  @author ljt
  *  @date 2018/12/9
  *  @version 1.0

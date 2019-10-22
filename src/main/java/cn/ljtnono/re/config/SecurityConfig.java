@@ -6,12 +6,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- *  spring security 配置
- *  @author 凌家童
- *  @date 2019/10/6
- *  @version 1.0
+ * spring security 配置
  *
-*/
+ * @author 凌家童
+ * @version 1.0
+ * @date 2019/10/6
+ */
 @SpringBootConfiguration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
