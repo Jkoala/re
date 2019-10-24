@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PageController {
 
-    @GetMapping("/")
+    @GetMapping("/re/")
     public String index() {
-
         return "fore/index";
     }
 }

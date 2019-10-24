@@ -15,7 +15,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-role-permission")
+@RequestMapping("/re/role_permission")
 public class ReRolePermissionController extends BaseController {
 
 }

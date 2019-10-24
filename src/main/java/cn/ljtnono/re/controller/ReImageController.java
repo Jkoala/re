@@ -15,7 +15,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-image")
+@RequestMapping("/re/image")
 public class ReImageController extends BaseController {
 
 }

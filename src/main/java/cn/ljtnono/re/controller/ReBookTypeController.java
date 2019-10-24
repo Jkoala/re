@@ -15,7 +15,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-book-type")
+@RequestMapping("/re/book_type")
 public class ReBookTypeController extends BaseController {
 
 }

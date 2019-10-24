@@ -2,8 +2,10 @@ package cn.ljtnono.re.controller;
 
 
 import cn.ljtnono.re.pojo.JsonResult;
+import cn.ljtnono.re.service.IReBlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import cn.ljtnono.re.controller.common.BaseController;
@@ -17,8 +19,11 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-blog")
+@RequestMapping("/re/blog")
 public class ReBlogController extends BaseController {
+
+    @Autowired
+    private IReBlogService iReBlogService;
 
     private Logger logger = LoggerFactory.getLogger(ReBlogController.class);
 
@@ -46,8 +51,8 @@ public class ReBlogController extends BaseController {
         return null;
     }
 
-    @PostMapping("/update")
-    public JsonResult updateBlog() {
+    @PutMapping("/update/{id}")
+    public JsonResult updateBlog(@PathVariable Integer id) {
 
         return null;
     }

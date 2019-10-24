@@ -15,7 +15,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-timeline")
+@RequestMapping("/re/timeline")
 public class ReTimelineController extends BaseController {
 
 }

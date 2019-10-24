@@ -17,7 +17,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/root/re-user")
+@RequestMapping("/re/user")
 public class ReUserController extends BaseController {
 
     @Autowired
@@ -33,11 +33,6 @@ public class ReUserController extends BaseController {
     @GetMapping("/logout")
     public JsonResult logout() {
 
-        return null;
-    }
-
-
-    public JsonResult updatePassword() {
         return null;
     }
 }
