@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -374,7 +374,25 @@
             <a href="javascript:" class="fl"><i class="fa fa-rss"></i></a>
         </div>
         <!-- 博主信息 -->
-        <div class="author-info"></div>
+        <div class="author-info mb15">
+            <div class="title mb15">博主信息</div>
+            <div class="description mb15">
+                <a href="javascript:" class="avatar mr15">
+                    <img src="http://www.ljtnono.cn/myblog/images/album/me.jpg" alt="最后的疼爱" title="最后的疼爱">
+                </a>
+                <div class="description-text">
+                    <p class="mb5 f14">网名：最后的疼爱</p>
+                    <p class="mb5 f14">职业：程序员</p>
+                    <p class="mb5 f14">现居：北京-昌平</p>
+                    <p class="mb5 f14">Email：935188400@qq.com</p>
+                </div>
+            </div>
+            <div class="author-tags flex flex-justify-content-space-between">
+                <a href="javascript:" class="author-tag">理想主义者</a>
+                <a href="javascript:" class="author-tag">技术宅</a>
+                <a href="javascript:" class="author-tag">天然呆</a>
+            </div>
+        </div>
         <!-- 猜你喜欢 -->
         <div class="guess mb15">
             <div class="title mb15">猜你喜欢</div>
@@ -477,7 +495,6 @@
     </script>
     <p style="margin-bottom: 10px;"><a href="">鄂ICP备18013706号-1</a></p>
 </footer>
-
 
 </body>
 <script type="text/javascript">
