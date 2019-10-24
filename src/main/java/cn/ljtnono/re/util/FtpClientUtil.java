@@ -68,9 +68,10 @@ public class FtpClientUtil {
         FTPClient ftp = new FTPClient();
         try {
             int reply;
-            ftp.connect(host, port);// 连接FTP服务器
+            // 连接FTP服务器
+            ftp.connect(host, port);
             // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
-            ftp.login(username, password);// 登录
+            ftp.login(username, password);
             reply = ftp.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply)) {
                 ftp.disconnect();
@@ -82,7 +83,9 @@ public class FtpClientUtil {
                 String[] dirs = filePath.split("/");
                 String tempPath = basePath;
                 for (String dir : dirs) {
-                    if (null == dir || "".equals(dir)) continue;
+                    if (null == dir || "".equals(dir)) {
+                        continue;
+                    }
                     tempPath += "/" + dir;
                     if (!ftp.changeWorkingDirectory(tempPath)) {
                         if (!ftp.makeDirectory(tempPath)) {
@@ -111,7 +114,7 @@ public class FtpClientUtil {
             if (ftp.isConnected()) {
                 try {
                     ftp.disconnect();
-                } catch (IOException ioe) {
+                } catch (IOException ignored) {
                 }
             }
         }
