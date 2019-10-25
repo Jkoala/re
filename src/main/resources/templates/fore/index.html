@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Root Element 根元素</title>
     <link rel="stylesheet" href="../../static/fore/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/fore/css/base.min.css">
+<!--    <link rel="stylesheet" href="../../static/fore/css/base.min.css">-->
     <link rel="stylesheet" href="../../static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../static/fore/lib/swiper4.5.1/css/swiper.min.css">
     <link rel="stylesheet" href="../../static/fore/css/style.min.css">
@@ -464,10 +464,26 @@
         <!-- 热门标签 -->
         <div class="tags">
             <div class="title mb15">热门标签</div>
-            <span class="tag"></span>
+            <div class="tag-list">
+                <a href="javascript:" class="tag">js(146)</a>
+                <a href="javascript:" class="tag">css(80)</a>
+                <a href="javascript:" class="tag">springmvc(150)</a>
+                <a href="javascript:" class="tag">mybatis(132)</a>
+                <a href="javascript:" class="tag">bootstrap(146)</a>
+                <a href="javascript:" class="tag">jquery(146)</a>
+                <a href="javascript:" class="tag">spring(146)</a>
+                <a href="javascript:" class="tag">java(146)</a>
+                <a href="javascript:" class="tag">maven(146)</a>
+                <a href="javascript:" class="tag">springboot(146)</a>
+                <a href="javascript:" class="tag">html(146)</a>
+                <a href="javascript:" class="tag">ps(146)</a>
+                <a href="javascript:" class="tag">android(146)</a>
+            </div>
         </div>
         <!-- 友情链接 -->
-        <div class="links"></div>
+        <div class="links">
+            <div class="title"></div>
+        </div>
         <!-- 加我微信 -->
         <div class="wechat"></div>
     </div>
@@ -475,7 +491,7 @@
 <!-- 导航栏 -->
 <!--<div class="side-nav">-->
 <!--</div>-->
-<div class="roll-top pf p10 cursor-pointer">
+<div class="roll-top pf p10 cursor-pointer none">
     <a href="javascript:" title="回顶部"><i class="fa fa-arrow-up f14" aria-hidden="true"></i></a>
 </div>
 <!-- footer部分 -->
@@ -497,6 +513,7 @@
 </footer>
 
 </body>
+<script type="text/javascript" src="../../static/fore/js/common.js"></script>
 <script type="text/javascript">
     // 配置swiper
     var swiper = new Swiper(".swiper-container", {
