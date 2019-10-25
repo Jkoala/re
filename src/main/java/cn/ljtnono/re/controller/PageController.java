@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class PageController {
 
-    @GetMapping("/re/")
+    @GetMapping("/re")
     public String fore(ModelMap map) {
         map.addAttribute("hello", "我套死你猴子！");
         return "fore/index";
     }
 
-    @GetMapping("/admin/")
+    @GetMapping("/admin")
     public String back(ModelMap map) {
         return "back/index";
     }
