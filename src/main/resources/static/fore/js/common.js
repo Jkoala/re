@@ -12,7 +12,7 @@ $(window).scroll(function(e){
 
 /**鼠标点击回到顶部事件*/
 $(".roll-top").on("click", function (e) {
-    $("html, body").animate({
+    $("html, body").clearQueue().animate({
         scrollTop: 0
     },"ease");
 });
