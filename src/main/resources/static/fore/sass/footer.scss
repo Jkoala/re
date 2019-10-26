@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/*footer部分*/
+#footer {
+  background-color: #333333;
+  text-align: center;
+  color: #707070;
+  overflow: hidden;
+  bottom: 0;
+  font-size: 12px;
+
+  p {
+    margin: 0;
+    padding: 0 10px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+/*ipad 768px以上*/
+@media screen and (min-width: 768px) {
+  #footer {
+    font-size: 16px;
+
+    p {
+      display: inline-block;
+    }
+  }
+}
+
+/*web 1200px以上*/
+@media screen and (min-width: 1200px) {
+
+}
