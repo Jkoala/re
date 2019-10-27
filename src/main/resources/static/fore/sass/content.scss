@@ -7,7 +7,164 @@
   max-width: 1200px;
   margin: 0 auto;
 
+  .content-author {
+    background-color: #ffffff;
+    padding: 10px 20px;
+
+    .title {
+      width: 100%;
+      height: 26px;
+      color: #1ABC9C;
+      border-bottom: 1px solid #1ABC9C;
+    }
+
+    .personal {
+      .name {
+        background-color: #f1f1f1;
+        text-align: center;
+      }
+
+      .nick-name {
+        color: #555555;
+      }
+
+      a {
+        display: block;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+
+        &:hover {
+          img {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+          }
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          transition: all ease-in-out .5s;
+          -webkit-transition: all ease-in-out .5s;
+          -moz-transition: all ease-in-out .5s;
+        }
+      }
+    }
+
+    .skill {
+      height: 500px;
+
+      .name {
+        background-color: #f1f1f1;
+        text-align: center;
+      }
+
+      .chart {
+        margin: 0 auto;
+      }
+    }
+
+    .chat-me {
+      background-color: #ffffff;
+
+      .name {
+        background-color: #f1f1f1;
+        text-align: center;
+      }
+
+      .icons {
+        margin: 30px auto;
+
+        a {
+          display: inline-block;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          overflow: hidden;
+          text-align: center;
+          margin: 0 10px;
+
+          &:nth-of-type(1) {
+            background-color: #F78585;
+          }
+
+          &:nth-of-type(2) {
+            background-color: #49C085;
+          }
+
+          &:nth-of-type(3) {
+            background-color: #7782D1;
+          }
+
+          &:nth-of-type(4) {
+            background-color: #7243D4;
+          }
+
+          i {
+            font-size: 36px;
+            line-height: 50px;
+            color: #ffffff;
+          }
+        }
+      }
+
+      .apply-btn {
+        width: 310px;
+        height: 40px;
+        background-color: #03CAB1;
+        text-align: center;
+        line-height: 40px;
+        color: #ffffff;
+        margin: 30px auto;
+
+        &:hover {
+          background-color: #07b391;
+        }
+      }
+    }
+  }
+
+  .content-support {
+    padding: 10px 20px;
+    background-color: #ffffff;
+
+    .title {
+      width: 100%;
+      height: 26px;
+      color: #1ABC9C;
+      border-bottom: 1px solid #1ABC9C;
+    }
+
+    .support1, .support2 {
+      .name {
+        background-color: #f1f1f1;
+        text-align: center;
+      }
+
+      .zfb, .wechat {
+        text-align: center;
+
+        h1 {
+          text-align: center;
+        }
+
+        img {
+          display: block;
+          max-width: 270px;
+        }
+      }
+    }
+  }
+
   .content-main {
+    /*热门文章*/
     .hot {
       background-color: #ffffff;
       padding: 10px 20px;
@@ -151,6 +308,7 @@
       }
     }
 
+    /*轮播图*/
     .swiper-slide {
       img {
         width: 100%;
@@ -158,6 +316,23 @@
       }
     }
 
+    /*导航路径*/
+    .nav-path {
+      height: 65px;
+      background-color: #ffffff;
+      padding: 20px 18px;
+
+      span, i {
+        font-size: 18px;
+        color: #1AAF89;
+      }
+
+      .fa-home {
+        font-size: 25px;
+      }
+    }
+
+    /*赞助作者*/
   }
 
   .content-side {
@@ -459,6 +634,8 @@
       }
     }
   }
+
+
 }
 
 /*侧边导航*/
@@ -529,6 +706,22 @@
                   line-height: 20px;
                 }
               }
+            }
+          }
+        }
+      }
+    }
+
+    .content-author {
+      .chat-me {
+        .icons {
+          a {
+            width: 70px;
+            height: 70px;
+            margin: 0 50px;
+
+            i {
+              line-height: 70px;
             }
           }
         }

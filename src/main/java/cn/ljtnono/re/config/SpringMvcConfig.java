@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 配置springmvc处理静态文件
+ * 配置SpringMvc处理静态文件
  * @author ljt
  * @date 2019/10/19
  * @version 1.0
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpringMvcConfig implements WebMvcConfigurer {
 
     /**
-     * 配置springmvc静态资源拦截
+     * 配置SpringMvc静态资源拦截
      * @param registry 静态资源注册中心
      */
     @Override

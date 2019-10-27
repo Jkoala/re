@@ -11,8 +11,9 @@ public class ReBlog {
     /** 博客的id */
     private Integer id;
 
-
+    /** 博客的标题 */
     private String title;
+
 
 
 }
