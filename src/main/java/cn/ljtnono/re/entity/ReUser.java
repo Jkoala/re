@@ -16,23 +16,32 @@ public class ReUser implements Serializable {
 
     private static final long serialVersionUID = 5314772925085498518L;
 
+    /** 用户id */
     private Integer id;
 
+    /** 用户名 */
     private String username;
 
+    /** 用户密码 */
     @TableField("`password`")
     private String password;
 
+    /** 用户qq */
     private String qq;
 
+    /** 用户电话 */
     private String tel;
 
+    /** 用户邮箱 */
     private String email;
 
+    /** 创建时间 */
     private Date createTime;
 
+    /** 最后修改时间 */
     private Date modifyTime;
 
+    /** 是否删除 0删除 1正常 */
     @TableField("`delete`")
     private byte delete;
 
