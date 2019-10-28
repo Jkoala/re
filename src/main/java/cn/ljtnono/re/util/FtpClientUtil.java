@@ -59,9 +59,6 @@ public class FtpClientUtil {
         }
     }
 
-
-
-
     public static boolean uploadFile(String host, int port, String username, String password, String basePath,
                                      String filePath, String filename, InputStream input) {
         boolean result = false;

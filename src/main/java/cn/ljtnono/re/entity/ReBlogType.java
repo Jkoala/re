@@ -2,6 +2,7 @@ package cn.ljtnono.re.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,19 +12,27 @@ import java.util.Date;
  *  @version 1.0
  *
 */
-public class ReBlogType {
+public class ReBlogType implements Serializable {
 
+    private static final long serialVersionUID = -1997697590986661638L;
+
+    /** 博客类型id */
     private Integer id;
 
+    /** 是否删除 0删除 1正常*/
     @TableField("`delete`")
     private byte delete;
 
+    /** 最后修改时间 */
     private Date modifyTime;
 
+    /** 创建时间 */
     private Date createTime;
 
+    /** 博客类型名 */
     private String name;
 
+    /** 博客类型描述 */
     private String description;
 
     public ReBlogType() {

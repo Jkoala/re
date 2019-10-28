@@ -2,6 +2,7 @@ package cn.ljtnono.re.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Date;
  *  @version 1.0
  *
 */
-public class ReUser {
+public class ReUser implements Serializable {
+
+    private static final long serialVersionUID = 5314772925085498518L;
 
     private Integer id;
 
