@@ -65,9 +65,9 @@
 <script type="text/javascript" src="../../static/fore/js/common.js"></script>
 <script type="text/javascript" src="../../static/fore/lib/echarts.min.js"></script>
 <script>
-    var color = ["#49c085", "#f2b63c", "#f58a87", "#6f92ff", "#7782d1", "#d56464"];
-    var myChart = echarts.init($(".chart")[0]);
-    var option = {
+    const color = ["#49c085", "#f2b63c", "#f58a87", "#6f92ff", "#7782d1", "#d56464"];
+    let myChart = echarts.init($(".chart")[0]);
+    let option = {
         left: "100%",
         top: "100%",
         title: {
