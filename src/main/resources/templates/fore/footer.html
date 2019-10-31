@@ -1,18 +1,14 @@
 <!-- 回到顶部 -->
-<div class="roll-top pf p10 cursor-pointer none">
+<div class="roll-top pf p10 cursor-pointer none" th:fragment="roll-top">
     <a href="javascript:" title="回顶部"><i class="fa fa-arrow-up f14" aria-hidden="true"></i></a>
 </div>
 <!-- footer部分 -->
-<footer id="footer">
+<footer id="footer" th:fragment="footer">
     <div class="line" style="background-color:#23B7E5;height: 2px;margin-bottom: 10px;"></div>
     <p>
-        <span class="author">
-            copyright
-            <i class="fa fa-copyright" aria-hidden="true"></i>
-            最后的疼爱
-        </span>
+        <span class="author">copyright<i class="fa fa-copyright" aria-hidden="true"></i>最后的疼爱</span>
         <i class="fa">|</i>
-        <span>版权所有 改自思欲主题</span>
+        <span>版权所有 改自欲思主题</span>
     </p>
     <script>
         document.write("<p>基于JAVA构建" + "\n" + "2019-10-20" + "至" + new DateUtil().format("yyyy-MM-dd") + "</p>");

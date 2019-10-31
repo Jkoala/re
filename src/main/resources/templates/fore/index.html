@@ -20,7 +20,7 @@
     <![endif]-->
 </head>
 <body>
-<div th:include="fore/header.html"></div>
+<div th:replace="fore/header.html"></div>
 <!-- 内容区 -->
 <div class="content pr">
     <div class="content-main">
@@ -480,12 +480,12 @@
             </article>
         </div>
     </div>
-    <div th:include="fore/content_side.html"></div>
+    <div th:replace="fore/content_side.html"></div>
 </div>
 <!-- 导航栏 -->
 <!--<div class="side-nav">-->
 <!--</div>-->
-<div th:include="fore/footer.html"></div>
+<div th:replace="fore/footer.html"></div>
 </body>
 <script type="text/javascript" src="../../static/fore/js/common.js"></script>
 <script type="text/javascript">

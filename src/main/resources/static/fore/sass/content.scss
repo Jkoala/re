@@ -332,7 +332,99 @@
       }
     }
 
-    /*赞助作者*/
+
+    .content-detail {
+      .detail-nav {
+        background-color: #ffffff;
+        margin-bottom: 2px;
+        i {
+          color: #BBBBBB;
+        }
+        a {
+          i.fa-home {
+            color: #00A67C;
+            font-size: 16px;
+          }
+          span {
+            color: #00A67C;
+            font-size: 14px;
+          }
+        }
+
+      }
+      .detail-header {
+        background-color: #fff;
+        margin-bottom: 2px;
+        .article-title {
+          color: #000000;
+        }
+        a {
+          &:nth-of-type(1), &:nth-of-type(2) {
+            span {
+              color: #00A67C;
+            }
+          }
+          i.fa {
+            color: #999999;
+            margin-right: 2px;
+          }
+          color: #999999;
+        }
+      }
+      .detail-content {
+        background-color: #FFFFFF;
+        margin-bottom: 2px;
+      }
+      .detail-label {
+        background-color: #FFFFFF;
+        i {
+          color: #999999;
+        }
+        .label {
+          width: 70px;
+          height: auto;
+          position: relative;
+          color: #ffffff;
+          display: inline-block !important;
+          background-color: #D9534F;
+          text-align: center;
+          border-radius: 0;
+        }
+      }
+      .detail-pre-next {
+        background-color: #FBFBFB;
+        margin-bottom: 2px;
+        .pre, .next {
+          a {
+            color: #00A67C;
+          }
+        }
+      }
+      .title {
+        background-color: #FFFFFF;
+        width: 100%;
+        color: #00A67C;
+        border-bottom: 1px solid #00A67C;
+      }
+      .detail-hot-list {
+        background-color: #FFFFFF;
+        margin-bottom: 2px;
+        ul {
+          li {
+            height: 30px;
+            overflow: hidden;
+            line-height: 30px;
+            color: #bbb;
+            i {
+              vertical-align: middle;
+            }
+            a {
+              color: #00a67c;
+            }
+          }
+        }
+      }
+    }
   }
 
   .content-side {

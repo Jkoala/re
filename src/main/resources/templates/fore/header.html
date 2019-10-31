@@ -1,7 +1,7 @@
 <!-- 头部分 -->
-<header id="header">
+<header id="header" th:fragment="header">
     <div class="logo">
-        <a href="javascript:" class="cursor-pointer">
+        <a href="/re" class="cursor-pointer">
             <h1>
                 <img src="../../static/fore/images/logo_word.png" alt="RootElement根元素" class="logo-word"
                      title="RootElement根元素">
@@ -46,7 +46,7 @@
     <div class="line h10" style="opacity: 0.9"></div>
 </header>
 <!-- 消息通知栏 -->
-<div class="w message">
+<div class="w message" th:fragment="message">
     <div class="message-content">
         <i class="fa fa-volume-up"></i>
         <span class="f16">看到网上新闻美国的贴吧将成为中国公司</span>

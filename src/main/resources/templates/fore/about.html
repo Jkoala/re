@@ -13,6 +13,8 @@
     <script src="../../static/fore/lib/jquery-1.11.0.min.js"></script>
     <script src="../../static/fore/lib/swiper4.5.1/js/swiper.min.js"></script>
     <script src="../../static/fore/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/fore/lib/echarts.min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <script src="../../static/fore/js/utils.js"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -31,7 +33,7 @@
             <div class="flex flex-direction-column flex-align-items-center">
                 <a href="javascript:" class="mt10"><img class="avatar"
                                                         src="http://www.ljtnono.cn:80/myblog/images/album/me.jpg"
-                                                        alt=""></a>
+                                                        alt="最后的疼爱" title="最后的疼爱"></a>
                 <p class="nick-name fb f20 m10">最后的疼爱</p>
                 <p class="m10">Java菜鸟一枚</p>
                 <p class="m10">喜欢折腾各种技术，web、linux、数据库、前端等</p>
@@ -58,13 +60,23 @@
             </div>
         </section>
         <!--留言区-->
-        <div class="title">网友留言</div>
+        <div class="title mb20">网友留言</div>
+        <div id="comments"></div>
     </section>
 </div>
 <div th:include="fore/footer.html"></div>
-<script type="text/javascript" src="../../static/fore/js/common.js"></script>
-<script type="text/javascript" src="../../static/fore/lib/echarts.min.js"></script>
+<script src="../../static/fore/js/common.js"></script>
 <script>
+    // 初始化评论系统
+    new Valine({
+        el: '#comments',
+        appId: 'iyTC528gHvHe09Qg8b5HPrvj-gzGzoHsz',
+        appKey: '8ndLNYwjGS7FPLKdzgRKCfeL',
+        notify: false,
+        verify: false,
+        avatar: 'mp',
+        placeholder: 'just go go'
+    });
     const color = ["#49c085", "#f2b63c", "#f58a87", "#6f92ff", "#7782d1", "#d56464"];
     let myChart = echarts.init($(".chart")[0]);
     let option = {
@@ -105,8 +117,8 @@
         }]
     };
     myChart.setOption(option);
-    // 监听resize事件，实现响应式
-    $(window).resize(function() {
+    // 监听resize事件，实现echarts随着窗口大小发生变化而变化
+    $(window).resize(function () {
         myChart.resize();
     });
 </script>
