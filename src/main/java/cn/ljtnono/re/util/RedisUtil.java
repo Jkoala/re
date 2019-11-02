@@ -2,6 +2,7 @@ package cn.ljtnono.re.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil {
 
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
     private Logger logger = LoggerFactory.getLogger(RedisUtil.class);

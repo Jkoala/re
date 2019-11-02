@@ -29,15 +29,29 @@ spring:
       content-type: text/html
     cache: false
     enabled: true
+  redis:
+    database: 0
+    host: 139.9.73.191
+    password: ljtLJT715336
+    port: 6379
 # 配置debug模式
 debug: true
+
+
 #配置mybatis相关
 mybatis:
   configuration:
     # 配置打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 配置服务器相关
+
+
+# 配置tomcat服务器相关
 server:
   port: 80
   servlet:
     context-path: /re
+
+# 配置日志相关
+#logging:
+#  config: classpath:/logback.xml
+#  level: info

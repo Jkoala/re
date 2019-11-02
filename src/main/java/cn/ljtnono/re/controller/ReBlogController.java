@@ -36,7 +36,7 @@ public class ReBlogController extends BaseController {
     public String getBlogById(@PathVariable String id) {
         ModelMap map = new ModelMap();
         map.addAttribute("key", "fdafd");
-        return "forward:/re";
+        return "forward:/";
     }
 
     @GetMapping("/")
