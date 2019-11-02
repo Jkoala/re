@@ -38,6 +38,6 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 配置服务器相关
 server:
-  port: 80
+  port: 8080
   servlet:
     context-path: /re
