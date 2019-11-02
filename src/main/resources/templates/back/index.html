@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="x-admin-sm" lang="en">
+<html class="x-admin-sm" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>后台登录-X-admin2.2</title>
@@ -8,12 +8,10 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="../static/back/css/font.css">
-    <link rel="stylesheet" href="../static/back/css/xadmin.css">
-    <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-    <script src="../static/back/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../static/back/js/xadmin.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <link rel="stylesheet" th:href="@{/static/back/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/back/css/xadmin.css}">
+    <script th:src="@{/static/back/lib/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/static/back/js/xadmin.js}"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -27,7 +25,7 @@
 <!-- 顶部开始 -->
 <div class="container">
     <div class="logo">
-        <a href="/admin/index">Root Element</a></div>
+        <a th:href="@{/admin/index}">Root Element</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
@@ -84,22 +82,22 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('统计页面','/admin/welcome1')">
+                        <a onclick="xadmin.add_tab('统计页面','/re/admin/welcome1')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>统计页面</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('会员列表(静态表格)','/admin/member-list')">
+                        <a onclick="xadmin.add_tab('会员列表(静态表格)','/re/admin/member-list')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表(静态表格)</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('会员列表(动态表格)','/admin/member-list1',true)">
+                        <a onclick="xadmin.add_tab('会员列表(动态表格)','/re/admin/member-list1',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表(动态表格)</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('会员删除','/admin/member-del')">
+                        <a onclick="xadmin.add_tab('会员删除','/re/admin/member-del')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员删除</cite></a>
                     </li>
@@ -110,12 +108,12 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('会员删除','/admin/member-del')">
+                                <a onclick="xadmin.add_tab('会员删除','/re/admin/member-del')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员删除</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('等级管理','/admin/member-list1')">
+                                <a onclick="xadmin.add_tab('等级管理','/re/admin/member-list1')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>等级管理</cite></a>
                             </li>
@@ -124,133 +122,133 @@
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
                     <cite>订单管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('订单列表','/admin/order-list')">
+                        <a onclick="xadmin.add_tab('订单列表','/re/admin/order-list')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('订单列表1','/admin/order-list1')">
+                        <a onclick="xadmin.add_tab('订单列表1','/re/admin/order-list1')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订单列表1</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
                     <cite>分类管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('多级分类','/admin/cate')">
+                        <a onclick="xadmin.add_tab('多级分类','/re/admin/cate')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>多级分类</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="城市联动">&#xe723;</i>
                     <cite>城市联动</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('三级地区联动','/admin/city')">
+                        <a onclick="xadmin.add_tab('三级地区联动','/re/admin/city')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>三级地区联动</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
                     <cite>管理员管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('管理员列表','/admin/admin-list')">
+                        <a onclick="xadmin.add_tab('管理员列表','/re/admin/admin-list')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('角色管理','/admin/admin-role')">
+                        <a onclick="xadmin.add_tab('角色管理','/re/admin/admin-role')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('权限分类','/admin/admin-cate')">
+                        <a onclick="xadmin.add_tab('权限分类','/re/admin/admin-cate')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限分类</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('权限管理','/admin/admin-rule')">
+                        <a onclick="xadmin.add_tab('权限管理','/re/admin/admin-rule')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
                     <cite>系统统计</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('拆线图','/admin/echarts1')">
+                        <a onclick="xadmin.add_tab('拆线图','/re/admin/echarts1')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>拆线图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('拆线图','/admin/echarts2')">
+                        <a onclick="xadmin.add_tab('拆线图','/re/admin/echarts2')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>拆线图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('地图','/admin/echarts3')">
+                        <a onclick="xadmin.add_tab('地图','/re/admin/echarts3')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>地图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('饼图','/admin/echarts4')">
+                        <a onclick="xadmin.add_tab('饼图','/re/admin/echarts4')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>饼图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('雷达图','/admin/echarts5')">
+                        <a onclick="xadmin.add_tab('雷达图','/re/admin/echarts5')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>雷达图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('k线图','/admin/echarts6')">
+                        <a onclick="xadmin.add_tab('k线图','/re/admin/echarts6')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>k线图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('热力图','/admin/echarts7')">
+                        <a onclick="xadmin.add_tab('热力图','/re/admin/echarts7')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>热力图</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('仪表图','/admin/echarts8')">
+                        <a onclick="xadmin.add_tab('仪表图','/re/admin/echarts8')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>仪表图</cite></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;">
+                <a href="javascript:">
                     <i class="iconfont left-nav-li" lay-tips="图标字体">&#xe6b4;</i>
                     <cite>图标字体</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('图标对应字体','/admin/unicode')">
+                        <a onclick="xadmin.add_tab('图标对应字体','/re/admin/unicode')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>图标对应字体</cite></a>
                     </li>
@@ -263,22 +261,22 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="login.html" target="_blank">
+                        <a th:href="@{/admin/login}" target="_blank">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>登录页面</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('错误页面','/admin/error')">
+                        <a onclick="xadmin.add_tab('错误页面','/re/admin/error')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>错误页面</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('示例页面','/admin/demo')">
+                        <a onclick="xadmin.add_tab('示例页面','/re/admin/demo')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>示例页面</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('更新日志','/admin/log')">
+                        <a onclick="xadmin.add_tab('更新日志','/re/admin/log')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>更新日志</cite></a>
                     </li>
@@ -349,7 +347,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/re/admin/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>

@@ -15,7 +15,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/re/link")
+@RequestMapping("/link")
 public class ReLinkController extends BaseController {
 
 }

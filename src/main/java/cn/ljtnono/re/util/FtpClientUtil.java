@@ -11,17 +11,12 @@ import java.io.*;
 import java.util.Properties;
 
 /**
+ * 单例模式FtpClientUtil，文件服务器交互工具
  * @author ljt
  * @date 2019/10/15
  * @version 1.0
  */
 public class FtpClientUtil {
-
-
-    /**
-     * 禁止实例化
-     */
-    private FtpClientUtil(){}
 
     /** 配置文件路径 */
     public static final String FTP_CONFIG_PATH = "/web.properties";
@@ -58,6 +53,13 @@ public class FtpClientUtil {
             logger.info("ftp配置文件路径错误");
         }
     }
+
+
+    public boolean uploadFile() {
+
+        return false;
+    }
+
 
     public static boolean uploadFile(String host, int port, String username, String password, String basePath,
                                      String filePath, String filename, InputStream input) {
@@ -118,6 +120,6 @@ public class FtpClientUtil {
         return result;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        uploadFile(FTP_SERVER_ADDR, FTP_SERVER_PORT,FTP_SERVER_USER, FTP_SERVER_PASSWORD, "/home/ftpadmin/", "/","hlbxcx.zip", new BufferedInputStream(new FileInputStream("C:\\Users\\GEEK\\Desktop\\hlbxcx.zip")));
+        uploadFile(FTP_SERVER_ADDR, FTP_SERVER_PORT,FTP_SERVER_USER, FTP_SERVER_PASSWORD, "/home/ftpadmin/root_element/", "/images","mm_facetoface_collect_qrcode_1572110198965.png", new BufferedInputStream(new FileInputStream("C:\\Users\\ljt\\Desktop\\mm_facetoface_collect_qrcode_1572110198965.png")));
     }
 }

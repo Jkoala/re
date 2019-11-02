@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2019-10-06
  */
 @Controller
-@RequestMapping("/re/blog")
+@RequestMapping("/blog")
 public class ReBlogController extends BaseController {
 
     @Autowired

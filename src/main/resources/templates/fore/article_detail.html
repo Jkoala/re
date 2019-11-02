@@ -6,27 +6,27 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Root Element 根元素</title>
-    <link rel="stylesheet" href="../../static/fore/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../static/fore/lib/swiper4.5.1/css/swiper.min.css">
-    <link rel="stylesheet" href="../../static/fore/css/style.min.css">
-    <script src="../../static/fore/lib/jquery-1.11.0.min.js"></script>
-    <script src="../../static/fore/lib/swiper4.5.1/js/swiper.min.js"></script>
-    <script src="../../static/fore/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script src="../../static/fore/js/utils.js"></script>
+    <link rel="stylesheet" th:href="@{/static/fore/lib/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/swiper4.5.1/css/swiper.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/css/style.min.css}">
+    <script th:src="@{/static/fore/lib/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/static/fore/lib/swiper4.5.1/js/swiper.min.js}"></script>
+    <script th:src="@{/static/fore/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script th:src="@{/static/fore/js/utils.js}"></script>
     <!-- editor.md编辑器相关 -->
-    <link rel="stylesheet" href="../../static/fore/lib/editor.md-1.5.0/css/editormd.preview.min.css">
-    <link rel="stylesheet" href="../../static/fore/lib/google-code-prettify/prettify.css">
-    <link rel="stylesheet" href="../../static/fore/lib/google-code-prettify/skins/tomorrow.min.css">
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/marked.min.js"></script>
-    <script src="../../static/fore/lib/google-code-prettify/prettify.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/raphael.min.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/underscore.min.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/sequence-diagram.min.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/flowchart.min.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/lib/jquery.flowchart.min.js"></script>
-    <script src="../../static/fore/lib/editor.md-1.5.0/editormd.min.js"></script>
+    <link rel="stylesheet" th:href="@{/static/fore/lib/editor.md-1.5.0/css/editormd.preview.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/google-code-prettify/prettify.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/google-code-prettify/skins/tomorrow.min.css}">
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/marked.min.js}"></script>
+    <script th:src="@{/static/fore/lib/google-code-prettify/prettify.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/raphael.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/underscore.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/sequence-diagram.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/flowchart.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/jquery.flowchart.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/editormd.min.js}"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
@@ -177,7 +177,7 @@ string是redis最基本的类型，可以理解成key与value一对一的模式�
 <!--</div>-->
 <div th:replace="fore/footer.html"></div>
 </body>
-<script src="../../static/fore/js/common.js"></script>
+<script th:src="@{/static/fore/js/common.js}"></script>
 <script>
     // 初始化评论系统
     new Valine({
@@ -200,6 +200,5 @@ string是redis最基本的类型，可以理解成key与value一对一的模式�
         sequenceDiagram: true, // 默认不解析
         codeFold: true
     });
-
 </script>
 </html>

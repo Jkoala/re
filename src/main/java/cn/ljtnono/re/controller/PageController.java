@@ -18,13 +18,13 @@ public class PageController {
 
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
-    @GetMapping({"/re", "/re/"})
+    @GetMapping("/")
     public String fore(ModelMap map) {
         map.addAttribute("currentPage", "index");
         return "fore/index";
     }
 
-    @GetMapping("/re/{page}")
+    @GetMapping("/{page}")
     public String foreTemplates(@PathVariable final String page, final ModelMap map) {
         setActivePage(page, map);
         return "fore/" + page;

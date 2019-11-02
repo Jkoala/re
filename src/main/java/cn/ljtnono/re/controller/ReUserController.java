@@ -17,7 +17,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  * @since 2019-10-06
  */
 @RestController
-@RequestMapping("/re/user")
+@RequestMapping("/user")
 public class ReUserController extends BaseController {
 
     @Autowired

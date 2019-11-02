@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="x-admin-sm" lang="en">
+<html class="x-admin-sm" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>后台登录-X-admin2.2</title>
@@ -8,8 +8,8 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="../static/back/css/font.css">
-    <link rel="stylesheet" href="../static/back/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/static/back/css/font.css}">
+    <link rel="stylesheet" th:href="@{/static/back/css/xadmin.css}">
 </head>
 <body>
 <div class="layui-fluid">
@@ -37,7 +37,7 @@
 <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/extension/bmap.min.js"></script>
 <script src="http://echarts.baidu.com/asset/map/js/china.js"></script>
-<script type="text/javascript">
+<script>
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     myChart.setOption({
