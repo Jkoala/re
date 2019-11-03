@@ -1,14 +1,22 @@
 package cn.ljtnono.re.listener;
 
+import cn.ljtnono.re.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.Properties;
 
 /**
  * 容器启动监听器
@@ -17,20 +25,21 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class ReApplicationContextListener implements ApplicationListener<ContextRefreshedEvent>, ApplicationContextAware {
+public class ReApplicationContextListener implements ApplicationListener<ContextRefreshedEvent> {
 
-    private ApplicationContext applicationContext;
 
-    private final Logger logger = LoggerFactory.getLogger(ReApplicationContextListener.class);
+    private static Logger logger = LoggerFactory.getLogger(ReApplicationContextListener.class);
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        // 读取数据库中的配置项，并且将配置项设置到application域中去
+        // 读取web.properties中所有的配置,并且将配置项一一设置进入spring环境中去
+        Properties web = new Properties();
+        try {
+            web.load(ReApplicationContextListener.class.getClassLoader().getResourceAsStream("web.properties"));
+            // 将配置文件中的数据放入缓存
 
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        } catch (IOException e) {
+            logger.error("");
+        }
     }
 }
