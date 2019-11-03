@@ -1,10 +1,21 @@
 package cn.ljtnono.re.util;
 
-import cn.ljtnono.re.ftp.ReFtpClientObjectPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.ljtnono.re.ftp.ReFtpClient;
+import cn.ljtnono.re.ftp.ReFtpClientPool;
+import cn.ljtnono.re.ftp.ReFtpClientPooledObjectFactory;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.*;
 
 /**
@@ -13,19 +24,18 @@ import java.io.*;
  * @date 2019/10/15
  * @version 1.0
  */
+@Component
 public class FtpClientUtil {
 
     @Autowired
-    private ReFtpClientObjectPool reFtpClientObjectPool;
+    private ReFtpClientPool reFtpClientPool;
 
     /** 实例 */
     private static FtpClientUtil instance = null;
 
-    /** 日志记录器 */
-    private Logger logger = LoggerFactory.getLogger(FtpClientUtil.class);
-
     /** 单例模式 */
     private FtpClientUtil(){}
+
 
     /**
      * 单例模式获取实例
@@ -35,7 +45,7 @@ public class FtpClientUtil {
         if (instance == null) {
             synchronized (FtpClientUtil.class) {
                 if (instance == null) {
-                    return new FtpClientUtil();
+                    instance =  new FtpClientUtil();
                 }
             }
         }
@@ -44,20 +54,26 @@ public class FtpClientUtil {
 
     /**
      * 文件上传方法
-     * @param filePath
-     * @param filename 存储在文件服务器中的文件名
-     * @param input
+     *
+     * @param filePath 上传的文件路径 例如 /images/abc.png  /abc.doc
+     * @param fileName 存储在文件服务器中的文件名 例如 abc.png
+     * @param input    上传的文件输入流
      * @return 上传成功返回true，上传失败返回false
+     * @see ReFtpClient#uploadFile(String, String, InputStream)
      */
-    public boolean uploadFile(String filePath, String filename, InputStream input) throws Exception {
-        return reFtpClientObjectPool.borrowObject().uploadFile(filePath, filename, input);
-    }
-
-    public boolean uploadFile(String filePath, String filename, byte b) {
+    public boolean uploadFile(String filePath, String fileName, InputStream input) throws Exception {
+        ReFtpClient reFtpClient = reFtpClientPool.borrowObject();
+//        boolean result = reFtpClient.uploadFile(filePath, fileName, input);
+//        reFtpClientPool.returnObject(reFtpClient);
+        System.out.println(reFtpClient);
         return false;
     }
 
+//    public boolean uploadFile(String filePath, String filename, byte[] b) {
+//        return false;
+//    }
+
     public static void main(String[] args) throws Exception {
-        System.out.println(FtpClientUtil.getInstance().uploadFile( "/re/images/", "20180801234443645.png", new BufferedInputStream(new FileInputStream("C:\\Users\\ljt\\Desktop\\20180801234443645.png"))));
+        System.out.println(new FtpClientUtil().uploadFile(null, null, null));
     }
 }
