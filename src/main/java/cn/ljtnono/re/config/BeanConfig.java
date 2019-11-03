@@ -1,12 +1,10 @@
 package cn.ljtnono.re.config;
 
-import cn.ljtnono.re.ftp.ReFtpClientConfig;
-import cn.ljtnono.re.ftp.ReFtpClientObjectPool;
+import cn.ljtnono.re.ftp.ReFtpClient;
+import cn.ljtnono.re.ftp.ReFtpClientPool;
 import cn.ljtnono.re.ftp.ReFtpClientPooledObjectFactory;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * 配置相关需要注入的类
@@ -22,9 +20,11 @@ public class BeanConfig {
      * @return ftp连接池
      */
     @Bean
-    @Lazy
-    public ReFtpClientObjectPool reFtpClientObjectPool() {
-        // 默认配置
-        return new ReFtpClientObjectPool(new ReFtpClientPooledObjectFactory());
+    public ReFtpClientPool reFtpClientObjectPool() {
+        return new ReFtpClientPool(new ReFtpClientPooledObjectFactory());
     }
+
+
+
+
 }
