@@ -23,9 +23,4 @@ public class BeanConfig {
     public ReFtpClientPool reFtpClientObjectPool() {
         return new ReFtpClientPool(new ReFtpClientPooledObjectFactory());
     }
-
-
-
-
-
 }
