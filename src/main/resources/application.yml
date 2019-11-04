@@ -30,10 +30,17 @@ spring:
     cache: false
     enabled: true
   redis:
-    database: 0
     host: 139.9.73.191
     password: ljtLJT715336
     port: 6379
+    timeout: 12000
+    database: 0
+    lettuce:
+      pool:
+        max-active: 300
+        max-idle: 100
+        min-idle: 8
+        max-wait: -1
 # 配置debug模式
 debug: true
 
