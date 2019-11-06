@@ -56,6 +56,7 @@ public class ReFtpClient {
         if (ftpClient == null) {
             ftpClient = new FTPClient();
             connect();
+
         }
     }
 
@@ -207,6 +208,4 @@ public class ReFtpClient {
         disConnect();
         return true;
     }
-
-
 }

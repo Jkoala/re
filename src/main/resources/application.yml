@@ -33,14 +33,14 @@ spring:
     host: 139.9.73.191
     password: ljtLJT715336
     port: 6379
-    timeout: 12000
-    database: 0
-    lettuce:
+    jedis:
       pool:
-        max-active: 300
-        max-idle: 100
-        min-idle: 8
+        max-active: 200
         max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+    database: 0
 # 配置debug模式
 debug: true
 

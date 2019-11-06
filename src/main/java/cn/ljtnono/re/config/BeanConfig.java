@@ -22,5 +22,6 @@ public class BeanConfig {
     @Bean
     public ReFtpClientPool reFtpClientObjectPool() {
         return new ReFtpClientPool(new ReFtpClientPooledObjectFactory());
+
     }
 }
