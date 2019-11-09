@@ -46,8 +46,8 @@ public class PageController {
      */
     private void setActivePage(final String page, final ModelMap map) {
         switch (page) {
-            case "articles_technology":
-                map.addAttribute("currentPage", "articles_technology");
+            case "articles":
+                map.addAttribute("currentPage", "articles");
                 break;
             case "support":
                 map.addAttribute("currentPage", "support");
@@ -59,4 +59,5 @@ public class PageController {
                 map.addAttribute("currentPage", "index");
         }
     }
+
 }

@@ -5,6 +5,7 @@ import cn.ljtnono.re.entity.ReUser;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import cn.ljtnono.re.controller.common.BaseController;
@@ -21,7 +22,7 @@ import java.util.Collections;
  * @author ljt
  * @since 2019-10-06
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class ReUserController extends BaseController {
 
