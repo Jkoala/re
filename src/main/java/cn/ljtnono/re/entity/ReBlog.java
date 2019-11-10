@@ -46,7 +46,7 @@ public class ReBlog implements Serializable {
     /** 博客的html */
     private String contentHtml;
 
-    /** 博客的封面图片id */
+    /** 博客的封面图片url */
     private String coverImage;
 
     /** 博客的评论数 */

@@ -1,12 +1,8 @@
 package cn.ljtnono.re.controller;
 
 import cn.ljtnono.re.entity.ReBlog;
-import cn.ljtnono.re.enumeration.GlobalErrorEnum;
-import cn.ljtnono.re.exception.GlobalToJsonException;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +30,14 @@ public class ApiController {
 
     private static Logger logger = LoggerFactory.getLogger(ApiController.class);
 
-    @GetMapping("/getBlogAll")
+    /**
+     * 此接口只能管理员调用
+     * @param request 请求
+     * @param response 响应
+     * @return 全部博客信息
+     */
+    @GetMapping("/listBlogAll")
     public JsonResult listBlogAll(HttpServletRequest request, HttpServletResponse response) {
-        // TODO 此接口属于内部接口，只允许管理员调用
         List<ReBlog> list = iReBlogService.list(null);
         return JsonResult.success(list, list.size());
     }
@@ -47,18 +48,16 @@ public class ApiController {
      * @param count 每页获取的条数
      * @return Json 数据串
      */
-    @GetMapping("/getBlog")
+    @GetMapping("/listBlogPage")
     public JsonResult listBlogPage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count) {
-        if (page == null || count == null) {
-            throw new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR);
-        }
+        List<ReBlog> listBlogPage = iReBlogService.listBlogPage(page, count);
+        return JsonResult.success(listBlogPage, listBlogPage.size());
+    }
 
-        if (page < 0 || count < 0 || page > 1000 || count > 60) {
-            throw new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR);
-        }
+    @GetMapping("/getBlog")
+    public JsonResult getBlog(@RequestParam(value = "blogId", required = false) Integer blogId) {
 
-        IPage<ReBlog> pageResult = iReBlogService.page(new Page<>(page, count));
-        logger.info("获取" + page + "页博客数据，每页获取" + count + "条");
-        return JsonResult.success(pageResult.getRecords(), pageResult.getRecords().size());
+
+        return null;
     }
 }

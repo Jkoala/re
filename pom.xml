@@ -20,6 +20,7 @@
         <commons-logging.version>1.0.4</commons-logging.version>
         <commons-net.version>3.6</commons-net.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
+        <alibaba-fastjson.version>1.2.52.sec06</alibaba-fastjson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -68,6 +69,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba-fastjson.version}</version>
         </dependency>
         <!-- apache commons-net  -->
         <dependency>

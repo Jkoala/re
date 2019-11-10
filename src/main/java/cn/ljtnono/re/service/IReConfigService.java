@@ -1,7 +1,6 @@
 package cn.ljtnono.re.service;
 
-import cn.ljtnono.re.entity.ReBlogType;
-import com.alibaba.fastjson.JSONObject;
+import cn.ljtnono.re.entity.ReConfig;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,6 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author ljt
  * @since 2019-10-06
  */
-public interface IReBlogTypeService extends IService<ReBlogType> {
-
+public interface IReConfigService extends IService<ReConfig> {
 }

@@ -7,6 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * 处理页面路由的Controller
  * @author ljt
@@ -19,7 +21,7 @@ public class PageController {
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
     @GetMapping("/")
-    public String fore(ModelMap map) {
+    public String fore(ModelMap map, HttpSession session) {
         map.addAttribute("currentPage", "index");
         return "fore/index";
     }

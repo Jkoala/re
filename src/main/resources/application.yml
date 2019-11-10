@@ -41,6 +41,8 @@ spring:
         max-idle: 100
         min-idle: 8
         max-wait: -1
+  session:
+    store-type: redis
 # 配置debug模式
 debug: true
 

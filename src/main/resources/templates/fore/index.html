@@ -9,10 +9,12 @@
     <link rel="stylesheet" th:href="@{/static/fore/lib/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/static/fore/lib/swiper4.5.1/css/swiper.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/layui-v2.5.5/layui/css/layui.css}">
     <link rel="stylesheet" th:href="@{/static/fore/css/style.min.css}">
     <script th:src="@{/static/fore/lib/jquery-1.11.0.min.js}"></script>
     <script th:src="@{/static/fore/lib/swiper4.5.1/js/swiper.min.js}"></script>
     <script th:src="@{/static/fore/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/fore/lib/layui-v2.5.5/layui/layui.js}"></script>
     <script th:src="@{/static/fore/js/utils.js}"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -53,35 +55,11 @@
             <div class="title f14">热门文章</div>
             <div class="hot-content">
                 <ul class="hot-list">
-                    <li class="hot-item mb10">
-                        <span class="hot-label">1</span>
-                        <a href="javascript:" class="hot-title f14">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"></i>55评论</span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"></i>132浏览</span>
-                    </li>
-                    <li class="hot-item mb10">
-                        <span class="hot-label">2</span>
-                        <a href="javascript:" class="hot-title f14">Git主题官方在线使用文档</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"></i>55评论</span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"></i>132浏览</span>
-                    </li>
-                    <li class="hot-item mb10">
-                        <span class="hot-label">3</span>
-                        <a href="javascript:" class="hot-title f14">WordPress数据库定时远程备份插件-云落优化精简版WP Database Backup</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"></i>55评论</span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"></i>132浏览</span>
-                    </li>
-                    <li class="hot-item mb10">
-                        <span class="hot-label">4</span>
-                        <a href="javascript:" class="hot-title f14">Payjs For Ponits：基于Payjs开发的WordPress积分充值微信支付插件</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"></i>55评论</span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"></i>132浏览</span>
-                    </li>
-                    <li class="hot-item mb10">
-                        <span class="hot-label">5</span>
-                        <a href="javascript:" class="hot-title f14">WordPress函数文件常用自定义代码</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"></i>55评论</span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"></i>132浏览</span>
+                    <li class="hot-item mb10" th:each="hotBlog, status : ${application.guessYouLikeList}">
+                        <span class="hot-label" th:text="${status.index + 1}">1</span>
+                        <a th:href="${#servletContext.contextPath} + '/article/' + ${hotBlog.id}" class="hot-title f14" th:text="${hotBlog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
+                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E" th:text="${hotBlog.comment} + '评论'"></i></span>
+                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD" th:text="${hotBlog.view} + '浏览'"></i></span>
                     </li>
                 </ul>
             </div>
@@ -520,6 +498,21 @@
             hide: true,
             draggable: true
         }
+    });
+    // 流加载
+    layui.use('flow', function(){
+        var flow = layui.flow;
+
+        flow.load({
+            elem: ".articles",
+            isAuto: true,
+            end: "没有更多了",
+            done: function (page, next) {
+                $.ajax({
+
+                });
+            }
+        });
     });
 </script>
 </html>

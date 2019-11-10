@@ -13,4 +13,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IReImageService extends IService<ReImage> {
 
+    /**
+     * 获取博主头像
+     * @return 博主头像封装的ReImage类
+     */
+    ReImage getAvatar();
+
+    /**
+     * 获取加我微信的二维码图片
+     * @return 加我微信的二维码头像图片
+     */
+    ReImage getQrCodeWeChat();
 }

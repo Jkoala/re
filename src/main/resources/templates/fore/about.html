@@ -32,9 +32,9 @@
             <h1 class="f16 fb p10 name">个人简介</h1>
             <div class="flex flex-direction-column flex-align-items-center">
                 <a href="javascript:" class="mt10"><img class="avatar"
-                                                        src="http://www.ljtnono.cn:80/myblog/images/album/me.jpg"
-                                                        alt="最后的疼爱" title="最后的疼爱"></a>
-                <p class="nick-name fb f20 m10">最后的疼爱</p>
+                                                        th:src="${application.avatar.url}"
+                                                        th:alt="${application.author_nick_name}" th:title="application.author_nick_name"></a>
+                <p class="nick-name fb f20 m10" th:text="${application.author_nick_name}">最后的疼爱</p>
                 <p class="m10">Java菜鸟一枚</p>
                 <p class="m10">喜欢折腾各种技术，web、linux、数据库、前端等</p>
                 <p class="m10">爱生活、爱科学、爱设计、爱编程</p>

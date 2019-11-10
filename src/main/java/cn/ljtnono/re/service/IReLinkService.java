@@ -3,6 +3,8 @@ package cn.ljtnono.re.service;
 import cn.ljtnono.re.entity.ReLink;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IReLinkService extends IService<ReLink> {
 
+    /**
+     * 获取所有外部链接数据
+     * @return 所有外部链接数据
+     */
+    List<ReLink> listOutLinkAll();
 }

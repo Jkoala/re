@@ -1,6 +1,7 @@
 package cn.ljtnono.re.enumeration;
 
 /**
+ * 全局异常枚举
  * @author ljt
  * @date 2019/11/4
  * @version 1.0

@@ -155,4 +155,16 @@ public class ReBlogType implements Serializable {
             return new ReBlogType(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ReBlogType{" +
+                "id=" + id +
+                ", delete=" + delete +
+                ", modifyTime=" + modifyTime +
+                ", createTime=" + createTime +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
