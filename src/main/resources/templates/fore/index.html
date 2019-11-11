@@ -30,16 +30,16 @@
         <div class="swiper-container" id="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide swiper-zoom-container">
-                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/coffee.jpg}" alt="">
+                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/bird.jpg}" alt="">
                 </div>
                 <div class="swiper-slide swiper-zoom-container">
                     <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/coffee.jpg}" alt="">
                 </div>
                 <div class="swiper-slide swiper-zoom-container">
-                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/coffee.jpg}" alt="">
+                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/leaves.jpg}" alt="">
                 </div>
                 <div class="swiper-slide swiper-zoom-container">
-                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/coffee.jpg}" alt="">
+                    <img src="../../static/fore/images/bird.jpg" th:src="@{/static/fore/images/sunset.jpg}" alt="">
                 </div>
             </div>
             <!-- 分页器 -->
@@ -57,405 +57,48 @@
                 <ul class="hot-list">
                     <li class="hot-item mb10" th:each="hotBlog, status : ${application.guessYouLikeList}">
                         <span class="hot-label" th:text="${status.index + 1}">1</span>
-                        <a th:href="${#servletContext.contextPath} + '/article/' + ${hotBlog.id}" class="hot-title f14" th:text="${hotBlog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
-                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E" th:text="${hotBlog.comment} + '评论'"></i></span>
-                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD" th:text="${hotBlog.view} + '浏览'"></i></span>
+                        <a th:href="${#servletContext.contextPath} + '/article/' + ${hotBlog.id}" class="hot-title f14"
+                           th:text="${hotBlog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
+                        <span class="hot-comment fr"><i class="fa fa-comment" style="color: #FF8E8E"
+                                                        th:text="${hotBlog.comment} + '评论'"></i></span>
+                        <span class="hot-view mr15 fr"><i class="fa fa-eye" style="color: #3DB1AD"
+                                                          th:text="${hotBlog.view} + '浏览'"></i></span>
                     </li>
                 </ul>
             </div>
         </div>
         <!-- 文章列表项 -->
-        <div class="articles">
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
-            <article class="article mb10 p10">
-                <header class="article-header mb10">
-                    <span class="article-label f12 mr5">
-                SpringBoot
-                <i class="label-arrow"></i>
-            </span>
-                    <span class="article-title f14">对象及变量的并发访问</span>
-                </header>
-                <section class="article-detail flex">
-                    <div class="mr10 article-thumb cursor-pointer">
-                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"
-                             alt="对象及变量的并发访问"
-                             title="对象及变量的并发访问">
-                    </div>
-                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">
-                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。
-                            行内快空白问题来看下面一段代码</a>
-                        <div class="article-info">
-                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""
-                                                                                                        style="color: #00A67C;">ljtnono</span></a>
-                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span
-                                    class="">2019-10-10 17:57</span></a>
-                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span
-                                    class="">1034浏览</span></a>
-                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span
-                                    class="">10评论</span></a>
-                        </div>
-                    </div>
-                </section>
-            </article>
+        <div class="articles" style="min-height: 2192px">
+            <!--            <article class="article mb10 p10">-->
+            <!--                <header class="article-header mb10">-->
+            <!--                    <span class="article-label f12 mr5">-->
+            <!--                SpringBoot-->
+            <!--                <i class="label-arrow"></i>-->
+            <!--            </span>-->
+            <!--                    <span class="article-title f14">对象及变量的并发访问</span>-->
+            <!--                </header>-->
+            <!--                <section class="article-detail flex">-->
+            <!--                    <div class="mr10 article-thumb cursor-pointer">-->
+            <!--                        <img src="https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png"-->
+            <!--                             alt="对象及变量的并发访问"-->
+            <!--                             title="对象及变量的并发访问">-->
+            <!--                    </div>-->
+            <!--                    <div class="article-summary flex flex-direction-column flex-justify-content-space-between">-->
+            <!--                        <a href="javascript:">弹性布局学习弹性盒子布局之前，我们要弄清楚现有的布局方式的缺点，比如行内快、浮动、以及表格的缺点。-->
+            <!--                            行内快空白问题来看下面一段代码</a>-->
+            <!--                        <div class="article-info">-->
+            <!--                            <a href="#" class=""><i class="fa fa-user pr5" aria-hidden="true"></i><span class=""-->
+            <!--                                                                                                        style="color: #00A67C;">ljtnono</span></a>-->
+            <!--                            <a href="#" class=""><i class="fa fa-clock-o" aria-hidden="true"></i><span-->
+            <!--                                    class="">2019-10-10 17:57</span></a>-->
+            <!--                            <a href="#" class=""><i class="fa fa-eye" aria-hidden="true"></i><span-->
+            <!--                                    class="">1034浏览</span></a>-->
+            <!--                            <a href="#" class=""><i class="fa fa-comment" aria-hidden="true"></i><span-->
+            <!--                                    class="">10评论</span></a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </section>-->
+            <!--            </article>-->
         </div>
     </div>
     <div th:replace="fore/content_side.html"></div>
@@ -466,9 +109,9 @@
 <div th:replace="fore/footer.html"></div>
 </body>
 <script th:src="@{/static/fore/js/common.js}"></script>
-<script>
+<script th:inline="javascript">
     // 配置swiper
-    var swiper = new Swiper(".swiper-container", {
+    let swiper = new Swiper(".swiper-container", {
         speed: 800,
         loop: true,
         grabCursor: true,
@@ -500,16 +143,65 @@
         }
     });
     // 流加载
-    layui.use('flow', function(){
-        var flow = layui.flow;
-
+    layui.use(["flow", "util"], function () {
+        let flow = layui.flow;
+        let util = layui.util;
         flow.load({
             elem: ".articles",
             isAuto: true,
             end: "没有更多了",
             done: function (page, next) {
+                let lis = [];
                 $.ajax({
-
+                    url: [[${#servletContext.contextPath}]] + "/api/listBlogPage",
+                    method: "GET",
+                    data: {
+                        page: page,
+                        count: 12 // 每页12条
+                    },
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.request === "success" && res.status === 200) {
+                            layui.each(res.data[0], function (index, item) {
+                                let text = "";
+                                text += "<article class=\"article mb10 p10\">";
+                                text += "                <header class=\"article-header mb10\">";
+                                text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/articles/" + item.type + "\">";
+                                text += "                    <span class=\"article-label f12 mr5\">";
+                                text += item.type;
+                                text += "                <i class=\"label-arrow\"></i>";
+                                text += "</a>";
+                                text += "            </span>";
+                                text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">";
+                                text += "                    <span class=\"article-title f14\">" + item.title + "</span>";
+                                text += "</a>";
+                                text += "                </header>";
+                                text += "                <section class=\"article-detail flex\">";
+                                text += "                    <div class=\"mr10 article-thumb cursor-pointer\">";
+                                text += "                        <img src=\"https://www.ljtnono.cn/group1/M00/00/00/rBUAC1zmdjiAf_2uAACwcD9FHZU344.png\"";
+                                text += "                             alt=\"" + item.title + "\"";
+                                text += "                             title=\"" + item.title + "\">";
+                                text += "                    </div>";
+                                text += "                    <div class=\"article-summary flex flex-direction-column flex-justify-content-space-between\">";
+                                text += "                        <a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">" + item.summary + "</a>";
+                                text += "                        <div class=\"article-info\">";
+                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-user pr5\" aria-hidden=\"true\"></i><span class=\"\"";
+                                text += "                                                                                                        style=\"color: #00A67C;\">" + item.author + "</span></a>";
+                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i><span";
+                                text += "                                    class=\"\">" + util.toDateString(item.modifyTime, "yyyy-MM-dd") + "</span></a>";
+                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i><span";
+                                text += "                                    class=\"\">" + item.view + "浏览</span></a>";
+                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-comment\" aria-hidden=\"true\"></i><span";
+                                text += "                                    class=\"\">" + item.comment + "评论</span></a>";
+                                text += "                        </div>";
+                                text += "                    </div>";
+                                text += "                </section>";
+                                text += "            </article>";
+                                lis.push(text);
+                            });
+                            next(lis.join(''));
+                        }
+                    }
                 });
             }
         });

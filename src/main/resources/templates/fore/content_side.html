@@ -32,10 +32,10 @@
     <div class="guess mb15">
         <div class="title mb15">猜你喜欢</div>
         <div class="guess-item pb10 mb10" th:each="blog : ${application.guessYouLikeList}">
-            <a href="javascript:" class="thumb mr5"><img
+            <a th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" class="thumb mr5"><img
                     src="https://www.ljtnono.cn/group1/M00/00/00/rBKlY1yEpZqACq25AAAbhH43tzY093.jpg" alt=""></a>
             <div class="guess-text pr">
-                <a class="guess-title pa" href="javascript:" th:text="${blog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
+                <a class="guess-title pa" th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" th:text="${blog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
                 <a class="guess-info pa">
                     <span th:text="${#dates.format(blog.modifyTime,'yyyy-MM-dd')}">2019-10-13</span>
                     <span th:text="${blog.comment} + '评论'">1,213评论</span>
