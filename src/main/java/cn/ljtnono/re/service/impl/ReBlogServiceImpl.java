@@ -56,7 +56,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             });
             return selectListResult;
         }
-        reBlogList.sort(Comparator.comparingInt(ReBlog::getView));
+//        reBlogList.sort(Comparator.comparingInt(ReBlog::getView));
         return reBlogList.subList(0, 5);
     }
 
