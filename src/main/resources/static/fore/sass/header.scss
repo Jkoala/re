@@ -106,7 +106,29 @@
       }
     }
   }
+
+  .side-nav {
+    width: 206px;
+    height: 100vh;
+    background-color: #12B7DE;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 998;
+    display: none;
+    a {
+      display: block;
+      width: 100%;
+      height: 36px;
+      color: #FFFFFF;
+      font-size: 18px;
+      line-height: 36px;
+      border-top: 1px solid #49CCEA;
+    }
+  }
 }
+
+
 
 /*ipad 768px以上*/
 @media screen and (min-width: 768px) {
@@ -114,7 +136,9 @@
     .side-nav-header {
       display: none;
     }
-
+    .side-nav {
+      display: none !important;
+    }
     .nav {
       display: block;
     }

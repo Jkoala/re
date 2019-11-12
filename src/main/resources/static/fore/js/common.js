@@ -65,4 +65,10 @@ $(".roll-top").on("click", function (e) {
     }, "ease");
 });
 
+/** 侧边栏导航点击事件 */
+$("#header .side-nav-header .side-nav-bar").on("click", function () {
+   // 直接toggle
+    $("#header .side-nav").toggle();
+});
+
 

@@ -1,6 +1,7 @@
 package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReBlog;
+import cn.ljtnono.re.pojo.JsonResult;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -34,4 +35,13 @@ public interface IReBlogService extends IService<ReBlog> {
      * @return 返回分页数据
      */
     List<ReBlog> listBlogPage(Integer page, Integer count);
+
+    /**
+     * 根据博客类型分页查询博客列表
+     * @param page 当前页
+     * @param count 每页查询的条数
+     * @param type 博客类型
+     * @return 返回根据类型查询的博客分页数据,并且封装在JsonResult中 {@link JsonResult}
+     */
+    JsonResult listBlogPageByType(Integer page, Integer count, String type);
 }

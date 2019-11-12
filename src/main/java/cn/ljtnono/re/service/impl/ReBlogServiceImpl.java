@@ -5,6 +5,7 @@ import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.exception.GlobalToJsonException;
 import cn.ljtnono.re.mapper.ReBlogMapper;
+import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.util.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -44,7 +45,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
     public List<ReBlog> listGuessYouLike() {
         // 根据view降序获取前6条记录
         // 首先从缓存获取所有数据 TODO 这里琢磨一下怎么提高效率
-        List<ReBlog> reBlogList = (List<ReBlog>) redisUtil.getByPattern("re_blog*");
+        List<ReBlog> reBlogList = (List<ReBlog>) redisUtil.getByPattern("re_blog:*:*:*:*");
         if (reBlogList == null || reBlogList.size() == 0) {
             List<ReBlog> selectListResult = getBaseMapper().selectList(new QueryWrapper<ReBlog>().last("ORDER BY view LIMIT 6"));
             selectListResult.forEach(reBlog -> {
@@ -56,7 +57,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             });
             return selectListResult;
         }
-//        reBlogList.sort(Comparator.comparingInt(ReBlog::getView));
+        reBlogList.sort(Comparator.comparingInt(ReBlog::getView));
         return reBlogList.subList(0, 5);
     }
 
@@ -68,7 +69,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
     @Override
     public List<ReBlog> listAll() {
         // 首先从缓存中获取
-        List<ReBlog> reBlogList = (List<ReBlog>) redisUtil.getByPattern("re_blog*");
+        List<ReBlog> reBlogList = (List<ReBlog>) redisUtil.getByPattern("re_blog:*:*:*:*");
         if (reBlogList == null || reBlogList.size() == 0) {
             // 从数据库中获取
             List<ReBlog> list = getBaseMapper().selectList(null);
@@ -118,5 +119,25 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
 
         logger.info("从缓存中获取" + page + "页博客数据，每页获取" + count + "条");
         return (List<ReBlog>) objects;
+    }
+
+    /**
+     * 根据博客类型分页查询博客列表
+     *
+     * @param page  当前页
+     * @param count 每页查询的条数
+     * @param type  博客类型
+     * @return 返回根据类型查询的博客分页数据, 并且封装在JsonResult中 {@link JsonResult}
+     */
+    @Override
+    public JsonResult listBlogPageByType(Integer page, Integer count, String type) {
+        // 首先从缓存中获取
+        return null;
+    }
+
+
+    private JsonResult listBlogPageByCondition(Integer page, Integer count, String type) {
+
+        return null;
     }
 }
