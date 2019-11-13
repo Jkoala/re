@@ -5,6 +5,7 @@ package cn.ljtnono.re.common;
  * @author ljt
  * @date 2019/11/10
  * @version 1.0
+ * @deprecated 已经切换到枚举类了 {@link cn.ljtnono.re.enumeration.ReEntityRedisKeyEnum}
  */
 public class ReEntityRedisCommon {
 

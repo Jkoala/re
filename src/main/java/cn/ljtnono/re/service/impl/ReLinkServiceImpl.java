@@ -1,7 +1,7 @@
 package cn.ljtnono.re.service.impl;
 
-import cn.ljtnono.re.common.ReEntityRedisCommon;
 import cn.ljtnono.re.entity.ReLink;
+import cn.ljtnono.re.enumeration.ReEntityRedisKeyEnum;
 import cn.ljtnono.re.mapper.ReLinkMapper;
 import cn.ljtnono.re.service.IReLinkService;
 import cn.ljtnono.re.util.RedisUtil;
@@ -43,7 +43,7 @@ public class ReLinkServiceImpl extends ServiceImpl<ReLinkMapper, ReLink> impleme
             // 从数据库获取
             List<ReLink> list = list(new QueryWrapper<ReLink>().eq("type", "外部链接"));
             list.forEach(reLink -> {
-                redisUtil.set(ReEntityRedisCommon.RE_LINK_KEY
+                redisUtil.set(ReEntityRedisKeyEnum.RE_LINK_KEY.getKey()
                         .replace("id", reLink.getId() + "")
                         .replace("name", reLink.getName())
                         .replace("type", reLink.getType()), reLink, RedisUtil.EXPIRE_TIME_DEFAULT);

@@ -38,7 +38,7 @@ public class ApiController {
      */
     @GetMapping("/listBlogAll")
     public JsonResult listBlogAll(HttpServletRequest request, HttpServletResponse response) {
-        List<ReBlog> list = iReBlogService.list(null);
+        List<ReBlog> list = iReBlogService.listAll();
         return JsonResult.success(list, list.size());
     }
 
@@ -59,5 +59,11 @@ public class ApiController {
 
 
         return null;
+    }
+
+    @GetMapping("/getGuessYouLikeBlogList")
+    public JsonResult listGuessYouLike() {
+        List<ReBlog> reBlogs = iReBlogService.listGuessYouLike();
+        return JsonResult.success(reBlogs, reBlogs.size());
     }
 }

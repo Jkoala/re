@@ -5,6 +5,10 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * 封装ftpClient的对象

@@ -1,7 +1,7 @@
 package cn.ljtnono.re.service.impl;
 
-import cn.ljtnono.re.common.ReEntityRedisCommon;
 import cn.ljtnono.re.entity.ReImage;
+import cn.ljtnono.re.enumeration.ReEntityRedisKeyEnum;
 import cn.ljtnono.re.mapper.ReImageMapper;
 import cn.ljtnono.re.service.IReImageService;
 import cn.ljtnono.re.util.RedisUtil;
@@ -40,7 +40,7 @@ public class ReImageServiceImpl extends ServiceImpl<ReImageMapper, ReImage> impl
         if (avatar == null) {
             // 尝试从数据库获取
             ReImage one = getOne(new QueryWrapper<ReImage>().eq("origin_name", "avatar"));
-            redisUtil.set(ReEntityRedisCommon.RE_IMAGE_KEY
+            redisUtil.set(ReEntityRedisKeyEnum.RE_IMAGE_KEY.getKey()
                     .replace("id", one.getId())
                     .replace("origin_name", one.getOriginName())
                     .replace("type", one.getType())
@@ -62,7 +62,7 @@ public class ReImageServiceImpl extends ServiceImpl<ReImageMapper, ReImage> impl
         if (qrCodeWeChat == null) {
             // 尝试从数据库获取
             ReImage one = getOne(new QueryWrapper<ReImage>().eq("origin_name", "qrcode-wechat"));
-            redisUtil.set(ReEntityRedisCommon.RE_IMAGE_KEY
+            redisUtil.set(ReEntityRedisKeyEnum.RE_IMAGE_KEY.getKey()
                     .replace("id", one.getId())
                     .replace("origin_name", one.getOriginName())
                     .replace("type", one.getType())

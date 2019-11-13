@@ -33,7 +33,7 @@
         <div class="title mb15">猜你喜欢</div>
         <div class="guess-item pb10 mb10" th:each="blog : ${application.guessYouLikeList}">
             <a th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" class="thumb mr5"><img
-                    src="https://www.ljtnono.cn/group1/M00/00/00/rBKlY1yEpZqACq25AAAbhH43tzY093.jpg" alt=""></a>
+                    th:src="${blog.coverImage}" alt=""></a>
             <div class="guess-text pr">
                 <a class="guess-title pa" th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" th:text="${blog.title}">Git:一款比付费主题更像是付费主题的WordPress免费主题</a>
                 <a class="guess-info pa">
