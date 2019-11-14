@@ -1,6 +1,7 @@
 package cn.ljtnono.re.listener;
 
 import cn.ljtnono.re.entity.*;
+import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.*;
 import cn.ljtnono.re.util.RedisUtil;
 import org.slf4j.Logger;
@@ -76,12 +77,15 @@ public class ReApplicationContextListener implements ApplicationListener<Context
         List<ReConfig> list = iReConfigService.list();
         // 获取首页猜你喜欢
         List<ReBlog> listGuessYouLike = iReBlogService.listGuessYouLike();
+        // 获取首页分页博客列表的第一页
+        JsonResult jsonResult = iReBlogService.listBlogPage(1, 12);
         ReImage qrCodeWeChat = iReImageService.getQrCodeWeChat();
         ReImage avatar = iReImageService.getAvatar();
         // 将每一个配置项设置到application域
         list.forEach(reConfig -> {
             servletContext.setAttribute(reConfig.getKey(), reConfig.getValue());
         });
+        servletContext.setAttribute("indexBlogListFirstPage", jsonResult.getData());
         servletContext.setAttribute("guessYouLikeList", listGuessYouLike);
         servletContext.setAttribute("blogTypeList", listBlogTypeResult);
         servletContext.setAttribute("linkList", listLinkResult);

@@ -50,8 +50,7 @@ public class ApiController {
      */
     @GetMapping("/listBlogPage")
     public JsonResult listBlogPage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count) {
-        List<ReBlog> listBlogPage = iReBlogService.listBlogPage(page, count);
-        return JsonResult.success(listBlogPage, listBlogPage.size());
+        return iReBlogService.listBlogPage(page, count);
     }
 
     @GetMapping("/getBlog")
@@ -63,7 +62,7 @@ public class ApiController {
 
     @GetMapping("/getGuessYouLikeBlogList")
     public JsonResult listGuessYouLike() {
-        List<ReBlog> reBlogs = iReBlogService.listGuessYouLike();
-        return JsonResult.success(reBlogs, reBlogs.size());
+        List<ReBlog> reBlogList = iReBlogService.listGuessYouLike();
+        return JsonResult.success(reBlogList, reBlogList.size());
     }
 }

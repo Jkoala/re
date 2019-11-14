@@ -21,7 +21,6 @@ public class JsonResult implements Serializable {
     private Integer totalCount;
 
     /** 请求状态 success 代表成功 fail 代表失败 */
-
     private String request;
 
     /** 请求状态码 */

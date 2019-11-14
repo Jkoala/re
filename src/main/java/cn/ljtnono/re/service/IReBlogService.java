@@ -34,7 +34,7 @@ public interface IReBlogService extends IService<ReBlog> {
      * @param count 每页条数
      * @return 返回分页数据
      */
-    List<ReBlog> listBlogPage(Integer page, Integer count);
+    JsonResult listBlogPage(Integer page, Integer count);
 
     /**
      * 根据博客类型分页查询博客列表
