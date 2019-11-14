@@ -72,4 +72,48 @@ public class ReImageServiceImpl extends ServiceImpl<ReImageMapper, ReImage> impl
         logger.info("从缓存中加载用户微信二维码图片");
         return qrCodeWeChat;
     }
+
+    /**
+     * 获取微信扫码支付的二维码图片
+     *
+     * @return 扫码支付二维码
+     */
+    @Override
+    public ReImage getQrCodeWeChatSk() {
+        ReImage qrCodeWeChatSk = (ReImage) redisUtil.getByPattern("re_image:*:qrcode-wechat-sk:*");
+        if (qrCodeWeChatSk == null) {
+            // 尝试从数据库获取
+            ReImage one = getOne(new QueryWrapper<ReImage>().eq("origin_name", "qrcode-wechat-sk"));
+            redisUtil.set(ReEntityRedisKeyEnum.RE_IMAGE_KEY.getKey()
+                    .replace("id", one.getId())
+                    .replace("origin_name", one.getOriginName())
+                    .replace("type", one.getType())
+                    .replace("owner", one.getOwner()), one, RedisUtil.EXPIRE_TIME_DEFAULT);
+            return one;
+        }
+        logger.info("从缓存中加载用户微信扫码支付二维码图片");
+        return qrCodeWeChatSk;
+    }
+
+    /**
+     * 获取支付宝扫码支付图片
+     *
+     * @return 支付宝扫码支付的二维码
+     */
+    @Override
+    public ReImage getQrCodeZfb() {
+        ReImage qrCodeZfb = (ReImage) redisUtil.getByPattern("re_image:*:qrcode-zfb:*");
+        if (qrCodeZfb == null) {
+            // 尝试从数据库获取
+            ReImage one = getOne(new QueryWrapper<ReImage>().eq("origin_name", "qrcode-zfb"));
+            redisUtil.set(ReEntityRedisKeyEnum.RE_IMAGE_KEY.getKey()
+                    .replace("id", one.getId())
+                    .replace("origin_name", one.getOriginName())
+                    .replace("type", one.getType())
+                    .replace("owner", one.getOwner()), one, RedisUtil.EXPIRE_TIME_DEFAULT);
+            return one;
+        }
+        logger.info("从缓存中加载用户支付宝支付二维码图片");
+        return qrCodeZfb;
+    }
 }

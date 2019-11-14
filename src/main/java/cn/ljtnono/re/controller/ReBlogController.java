@@ -40,10 +40,10 @@ public class ReBlogController extends BaseController {
      * 根据博客的id获取博客内容
      * @param id 博客的id
      * @param modelMap thymeleaf属性集合
-     * @return 跳转到article_detail页面
+     * @return 跳转到article页面
      */
     @GetMapping("/{id}")
-    public String getBlogById(@PathVariable final String id, ModelMap modelMap) {
+    public String article(@PathVariable final String id, ModelMap modelMap) {
         // 如果参数为空
         if (StringUtil.isEmpty(id)) {
             logger.info("博客id不能为空");

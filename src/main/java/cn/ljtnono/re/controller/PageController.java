@@ -32,6 +32,11 @@ public class PageController {
         return "fore/" + page;
     }
 
+    @GetMapping("/admin/login")
+    public String toLogin() {
+        return "back/login";
+    }
+
     @GetMapping({"/admin", "/admin/"})
     public String back(ModelMap map) {
         return "back/index";
@@ -41,6 +46,7 @@ public class PageController {
     public String backTemplates(@PathVariable String page) {
         return "back/" + page;
     }
+
 
     /**
      * 根据路由设置当前页面

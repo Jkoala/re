@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="崔庆才的个人网站，记录生活的瞬间，分享学习的心得，感悟生活，留住感动，静静寻觅生活的美好">
-    <meta name="keywords" content="崔庆才,静觅,PHP,Python,爬虫,深度学习,机器学习,数据分析,网络,IT,技术,博客,">
+    <meta name="description" content="根元素博客，追根溯源">
+    <meta name="keywords" content="更元素,Java,css,html,爬虫,网络,IT,技术,博客">
     <title>Root Element 根元素</title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -210,6 +210,13 @@
                 });
             }
         });
+    });
+    // 配置bootstrap提示
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover({
+        html: true,
+        content: '<img src="' + [[${application.qrCodeWeChat.url}]] + '" style="width: 100%; height: 100%"/>',
+        trigger: "hover"
     });
 </script>
 </html>

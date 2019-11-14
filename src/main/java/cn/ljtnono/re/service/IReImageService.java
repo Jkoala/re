@@ -24,4 +24,16 @@ public interface IReImageService extends IService<ReImage> {
      * @return 加我微信的二维码头像图片
      */
     ReImage getQrCodeWeChat();
+
+    /**
+     * 获取微信扫码支付的二维码图片
+     * @return 扫码支付二维码
+     */
+    ReImage getQrCodeWeChatSk();
+
+    /**
+     * 获取支付宝扫码支付图片
+     * @return 支付宝扫码支付的二维码
+     */
+    ReImage getQrCodeZfb();
 }

@@ -81,6 +81,8 @@ public class ReApplicationContextListener implements ApplicationListener<Context
         JsonResult jsonResult = iReBlogService.listBlogPage(1, 12);
         ReImage qrCodeWeChat = iReImageService.getQrCodeWeChat();
         ReImage avatar = iReImageService.getAvatar();
+        ReImage qrCodeWeChatSk = iReImageService.getQrCodeWeChatSk();
+        ReImage qrCodeZfb = iReImageService.getQrCodeZfb();
         // 将每一个配置项设置到application域
         list.forEach(reConfig -> {
             servletContext.setAttribute(reConfig.getKey(), reConfig.getValue());
@@ -91,5 +93,7 @@ public class ReApplicationContextListener implements ApplicationListener<Context
         servletContext.setAttribute("linkList", listLinkResult);
         servletContext.setAttribute("qrCodeWeChat", qrCodeWeChat);
         servletContext.setAttribute("avatar", avatar);
+        servletContext.setAttribute("qrCodeWeChatSk", qrCodeWeChatSk);
+        servletContext.setAttribute("qrCodeZfb", qrCodeZfb);
     }
 }

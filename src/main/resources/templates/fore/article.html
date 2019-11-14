@@ -80,25 +80,21 @@
             </section>
             <section class="detail-label p10">
                 <i class="fa fa-tag f20"></i>
-                <a class="label" href="javascript:" th:text="${blog.type}">
+                <a class="label" th:href="${#servletContext.contextPath} + '/articles/' + ${blog.type}" th:text="${blog.type}">
                     python
                 </a>
             </section>
             <section class="detail-pre-next p10 flex flex-justify-content-space-between">
-                <div class="pre">
-                    <a href="javascript:"><i class="fa fa-angle-double-left"></i>Python爬虫实战四之爬取淘宝MM照片</a>
+                <div class="pre" th:if="${prev != null}">
+                    <a th:href="${#servletContext.contextPath} + '/article/' + ${prev.id}" th:inline="text"><i class="fa fa-angle-double-left"></i>[[${prev.title}]]</a>
                 </div>
-                <div class="next">
-                    <a href="javascript:">Python爬虫实战四之爬取淘宝MM照片<i class="fa fa-angle-double-right"></i></a>
+                <div class="next" th:if="${next != null}">
+                    <a th:href="${#servletContext.contextPath} + '/article/' + ${next.id}" th:inline="text">[[${next.title}]]<i class="fa fa-angle-double-right"></i></a>
                 </div>
             </section>
             <section class="detail-hot-list p10">
                 <ul>
-                    <li class="mb10 mr10"><i class="fa fa-minus"></i><a href="javascript:" class="ml5">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
-                    <li class="mb10 mr10"><i class="fa fa-minus"></i><a href="javascript:" class="ml5">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
-                    <li class="mb10 mr10"><i class="fa fa-minus"></i><a href="javascript:" class="ml5">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
-                    <li class="mb10 mr10"><i class="fa fa-minus"></i><a href="javascript:" class="ml5">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
-                    <li class="mb10 mr10"><i class="fa fa-minus"></i><a href="javascript:" class="ml5">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
+                    <li class="mb10 mr10" th:each="blog : ${application.guessYouLikeList}"><i class="fa fa-minus"></i><a th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" class="ml5" th:text="${blog.title}">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
                 </ul>
             </section>
             <!--留言区-->
