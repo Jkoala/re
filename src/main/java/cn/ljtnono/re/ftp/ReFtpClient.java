@@ -68,7 +68,6 @@ public class ReFtpClient {
     public void disConnect() throws IOException {
         if (ftpClient != null) {
             ftpClient.disconnect();
-            ftpClient.logout();
         }
     }
 
@@ -207,5 +206,12 @@ public class ReFtpClient {
         ftpClient.logout();
         disConnect();
         return true;
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        ReFtpClient reFtpClient = new ReFtpClient();
+
+        reFtpClient.uploadFile("/re/", "失败.txt", new FileInputStream("C:\\Users\\GEEK\\Desktop\\失败.txt"));
     }
 }
