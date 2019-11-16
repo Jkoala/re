@@ -56,21 +56,17 @@ public class ReApplicationContextListener implements ApplicationListener<Context
         loadApplicationContextAttribute(servletContext);
     }
 
-
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-
-
 
     /**
      * 从数据库中加载初始化需要的内容
      * @param servletContext application实例
      */
     private void loadApplicationContextAttribute(ServletContext servletContext) {
-        List<ReBlogType> listBlogTypeResult = iReBlogTypeService.list();
+        List<ReBlogType> listBlogTypeResult = (List<ReBlogType>) iReBlogTypeService.listBlogTypeAll().getData();
         // 获取首页外部链接
         List<ReLink> listLinkResult = iReLinkService.listOutLinkAll();
         // 获取所有的配置项
@@ -78,7 +74,7 @@ public class ReApplicationContextListener implements ApplicationListener<Context
         // 获取首页猜你喜欢
         List<ReBlog> listGuessYouLike = iReBlogService.listGuessYouLike();
         // 获取首页分页博客列表的第一页
-        JsonResult jsonResult = iReBlogService.listBlogPage(1, 12);
+        JsonResult jsonResult = iReBlogService.listBlogPage(1, 10);
         ReImage qrCodeWeChat = iReImageService.getQrCodeWeChat();
         ReImage avatar = iReImageService.getAvatar();
         ReImage qrCodeWeChatSk = iReImageService.getQrCodeWeChatSk();
