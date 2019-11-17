@@ -24,7 +24,7 @@
     <div class="message">RootElement-管理登录</div>
     <div id="darkbannerwrap"></div>
 
-    <form method="post" class="layui-form" action="/re/user/login">
+    <form method="post" class="layui-form" th:action="${#servletContext.contextPath} + '/admin/login'">
         <input name="username" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
         <hr class="hr15">
         <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
