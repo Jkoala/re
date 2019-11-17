@@ -74,24 +74,4 @@ public class SpringBeanConfig {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-
-    /**
-     * 设置spring security 中的密码加密器
-     * @return {@link PasswordEncoder}
-     */
-    @Bean
-    public PasswordEncoder setSpringSecurityPasswordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence rawPassword) {
-                return EncryptUtil.getMd5((String) rawPassword);
-            }
-
-            @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return encodedPassword.equalsIgnoreCase(EncryptUtil.getMd5((String) rawPassword));
-            }
-        };
-    }
-
 }
