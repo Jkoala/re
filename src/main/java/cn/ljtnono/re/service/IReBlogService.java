@@ -7,12 +7,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
+ * 博客服务接口
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/16
+ * @version 1.0
  */
 public interface IReBlogService extends IService<ReBlog> {
 
@@ -34,7 +32,7 @@ public interface IReBlogService extends IService<ReBlog> {
      * @param count 每页条数
      * @return 返回分页数据
      */
-    JsonResult listBlogPage(Integer page, Integer count);
+    JsonResult listBlogPageReturnJsonResult(Integer page, Integer count);
 
     /**
      * 根据博客类型分页查询博客列表
@@ -43,5 +41,12 @@ public interface IReBlogService extends IService<ReBlog> {
      * @param type 博客类型
      * @return 返回根据类型查询的博客分页数据,并且封装在JsonResult中 {@link JsonResult}
      */
-    JsonResult listBlogPageByType(Integer page, Integer count, String type);
+    JsonResult listBlogPageByTypeReturnJsonResult(Integer page, Integer count, String type);
+
+    /**
+     * 根据博客id获取博客的信息，并封装在JsonResult中
+     * @param blogId 博客的id
+     * @return 博客详细信息
+     */
+    JsonResult getByIdReturnJsonResult(Integer blogId);
 }

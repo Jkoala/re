@@ -1,5 +1,6 @@
 package cn.ljtnono.re.advice;
 
+import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.exception.GlobalToJsonException;
 import cn.ljtnono.re.exception.GlobalToViewException;
 import cn.ljtnono.re.pojo.JsonResult;
@@ -30,6 +31,22 @@ public class ReControllerExceptionAdvice {
                 .request("fail")
                 .totalCount(null)
                 .status(e.getGlobalErrorEnum().getErrorCode())
+                .build();
+    }
+
+    /**
+     * 处理参数异常信息
+     * @return JsonResult 携带异常信息
+     */
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseBody
+    public JsonResult illegalArgumentExceptionHandler() {
+        return JsonResult.newBuilder()
+                .message(GlobalErrorEnum.PARAM_ERROR.getErrorMsg())
+                .data(null)
+                .request("fail")
+                .totalCount(null)
+                .status(GlobalErrorEnum.PARAM_ERROR.getErrorCode())
                 .build();
     }
 

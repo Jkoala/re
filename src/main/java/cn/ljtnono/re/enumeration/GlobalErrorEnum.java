@@ -1,7 +1,8 @@
 package cn.ljtnono.re.enumeration;
 
 /**
- * 全局异常枚举
+ * 全局异常枚举, 如果异常跟http错误一样，那么使用http的状态码来标示
+ * 如果状态跟http错误状态不一致，那么从10000开始递增状态码
  * @author ljt
  * @date 2019/11/4
  * @version 1.0
@@ -9,6 +10,9 @@ package cn.ljtnono.re.enumeration;
 public enum GlobalErrorEnum {
     /** 系统错误 */
     SYSTEM_ERROR(500, "系统错误"),
+
+    /**  找不到资源404错误 */
+    NOTFOUND_ERROR(404, "找不到资源"),
 
     /** 请求method错误 */
     METHOD_ERROR(10000, "请求方式错误"),
@@ -20,7 +24,11 @@ public enum GlobalErrorEnum {
     PARAM_MISSING_ERROR(10002, "参数缺失"),
 
     /** 参数无效 */
-    PARAM_INVALID_ERROR(10003, "参数无效");
+    PARAM_INVALID_ERROR(10003, "参数无效"),
+
+    /** 参数异常 */
+    PARAM_ERROR(10004, "参数异常");
+
 
     /** 错误码 */
     private final Integer errorCode;

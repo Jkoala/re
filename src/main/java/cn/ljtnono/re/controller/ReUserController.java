@@ -37,8 +37,10 @@ public class ReUserController extends BaseController {
     }
 
     @PostMapping("/login")
-    public JsonResult login(@RequestParam("username") String username) {
-        return null;
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+
+
+        return "back/index";
     }
 
 

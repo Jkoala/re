@@ -2,15 +2,14 @@ package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
+ * 用户服务类接口
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/15
+ * @version 1.0
  */
-public interface IReUserService extends IService<ReUser> {
+public interface IReUserService extends IService<ReUser>, UserDetailsService {
 
 }

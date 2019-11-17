@@ -17,17 +17,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
+ * 博客服务实现类
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/16
+ * @version 1.0
  */
 @Service
 public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> implements IReBlogService {
@@ -72,7 +68,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
      */
     @Override
     public List<ReBlog> listAll() {
-        // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合
+        // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合 TODO 这里改成先从缓存中获取
         List<ReBlog> list = getBaseMapper().selectList(null);
         // 将数据写入缓存中
         Optional<List<ReBlog>> optionalList = Optional.ofNullable(list);
@@ -93,7 +89,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
      * @return 返回分页数据
      */
     @Override
-    public JsonResult listBlogPage(Integer page, Integer count) {
+    public JsonResult listBlogPageReturnJsonResult(Integer page, Integer count) {
         Optional<Integer> optionalPage = Optional.ofNullable(page);
         Optional<Integer> optionalCount = Optional.ofNullable(count);
         optionalPage.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
@@ -112,27 +108,27 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         List<?> objects = redisUtil.lGet(redisKey, 0, -1);
         if (!objects.isEmpty()) {
             logger.info("从缓存中获取" + page + "页博客数据，每页获取" + count + "条");
-            Integer totalPages = (Integer) redisUtil.getByPattern(totalRedisKey);
-            return JsonResult.success((Collection<?>) objects.get(0), ((Collection<?>)objects.get(0)).size()).addField("totalPages", totalPages);
+            String getByPattern = (String) redisUtil.getByPattern(totalRedisKey);
+            return JsonResult.success((Collection<?>) objects.get(0), ((Collection<?>)objects.get(0)).size()).addField("totalPages", getByPattern.split("_")[0]).addField("totalCount", getByPattern.split("_")[1]);
         } else {
             IPage<ReBlog> pageResult = page(new Page<>(page, count));
             logger.info("获取" + page + "页博客数据，每页获取" + count + "条");
             redisUtil.lSet(redisKey, pageResult.getRecords(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
-            redisUtil.set(totalRedisKey, pageResult.getPages(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
-            return JsonResult.success(pageResult.getRecords(), pageResult.getRecords().size()).addField("totalPages", pageResult.getPages());
+            redisUtil.set(totalRedisKey, pageResult.getPages() + "_" + pageResult.getTotal(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
+            return JsonResult.success(pageResult.getRecords(), pageResult.getRecords().size()).addField("totalPages", pageResult.getPages()).addField("totalCount", pageResult.getTotal());
         }
     }
 
     /**
      * 根据博客类型分页查询博客列表
-     *
+     * TODO 还未完成
      * @param page  当前页
      * @param count 每页查询的条数
      * @param type  博客类型
      * @return 返回根据类型查询的博客分页数据, 并且封装在JsonResult中 {@link JsonResult}
      */
     @Override
-    public JsonResult listBlogPageByType(Integer page, Integer count, String type) {
+    public JsonResult listBlogPageByTypeReturnJsonResult(Integer page, Integer count, String type) {
         // 首先从缓存中获取
         Optional.ofNullable(page);
         String redisKey = ReEntityRedisKeyEnum.RE_BLOG_PAGE_TYPE_KEY.getKey()
@@ -142,8 +138,38 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         return null;
     }
 
-
-    public static void main(String[] args) {
-
+    /**
+     * 根据博客id获取博客的信息，并封装在JsonResult中
+     *
+     * @param blogId 博客的id
+     * @return 博客详细信息
+     */
+    @Override
+    public JsonResult getByIdReturnJsonResult(Integer blogId) {
+        // 首先从缓存获取，如果缓存不存在，那么从数据库获取
+        Optional<Integer> optionalBlogId = Optional.ofNullable(blogId);
+        optionalBlogId.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
+        optionalBlogId.filter(id -> id >= 10001)
+                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
+        ReBlog byPattern = (ReBlog) redisUtil
+                .getByPattern(ReEntityRedisKeyEnum.RE_BLOG_KEY
+                .getKey().replace(":id", ":" + blogId)
+                .replace(":author", ":*")
+                .replace(":title", ":*")
+                .replace(":type", ":*"));
+        Optional<ReBlog> optionalByPattern = Optional.ofNullable(byPattern);
+        optionalByPattern.ifPresent(reBlog -> logger.info("从缓存中获取博客数据: id = " + blogId));
+        ReBlog reBlogByOptional = optionalByPattern.orElseGet(() -> {
+            ReBlog reBlog = getBaseMapper().selectById(blogId);
+            if (reBlog == null) {
+                throw new GlobalToJsonException(GlobalErrorEnum.NOTFOUND_ERROR);
+            }
+            redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
+                    .replace(":id", ":" + reBlog.getId())
+                    .replace(":author", ":" + reBlog.getAuthor()), reBlog, RedisUtil.EXPIRE_TIME_DEFAULT);
+            logger.info("从数据库中获取博客数据: id = " + blogId);
+            return reBlog;
+        });
+        return JsonResult.success(Collections.singletonList(reBlogByOptional), 1);
     }
 }

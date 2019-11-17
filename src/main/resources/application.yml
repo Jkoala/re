@@ -43,6 +43,9 @@ spring:
         max-wait: -1
   session:
     store-type: redis
+  mvc:
+    favicon:
+      enabled: true
 # 配置debug模式
 debug: true
 
@@ -59,7 +62,6 @@ server:
   port: 80
   servlet:
     context-path: /re
-
 # 配置日志相关
 #logging:
 #  config: classpath:/logback.xml
