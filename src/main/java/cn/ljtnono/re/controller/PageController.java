@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,29 +29,29 @@ public class PageController {
 
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String fore(ModelMap map, HttpSession session) {
         map.addAttribute("currentPage", "index");
         return "fore/index";
     }
 
-    @GetMapping("/{page}")
+    @RequestMapping("/{page}")
     public String foreTemplates(@PathVariable final String page, final ModelMap map) {
         setActivePage(page, map);
         return "fore/" + page;
     }
 
-    @GetMapping("/admin/login")
+    @RequestMapping("/admin/login")
     public String toLogin() {
         return "back/login";
     }
 
-    @GetMapping({"/admin", "/admin/"})
+    @RequestMapping({"/admin", "/admin/"})
     public String back(ModelMap map) {
         return "back/index";
     }
 
-    @GetMapping("/admin/{page}")
+    @RequestMapping("/admin/{page}")
     public String backTemplates(@PathVariable String page) {
         return "back/" + page;
     }

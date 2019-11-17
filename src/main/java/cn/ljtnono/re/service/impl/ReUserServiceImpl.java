@@ -10,6 +10,7 @@ import cn.ljtnono.re.service.IReUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +36,9 @@ public class ReUserServiceImpl extends ServiceImpl<ReUserMapper, ReUser> impleme
 
     @Autowired
     private IReRoleService iReRoleService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     /**
      * 用户认证和授权实现
      * @param username 用户名
@@ -52,18 +56,22 @@ public class ReUserServiceImpl extends ServiceImpl<ReUserMapper, ReUser> impleme
         List<ReRole> reRoleList = getBaseMapper().listRoleByUserId(reUser.getId());
         Optional.ofNullable(reRoleList)
                 .orElseThrow(() -> new RuntimeException("权限异常"));
-        // 根据角色查询出所有的权限
-        List<RePermission> permissionList = new ArrayList<>(8);
+        List<GrantedAuthority> authorities = new ArrayList<>(10);
         reRoleList.forEach(reRole -> {
-            List<RePermission> rePermissions = iReRoleService.listPermissionByRoleId(reRole.getId());
-            permissionList.addAll(rePermissions);
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + reRole.getName()));
         });
-        List<SimpleGrantedAuthority> authorityList = new ArrayList<>(8);
-        permissionList.forEach(rePermission -> {
-            // 将权限表达式添加进去
-            authorityList.add(new SimpleGrantedAuthority(permissionList.get(0).getRes()));
-        });
-
-        return new User(username, reUser.getPassword(), authorityList);
+        // 根据角色查询出所有的权限
+//        List<RePermission> permissionList = new ArrayList<>(8);
+//        reRoleList.forEach(reRole -> {
+//            List<RePermission> rePermissions = iReRoleService.listPermissionByRoleId(reRole.getId());
+//            permissionList.addAll(rePermissions);
+//        });
+//        List<SimpleGrantedAuthority> authorityList = new ArrayList<>(8);
+//        permissionList.forEach(rePermission -> {
+//            // 将权限表达式添加进去
+//            authorityList.add(new SimpleGrantedAuthority(permissionList.get(0).getRes()));
+//        });
+        String password = passwordEncoder.encode(reUser.getPassword());
+        return new User(username, reUser.getPassword(), authorities);
     }
 }

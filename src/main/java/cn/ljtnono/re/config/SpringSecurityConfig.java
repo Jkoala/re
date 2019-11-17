@@ -4,9 +4,11 @@ import cn.ljtnono.re.service.IReUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * spring security 配置
@@ -17,11 +19,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @SpringBootConfiguration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private IReUserService iReUserService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,15 +36,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("fore/**")
+                .antMatchers("/fore/**")
                 .permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/admin/login")
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/admin/login").permitAll()
-//                .antMatchers("/admin/**").authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/admin/login")
+                .loginProcessingUrl("/user/login")
+                .successForwardUrl("/admin/index")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/admin/login").permitAll()
+                .antMatchers("/admin/**").authenticated()
                 .and()
                 .csrf()
                 .disable();
@@ -48,6 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(iReUserService);
+                .userDetailsService(iReUserService)
+                .passwordEncoder(passwordEncoder);
     }
 }

@@ -2,6 +2,7 @@ package cn.ljtnono.re.config;
 
 import cn.ljtnono.re.ftp.ReFtpClientPool;
 import cn.ljtnono.re.ftp.ReFtpClientPooledObjectFactory;
+import cn.ljtnono.re.util.EncryptUtil;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -13,6 +14,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 /**
  * 配置相关需要注入的类
@@ -69,6 +73,25 @@ public class SpringBeanConfig {
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+    }
+
+    /**
+     * 设置spring security 中的密码加密器
+     * @return {@link PasswordEncoder}
+     */
+    @Bean
+    public PasswordEncoder setSpringSecurityPasswordEncoder() {
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return EncryptUtil.getMd5((String) rawPassword);
+            }
+
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encodedPassword.equalsIgnoreCase(EncryptUtil.getMd5((String) rawPassword));
+            }
+        };
     }
 
 }

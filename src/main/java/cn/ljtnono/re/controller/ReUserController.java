@@ -5,13 +5,14 @@ import cn.ljtnono.re.entity.ReUser;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import cn.ljtnono.re.controller.common.BaseController;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -37,9 +38,10 @@ public class ReUserController extends BaseController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-
-
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
+        session.setAttribute("user", username);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName());
         return "back/index";
     }
 

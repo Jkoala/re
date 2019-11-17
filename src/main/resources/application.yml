@@ -45,7 +45,7 @@ spring:
     store-type: redis
   mvc:
     favicon:
-      enabled: true
+      enabled: false
 # 配置debug模式
 debug: true
 
