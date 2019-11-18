@@ -49,4 +49,11 @@ public interface IReBlogService extends IService<ReBlog> {
      * @return 博客详细信息
      */
     JsonResult getByIdReturnJsonResult(Integer blogId);
+
+    /**
+     * 新增一条博客记录
+     * @param reBlog 需要新增的博客记录
+     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
+     */
+    JsonResult saveBlog(ReBlog reBlog);
 }

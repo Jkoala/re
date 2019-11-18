@@ -172,4 +172,15 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         });
         return JsonResult.success(Collections.singletonList(reBlogByOptional), 1);
     }
+
+    /**
+     * 新增一条博客记录
+     *
+     * @param reBlog 需要新增的博客记录
+     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
+     */
+    @Override
+    public JsonResult saveBlog(ReBlog reBlog) {
+        return null;
+    }
 }
