@@ -37,7 +37,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <form class="layui-form">
+                <form class="layui-form" lay-filter="form-blog">
                     <div class="layui-card-body">
                         <div class="layui-collapse">
                             <div class="layui-colla-item">
@@ -46,21 +46,21 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">博客Id</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="id" autocomplete="off"
+                                            <input type="text" name="id" autocomplete="off" lay-verify="number"
                                                    class="layui-input">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">博客标题</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="title" autocomplete="off"
+                                            <input type="text" name="title" autocomplete="off" lay-verify="required"
                                                    class="layui-input">
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">博客作者</label>
                                         <div class="layui-input-block">
-                                            <input type="text" name="author" autocomplete="off"
+                                            <input type="text" name="author" autocomplete="off" lay-verify="required"
                                                    class="layui-input">
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                     <div class="layui-form-item">
                                         <label class="layui-form-label">博客简介</label>
                                         <div class="layui-input-block">
-                                            <textarea name="summary" placeholder="请输入博客的简介"
+                                            <textarea name="summary" placeholder="请输入博客的简介" lay-verify="required"
                                                       class="layui-textarea"></textarea>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                             <legend><a name="default">博客内容</a></legend>
                         </fieldset>
                         <div id="blog-editormd">
-                            <textarea style="display:none;"></textarea>
+                            <textarea style="display:none;" name="contentMarkdown" lay-verify="required"></textarea>
                         </div>
                     </div>
                     <div class="layui-card-body">
@@ -97,7 +97,8 @@
                                 <button type="reset" class="layui-btn layui-btn-fluid">重置</button>
                             </div>
                             <div class="layui-input-block" style="margin-left: 0;">
-                                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="blog">提交</button>
+                                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="form-blog-submit">提交
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -112,64 +113,96 @@
     console.log("blogId = " + blogId);
     // 初始化编辑框
     let blogEditor;
-    blogEditor = editormd("blog-editormd", {
-        width: "100%",
-        height: 730,
-        path: '/re/static/fore/lib/editor.md-1.5.0/lib/',
-        codeFold: true,
-        saveHTMLToTextarea: true,
-        searchReplace: true,
-        htmlDecode: "style,script,iframe|on*",
-        emoji: true,
-        taskList: true,
-        theme: "dark",
-        editorTheme: "rubyblue",
-        previewTheme: "dark",
-        tocm: true,         // Using [TOCM]
-        tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-        flowChart: true,             // 开启流程图支持，默认关闭
-        sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
-        imageUpload: true,
-        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL: "examples/php/upload.php",
-        onload: function () {
-            console.log('onload', this);
-        }
-    });
-
     layui.use(['form'], function () {
         let form = layui.form;
-        // ajax请求获取文章数据
-        $.ajax({
-            url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
-            method: "GET",
-            dataType: "json",
-            success: function (res) {
-                // 请求成功，将option拼接到下拉框中去
-                if (res.request === "success" && res.status === 200) {
-                    $.each(res.data, function (index, item) {
-                        $('#type').append(new Option(item.name, item.id));
-                    });
-                    form.render();
+        // 判断是否存在blogId, 如果不存在就不行
+        if (blogId) {
+            // ajax请求获取文章数据
+            $.ajax({
+                url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
+                method: "GET",
+                dataType: "json",
+                success: function (res) {
+                    // 请求成功，将option拼接到下拉框中去
+                    if (res.request === "success" && res.status === 200) {
+                        $.each(res.data, function (index, item) {
+                            $('#type').append(new Option(item.name, item.id));
+                        });
+                    }
+                },
+                error: function (res) {
+                    console.log(res);
                 }
-            },
-            error: function (res) {
-                console.log(res);
-            }
-        });
-        // 如果blogId存在，那么说明是修改，如果不存在那么说明是
+            });
+            $.ajax({
+                url: [[${#servletContext.contextPath}]] + "/blog/" + blogId,
+                method: "GET",
+                dataType: "json",
+                success: function (res) {
+                    if (res.request === "success" && res.status === 200 && res.data) {
+                        //给表单的各项属性赋值
+                        let blog = res.data[0];
+                        // 查找type类型
+                        $("#type option").each(function (index, item) {
+                            if ($(item).text() === blog.type) {
+                                console.log($(item).text());
+                                let typeValue = $(item).text();
+                                $("#type").val(typeValue);
+                            }
+                        });
+                        form.val("form-blog", {
+                            "id": blog.id,
+                            "title": blog.title,
+                            "author": blog.author,
+                            "summary": blog.summary,
+                            "contentMarkdown": blog.contentMarkdown
+                        });
+                        // 初始化markdown编辑器
+                        blogEditor = editormd("blog-editormd", {
+                            width: "100%",
+                            height: 730,
+                            path: '/re/static/fore/lib/editor.md-1.5.0/lib/',
+                            codeFold: true,
+                            saveHTMLToTextarea: true,
+                            searchReplace: true,
+                            htmlDecode: "style,script,iframe|on*",
+                            emoji: true,
+                            taskList: true,
+                            theme: "dark",
+                            editorTheme: "rubyblue",
+                            previewTheme: "dark",
+                            tocm: true,         // Using [TOCM]
+                            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+                            flowChart: true,             // 开启流程图支持，默认关闭
+                            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+                            imageUpload: true,
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "examples/php/upload.php",
+                            onload: function () {
 
-        form.on('submit(blog)', function (data) {
-            //被执行事件的元素DOM对象，一般为button对象
-            console.log(data.elem);
-            //被执行提交的form对象，一般在存在form标签时才会返回
-            console.log(data.form);
-            //当前容器的全部表单字段，名值对形式：{name: value}
-            console.log(data.field);
-            //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                            }
+                        });
+                        form.render();
+                        console.log(form.val("form-blog"));
+                    }
+                },
+                error: function (res) {
 
-            return false;
-        });
+                }
+            });
+            form.on('submit(form-blog-submit)', function (data) {
+                //被执行事件的元素DOM对象，一般为button对象
+                console.log(data.elem);
+                //被执行提交的form对象，一般在存在form标签时才会返回
+                console.log(data.form);
+                //当前容器的全部表单字段，名值对形式：{name: value}
+                console.log(data.field);
+                //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                return false;
+            });
+        } else {
+            // 弹出错误提示，并且关闭tab栏
+        }
     });
 </script>
 </body>
