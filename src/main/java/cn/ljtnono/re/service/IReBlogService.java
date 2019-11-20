@@ -14,17 +14,20 @@ import java.util.List;
  */
 public interface IReBlogService extends IService<ReBlog> {
 
-    /**
-     * 获取首页猜你喜欢
-     * @return 首页猜你喜欢博客数据
-     */
-    List<ReBlog> listGuessYouLike();
 
     /**
      * 获取所有的博客列表
      * @return 返回所有博客列表
      */
     List<ReBlog> listAll();
+
+    /**
+     * 新增一条博客记录
+     * @param reBlog 需要新增的博客记录
+     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
+     */
+    JsonResult saveBlog(ReBlog reBlog);
+
 
     /**
      * 无条件分页查询博客信息
@@ -50,10 +53,11 @@ public interface IReBlogService extends IService<ReBlog> {
      */
     JsonResult getByIdReturnJsonResult(Integer blogId);
 
+
     /**
-     * 新增一条博客记录
-     * @param reBlog 需要新增的博客记录
-     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
+     * 获取首页猜你喜欢
+     * @return 首页猜你喜欢博客数据
      */
-    JsonResult saveBlog(ReBlog reBlog);
+    List<ReBlog> listGuessYouLike();
+
 }

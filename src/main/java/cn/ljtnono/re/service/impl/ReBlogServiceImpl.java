@@ -34,6 +34,36 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
     private RedisUtil redisUtil;
 
     /**
+     * 获取所有的博客列表
+     *
+     * @return 返回所有博客列表
+     */
+    @Override
+    public List<ReBlog> listAll() {
+        // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合 TODO 这里改成先从缓存中获取
+        List<ReBlog> list = getBaseMapper().selectList(null);
+        // 将数据写入缓存中
+        Optional<List<ReBlog>> optionalList = Optional.ofNullable(list);
+        optionalList.ifPresent(l -> l.forEach(reBlog -> redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
+                .replace("id", reBlog.getId() + "")
+                .replace("author", reBlog.getAuthor())
+                .replace("title", reBlog.getTitle())
+                .replace("type", reBlog.getType()), reBlog, RedisUtil.EXPIRE_TIME_DEFAULT)));
+        optionalList.ifPresent(l -> logger.info("从数据库中获取所有博客列表，总条数：" + l.size()));
+        return list;
+    }
+
+    /**
+     * 新增一条博客记录
+     *
+     * @param reBlog 需要新增的博客记录
+     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
+     */
+    @Override
+    public JsonResult saveBlog(ReBlog reBlog) {
+        return null;
+    }
+    /**
      * 获取首页猜你喜欢
      *
      * @return 首页猜你喜欢博客数据
@@ -59,26 +89,6 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             });
             return selectListResult;
         });
-    }
-
-    /**
-     * 获取所有的博客列表
-     *
-     * @return 返回所有博客列表
-     */
-    @Override
-    public List<ReBlog> listAll() {
-        // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合 TODO 这里改成先从缓存中获取
-        List<ReBlog> list = getBaseMapper().selectList(null);
-        // 将数据写入缓存中
-        Optional<List<ReBlog>> optionalList = Optional.ofNullable(list);
-        optionalList.ifPresent(l -> l.forEach(reBlog -> redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
-                .replace("id", reBlog.getId() + "")
-                .replace("author", reBlog.getAuthor())
-                .replace("title", reBlog.getTitle())
-                .replace("type", reBlog.getType()), reBlog, RedisUtil.EXPIRE_TIME_DEFAULT)));
-        optionalList.ifPresent(l -> logger.info("从数据库中获取所有博客列表，总条数：" + l.size()));
-        return list;
     }
 
     /**
@@ -173,14 +183,5 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         return JsonResult.success(Collections.singletonList(reBlogByOptional), 1);
     }
 
-    /**
-     * 新增一条博客记录
-     *
-     * @param reBlog 需要新增的博客记录
-     * @return JsonResult对象，成功返回成功消息，失败返回失败消息
-     */
-    @Override
-    public JsonResult saveBlog(ReBlog reBlog) {
-        return null;
-    }
+
 }
