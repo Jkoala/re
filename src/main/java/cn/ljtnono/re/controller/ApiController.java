@@ -7,6 +7,7 @@ import cn.ljtnono.re.service.IReBlogTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,7 @@ public class ApiController {
      * @return 全部博客信息
      */
     @GetMapping("/listBlogAll")
+    @PreAuthorize("hasRole('root')")
     public JsonResult listBlogAll(HttpServletRequest request, HttpServletResponse response) {
         List<ReBlog> list = iReBlogService.listAll();
         return JsonResult.success(list, list.size());
@@ -53,6 +55,7 @@ public class ApiController {
      * @return Json 数据串
      */
     @GetMapping("/listBlogPage")
+    @PreAuthorize("hasRole('admin')")
     public JsonResult listBlogPage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count) {
         return iReBlogService.listBlogPageReturnJsonResult(page, count);
     }
