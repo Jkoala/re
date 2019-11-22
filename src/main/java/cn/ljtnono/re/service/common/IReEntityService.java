@@ -38,13 +38,14 @@ public interface IReEntityService <T> {
     /**
      * 根据id更新一个实体类
      * @param id 实体类的id
+     * @param entity 要更新的实体类
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
      * {request: "success", status: 200, message: "操作成功“}
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    JsonResult updateEntityById(Serializable id);
+    JsonResult updateEntityById(Serializable id, T entity);
 
     /**
      * 根据id获取一个实体类

@@ -126,6 +126,16 @@ public class RedisUtil {
     }
 
     /**
+     * 正则表达式匹配是否存在该key
+     * @param pattern 正则表达式
+     * @return true 存在 false 不存在
+     */
+    public boolean hasKeyByPattern(String pattern) {
+        Set<String> keys = redisTemplate.keys(pattern);
+        return keys != null && !keys.isEmpty();
+    }
+
+    /**
      * 普通缓存放入
      * @param key 键
      * @param value 值

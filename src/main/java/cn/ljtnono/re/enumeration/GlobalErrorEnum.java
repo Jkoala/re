@@ -27,8 +27,10 @@ public enum GlobalErrorEnum {
     PARAM_INVALID_ERROR(10003, "参数无效"),
 
     /** 参数异常 */
-    PARAM_ERROR(10004, "参数异常");
+    PARAM_ERROR(10004, "参数异常"),
 
+    /** 资源不存在 */
+    NOT_EXIST_ERROR(10005, "该资源不存在或已经删除");
 
     /** 错误码 */
     private final Integer errorCode;

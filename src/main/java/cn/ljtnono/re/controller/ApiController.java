@@ -42,10 +42,8 @@ public class ApiController {
      * @return 全部博客信息
      */
     @GetMapping("/listBlogAll")
-    @PreAuthorize("hasRole('root')")
     public JsonResult listBlogAll(HttpServletRequest request, HttpServletResponse response) {
-        List<ReBlog> list = iReBlogService.listAll();
-        return JsonResult.success(list, list.size());
+        return iReBlogService.listEntityAll();
     }
 
     /**
@@ -55,15 +53,8 @@ public class ApiController {
      * @return Json 数据串
      */
     @GetMapping("/listBlogPage")
-    @PreAuthorize("hasRole('admin')")
     public JsonResult listBlogPage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count) {
         return iReBlogService.listBlogPageReturnJsonResult(page, count);
-    }
-
-    @GetMapping("/getBlog")
-    public JsonResult getBlog(@RequestParam(value = "blogId", required = false) Integer blogId) {
-
-        return null;
     }
 
     /**

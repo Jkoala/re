@@ -8,18 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.ljtnono.re.controller.common.AbstractReController;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
+ * 图片controller
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/23
+ * @version 1.0
  */
-@Controller
+@RestController
 @RequestMapping("/image")
 public class ReImageController extends AbstractReController<ReImage> {
 
@@ -54,6 +53,7 @@ public class ReImageController extends AbstractReController<ReImage> {
      * 根据id更新一个实体类
      *
      * @param id 实体类的id
+     * @param entity 需要更新的实体类
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
      * {request: "success", status: 200, message: "操作成功“}
@@ -61,7 +61,7 @@ public class ReImageController extends AbstractReController<ReImage> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult updateEntityById(Serializable id) {
+    public JsonResult updateEntityById(Serializable id, ReImage entity) {
         return null;
     }
 
