@@ -90,7 +90,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
      * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult listAll() {
+    public JsonResult listEntityAll() {
         return null;
     }
 
@@ -105,7 +105,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult save(ReBlog entity) {
+    public JsonResult saveEntity(ReBlog entity) {
         return null;
     }
 
@@ -121,7 +121,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult updateById(Serializable id) {
+    public JsonResult updateEntityById(Serializable id) {
         return null;
     }
 
@@ -136,7 +136,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult deleteById(Serializable id) {
+    public JsonResult deleteEntityById(Serializable id) {
         return null;
     }
 
@@ -151,7 +151,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult getById(Serializable id) {
+    public JsonResult getEntityById(Serializable id) {
         return null;
     }
 }

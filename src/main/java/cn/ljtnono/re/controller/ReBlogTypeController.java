@@ -30,7 +30,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      */
     @Override
     @GetMapping
-    public JsonResult listAll() {
+    public JsonResult listEntityAll() {
         return null;
     }
 
@@ -46,7 +46,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      */
     @Override
     @PostMapping
-    public JsonResult save(ReBlogType entity) {
+    public JsonResult saveEntity(ReBlogType entity) {
         ReBlogType reBlogType;
         System.out.println(entity.toString());
         reBlogType = (ReBlogType) entity;
@@ -65,7 +65,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult updateById(Serializable id) {
+    public JsonResult updateEntityById(Serializable id) {
         return null;
     }
 
@@ -80,7 +80,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult deleteById(Serializable id) {
+    public JsonResult deleteEntityById(Serializable id) {
         return null;
     }
 
@@ -95,7 +95,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult getById(Serializable id) {
+    public JsonResult getEntityById(Serializable id) {
         return null;
     }
 }

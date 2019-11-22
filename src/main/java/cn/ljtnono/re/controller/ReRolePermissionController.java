@@ -31,7 +31,7 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult listAll() {
+    public JsonResult listEntityAll() {
         return null;
     }
 
@@ -46,7 +46,7 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult save(ReRolePermission entity) {
+    public JsonResult saveEntity(ReRolePermission entity) {
         return null;
     }
 
@@ -61,7 +61,7 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult updateById(Serializable id) {
+    public JsonResult updateEntityById(Serializable id) {
         return null;
     }
 
@@ -76,7 +76,7 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult deleteById(Serializable id) {
+    public JsonResult deleteEntityById(Serializable id) {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult getById(Serializable id) {
+    public JsonResult getEntityById(Serializable id) {
         return null;
     }
 }

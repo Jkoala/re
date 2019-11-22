@@ -2,7 +2,7 @@ package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReBlogType;
 import cn.ljtnono.re.pojo.JsonResult;
-import com.alibaba.fastjson.JSONObject;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @date 2019/11/16
  * @version 1.0
  */
-public interface IReBlogTypeService extends IService<ReBlogType> {
+public interface IReBlogTypeService extends IService<ReBlogType>, IReEntityService<ReBlogType> {
 
     /**
      * 获取所有的博客类型

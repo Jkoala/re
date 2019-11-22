@@ -19,7 +19,7 @@ public abstract class AbstractReController<T> {
      * 操作成功{request: "success", status: 200, message: "操作成功“, data: {列表}}
      * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    public abstract JsonResult listAll();
+    public abstract JsonResult listEntityAll();
 
     /**
      * 新增单个实体类
@@ -30,7 +30,7 @@ public abstract class AbstractReController<T> {
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    public abstract JsonResult save(T entity);
+    public abstract JsonResult saveEntity(T entity);
 
     /**
      * 根据id更新一个实体类
@@ -41,7 +41,7 @@ public abstract class AbstractReController<T> {
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    public abstract JsonResult updateById(Serializable id);
+    public abstract JsonResult updateEntityById(Serializable id);
 
     /**
      * 根据id删除一个实体类
@@ -52,7 +52,7 @@ public abstract class AbstractReController<T> {
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    public abstract JsonResult deleteById(Serializable id);
+    public abstract JsonResult deleteEntityById(Serializable id);
 
     /**
      * 根据id获取一个实体类
@@ -63,5 +63,5 @@ public abstract class AbstractReController<T> {
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    public abstract JsonResult getById(Serializable id);
+    public abstract JsonResult getEntityById(Serializable id);
 }

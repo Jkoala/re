@@ -2,6 +2,7 @@ package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.pojo.JsonResult;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2019/11/16
  * @version 1.0
  */
-public interface IReBlogService extends IService<ReBlog> {
+public interface IReBlogService extends IService<ReBlog>, IReEntityService<ReBlog> {
 
 
     /**
