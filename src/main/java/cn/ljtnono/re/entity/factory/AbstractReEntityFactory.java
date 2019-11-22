@@ -7,5 +7,5 @@ package cn.ljtnono.re.entity.factory;
  *  @version 1.0
  *
 */
-public abstract class ReEntityFactory {
+public abstract class AbstractReEntityFactory<T> {
 }

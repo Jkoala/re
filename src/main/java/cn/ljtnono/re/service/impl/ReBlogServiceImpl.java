@@ -182,6 +182,4 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         });
         return JsonResult.success(Collections.singletonList(reBlogByOptional), 1);
     }
-
-
 }

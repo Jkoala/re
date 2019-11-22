@@ -1,43 +1,28 @@
-package cn.ljtnono.re.controller;
+package cn.ljtnono.re.controller.common;
 
-
-import cn.ljtnono.re.entity.ReRolePermission;
-import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import cn.ljtnono.re.controller.common.AbstractReController;
-
+import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import java.io.Serializable;
 
 /**
- * <p>
- *  前端控制器
- * </p>
+ *  controller基类，封装了常用操作
+ *  @author 凌家童
+ *  @date 2019/10/6
+ *  @version 1.0
  *
- * @author ljt
- * @since 2019-10-06
- */
-@Controller
-@RequestMapping("/role_permission")
-public class ReRolePermissionController extends AbstractReController<ReRolePermission> {
+*/
+public abstract class AbstractReController<T> {
 
     /**
      * 获取实体类的所有列表
-     *
      * @return 实体类所有列表
      * 操作成功{request: "success", status: 200, message: "操作成功“, data: {列表}}
      * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    @Override
-    public JsonResult listAll() {
-        return null;
-    }
+    public abstract JsonResult listAll();
 
     /**
      * 新增单个实体类
-     *
      * @param entity 具体的实体类
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
@@ -45,14 +30,10 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    @Override
-    public JsonResult save(ReRolePermission entity) {
-        return null;
-    }
+    public abstract JsonResult save(T entity);
 
     /**
      * 根据id更新一个实体类
-     *
      * @param id 实体类的id
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
@@ -60,14 +41,10 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    @Override
-    public JsonResult updateById(Serializable id) {
-        return null;
-    }
+    public abstract JsonResult updateById(Serializable id);
 
     /**
      * 根据id删除一个实体类
-     *
      * @param id 实体类id
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
@@ -75,14 +52,10 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    @Override
-    public JsonResult deleteById(Serializable id) {
-        return null;
-    }
+    public abstract JsonResult deleteById(Serializable id);
 
     /**
      * 根据id获取一个实体类
-     *
      * @param id 实体类id
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
@@ -90,8 +63,5 @@ public class ReRolePermissionController extends AbstractReController<ReRolePermi
      * 操作失败返回
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
-    @Override
-    public JsonResult getById(Serializable id) {
-        return null;
-    }
+    public abstract JsonResult getById(Serializable id);
 }

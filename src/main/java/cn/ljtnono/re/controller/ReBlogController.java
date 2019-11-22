@@ -1,6 +1,7 @@
 package cn.ljtnono.re.controller;
 
 import cn.ljtnono.re.entity.ReBlog;
+import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.util.RedisUtil;
@@ -9,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import cn.ljtnono.re.controller.common.BaseController;
+import cn.ljtnono.re.controller.common.AbstractReController;
+
+import java.io.Serializable;
 
 /**
  * 博客Controller
@@ -19,7 +22,7 @@ import cn.ljtnono.re.controller.common.BaseController;
  */
 @RestController
 @RequestMapping("/blog")
-public class ReBlogController extends BaseController {
+public class ReBlogController extends AbstractReController<ReBlog> {
 
     @Autowired
     private IReBlogService iReBlogService;
@@ -29,15 +32,6 @@ public class ReBlogController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(ReBlogController.class);
 
-
-    /**
-     * 获取全部博客列表
-     * @return 带有全部博客列表的JsonResult对象 {@link JsonResult}
-     */
-    @GetMapping
-    public JsonResult listAll() {
-        return null;
-    }
 
     /**
      * 根据id获取博客信息
@@ -72,7 +66,7 @@ public class ReBlogController extends BaseController {
      * @return {@link JsonResult}
      */
     @PutMapping("/{blogId}")
-    public JsonResult updateBlog(@PathVariable(value = "blogId", required = false) Integer blogId, @RequestParam(value = "blog", required = false) ReBlog reBlog) {
+    public JsonResult updateBlogById(@PathVariable(value = "blogId", required = false) Integer blogId, @RequestParam(value = "blog", required = false) ReBlog reBlog) {
         return JsonResult.success(null, null);
     }
 
@@ -83,8 +77,81 @@ public class ReBlogController extends BaseController {
      * @return {@link JsonResult}
      */
     @DeleteMapping("/{blogId}")
-    public JsonResult deleteBlog(@PathVariable(value = "blogId", required = false) Integer blogId) {
+    public JsonResult deleteBlogById(@PathVariable(value = "blogId", required = false) Integer blogId) {
 
+        return null;
+    }
+
+    /**
+     * 获取实体类的所有列表
+     *
+     * @return 实体类所有列表
+     * 操作成功{request: "success", status: 200, message: "操作成功“, data: {列表}}
+     * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
+     */
+    @Override
+    public JsonResult listAll() {
+        return null;
+    }
+
+    /**
+     * 新增单个实体类
+     *
+     * @param entity 具体的实体类
+     * @return 返回操作结果
+     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
+     * {request: "success", status: 200, message: "操作成功“}
+     * 操作失败返回
+     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
+     */
+    @Override
+    public JsonResult save(ReBlog entity) {
+        return null;
+    }
+
+
+    /**
+     * 根据id更新一个实体类
+     *
+     * @param id 实体类的id
+     * @return 返回操作结果
+     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
+     * {request: "success", status: 200, message: "操作成功“}
+     * 操作失败返回
+     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
+     */
+    @Override
+    public JsonResult updateById(Serializable id) {
+        return null;
+    }
+
+    /**
+     * 根据id删除一个实体类
+     *
+     * @param id 实体类id
+     * @return 返回操作结果
+     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
+     * {request: "success", status: 200, message: "操作成功“, data: {删除的实体类}}
+     * 操作失败返回
+     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
+     */
+    @Override
+    public JsonResult deleteById(Serializable id) {
+        return null;
+    }
+
+    /**
+     * 根据id获取一个实体类
+     *
+     * @param id 实体类id
+     * @return 返回操作结果
+     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
+     * {request: "success", status: 200, message: "操作成功“, data: {实体类}}
+     * 操作失败返回
+     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
+     */
+    @Override
+    public JsonResult getById(Serializable id) {
         return null;
     }
 }
