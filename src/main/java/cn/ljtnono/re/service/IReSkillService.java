@@ -1,16 +1,15 @@
 package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReSkill;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
+ * 技能类服务接口
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/23
+ * @version 1.0
  */
-public interface IReSkillService extends IService<ReSkill> {
+public interface IReSkillService extends IService<ReSkill>, IReEntityService<ReSkill> {
 
 }

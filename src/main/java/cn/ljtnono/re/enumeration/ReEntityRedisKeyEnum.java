@@ -72,7 +72,7 @@ public enum ReEntityRedisKeyEnum {
     RE_USER_KEY("re_user:id:username:qq:tel"),
 
     /** ReUserRole实体类在redis中存储的键的格式，通过替换相应的值来存储 */
-    RE_USER_ROLE("re_user_role:id");
+    RE_USER_ROLE_KEY("re_user_role:id");
 
     /** 键的值 */
     private String key;

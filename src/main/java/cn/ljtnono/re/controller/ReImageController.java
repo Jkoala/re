@@ -4,7 +4,6 @@ package cn.ljtnono.re.controller;
 import cn.ljtnono.re.entity.ReImage;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.ljtnono.re.controller.common.AbstractReController;

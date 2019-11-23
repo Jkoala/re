@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 全局返回错误页面异常
  * @author ljt
  * @date 2019/11/9
- * @version 1.0
+ * @version 1.1
  */
 public class GlobalToViewException extends RuntimeException implements Serializable {
 

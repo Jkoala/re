@@ -1,17 +1,16 @@
 package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReImage;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
+ * 图像类接口
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/23
+ * @version 1.0
  */
-public interface IReImageService extends IService<ReImage> {
+public interface IReImageService extends IService<ReImage>, IReEntityService<ReImage> {
 
     /**
      * 获取博主头像

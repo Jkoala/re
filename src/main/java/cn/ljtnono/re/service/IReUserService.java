@@ -2,6 +2,7 @@ package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReRole;
 import cn.ljtnono.re.entity.ReUser;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2019/11/15
  * @version 1.0
  */
-public interface IReUserService extends IService<ReUser> {
+public interface IReUserService extends IService<ReUser>, IReEntityService<ReUser> {
 
     /**
      * 根据用户ID查询用户角色列表

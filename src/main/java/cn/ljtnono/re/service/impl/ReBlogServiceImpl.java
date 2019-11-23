@@ -245,7 +245,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         optionalEntity.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
         Integer blogId = Integer.parseInt(id.toString());
         if (blogId >= 10001) {
-            boolean updateResult = update(new UpdateWrapper<ReBlog>().setEntity(entity).eq("id", id));
+            boolean updateResult = update(new UpdateWrapper<ReBlog>().setEntity(entity).eq("id", blogId));
             if (updateResult) {
                 // 如果缓存中有的话，那么更新缓存中的数据
                 String key = ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
@@ -268,7 +268,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
 
     /**
      * 根据id获取一个实体类
-     * TODO 处理已经被删除的问题
+     *
      * @param id 实体类id
      * @return 返回操作结果
      * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
@@ -304,6 +304,11 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
                 if (reBlog == null || reBlog.getDelete() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
+                redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
+                        .replace(":id", ":" + reBlog.getId())
+                        .replace(":author", ":" + reBlog.getAuthor())
+                        .replace(":title", ":" + reBlog.getTitle())
+                        .replace(":type", ":" + reBlog.getType()), reBlog, RedisUtil.EXPIRE_TIME_DEFAULT);
                 jsonResult = JsonResult.success(Collections.singletonList(reBlog), 1);
             }
             jsonResult.setMessage("操作成功");

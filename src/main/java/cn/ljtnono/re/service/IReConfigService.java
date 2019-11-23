@@ -1,15 +1,14 @@
 package cn.ljtnono.re.service;
 
 import cn.ljtnono.re.entity.ReConfig;
+import cn.ljtnono.re.service.common.IReEntityService;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
+ * 配置类接口
  * @author ljt
- * @since 2019-10-06
+ * @date 2019/11/23
+ * @version 1.0
  */
-public interface IReConfigService extends IService<ReConfig> {
+public interface IReConfigService extends IService<ReConfig>, IReEntityService<ReConfig> {
 }

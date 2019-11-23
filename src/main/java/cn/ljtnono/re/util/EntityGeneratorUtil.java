@@ -10,4 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class EntityGeneratorUtil {
 
+    /**
+     * 根据表字段自动生成实体类
+     * @param tableName 生成的实体类对应的表名
+     * @param entity 生成的实体类对应的class对象
+     * @param path 生成类的路径
+     *
+     */
+    public static void generatorEntity(String tableName, Class<?> entity, String path) {
+
+    }
 }
