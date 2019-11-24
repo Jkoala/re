@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +18,7 @@ public class RePermission implements Serializable {
     private static final long serialVersionUID = -5664674075785947553L;
 
     /** 权限id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 创建时间 */

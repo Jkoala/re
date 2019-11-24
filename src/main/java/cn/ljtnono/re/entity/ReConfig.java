@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +17,7 @@ public class ReConfig implements Serializable {
 
     private static final long serialVersionUID = -8489311168805539341L;
     /** 配置项id  */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 配置项key  */

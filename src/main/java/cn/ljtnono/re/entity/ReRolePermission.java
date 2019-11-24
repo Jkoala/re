@@ -1,5 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 /**
@@ -13,6 +16,7 @@ public class ReRolePermission implements Serializable {
     private static final long serialVersionUID = 3352081800260051491L;
 
     /** 角色权限表id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 权限id */

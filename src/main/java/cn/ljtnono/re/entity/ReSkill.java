@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +18,7 @@ public class ReSkill implements Serializable {
     private static final long serialVersionUID = -5222819912129815867L;
 
     /** 技能id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 技能名字 */
