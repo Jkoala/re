@@ -53,7 +53,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             }
             return reBlogList;
         }).orElseGet(() -> {
-            List<ReBlog> selectListResult = getBaseMapper().selectList(new QueryWrapper<ReBlog>().last("ORDER BY view LIMIT 6"));
+            List<ReBlog> selectListResult = list(new QueryWrapper<ReBlog>().orderByDesc("view", "modify_time").last("LIMIT 6"));
             selectListResult.forEach(reBlog -> {
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
                         .replace("id", reBlog.getId() + "")
@@ -95,7 +95,8 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             String getByPattern = (String) redisUtil.getByPattern(totalRedisKey);
             return JsonResult.success((Collection<?>) objects.get(0), ((Collection<?>) objects.get(0)).size()).addField("totalPages", getByPattern.split("_")[0]).addField("totalCount", getByPattern.split("_")[1]);
         } else {
-            IPage<ReBlog> pageResult = page(new Page<>(page, count));
+            // 按照时间降序排列
+            IPage<ReBlog> pageResult = page(new Page<>(page, count), new QueryWrapper<ReBlog>().orderByDesc("modify_time"));
             logger.info("获取" + page + "页博客数据，每页获取" + count + "条");
             redisUtil.lSet(redisKey, pageResult.getRecords(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
             redisUtil.set(totalRedisKey, pageResult.getPages() + "_" + pageResult.getTotal(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
@@ -245,7 +246,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         optionalEntity.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
         Integer blogId = Integer.parseInt(id.toString());
         if (blogId >= 10001) {
-            boolean updateResult = update(new UpdateWrapper<ReBlog>().setEntity(entity).eq("id", blogId));
+            boolean updateResult = update(entity, new UpdateWrapper<ReBlog>().eq("id", blogId));
             if (updateResult) {
                 // 如果缓存中有的话，那么更新缓存中的数据
                 String key = ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
@@ -328,7 +329,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
     @Override
     public JsonResult listEntityAll() {
         // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合
-        List<ReBlog> blogList = list();
+        List<ReBlog> blogList = list(new QueryWrapper<ReBlog>().orderByDesc("view", "modify_time").last("LIMIT 6"));
         // 将数据写入缓存中
         Optional<List<ReBlog>> optionalList = Optional.ofNullable(blogList);
         optionalList.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.SYSTEM_ERROR));

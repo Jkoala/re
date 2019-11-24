@@ -299,18 +299,6 @@ public class DateUtil {
         return c.getTime();
     }
 
-//    /**
-//     *
-//     * @param currentDate
-//     * @param days
-//     * @return
-//     */
-//    public static Date getDateBefore(Date currentDate, int days) {
-//
-//        return null;
-//    }
-
-
     public static void main(String[] args) {
         SimpleDateFormat format = new SimpleDateFormat(DateStyleEnum.MM_DD.getValue());
         System.out.println(format.format(new Date()));

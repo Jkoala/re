@@ -58,7 +58,10 @@ public class ReApplicationContextListener implements ApplicationListener<Context
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        // 防止application没有加载完就注入出现npe
+        if (applicationContext != null) {
+            this.applicationContext = applicationContext;
+        }
     }
 
     /**

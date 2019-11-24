@@ -1,7 +1,5 @@
 package cn.ljtnono.re.util;
 
-import org.springframework.beans.factory.annotation.Value;
-
 /**
  * 根据数据库表自动生成实体类
  * @author ljt
@@ -9,6 +7,25 @@ import org.springframework.beans.factory.annotation.Value;
  * @version 1.0
  */
 public class EntityGeneratorUtil {
+
+    private EntityGeneratorUtil(){}
+
+    private static EntityGeneratorUtil instance = null;
+
+    /**
+     * 单例模式获取实例
+     * @return 返回工具类实例
+     */
+    public static EntityGeneratorUtil getInstance() {
+        if (instance == null) {
+            synchronized (EntityGeneratorUtil.class) {
+                if (instance == null) {
+                    instance =  new EntityGeneratorUtil();
+                }
+            }
+        }
+        return instance;
+    }
 
     /**
      * 根据表字段自动生成实体类

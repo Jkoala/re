@@ -2,7 +2,6 @@ package cn.ljtnono.re.config;
 
 import cn.ljtnono.re.ftp.ReFtpClientPool;
 import cn.ljtnono.re.ftp.ReFtpClientPooledObjectFactory;
-import cn.ljtnono.re.util.EncryptUtil;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -14,9 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 /**
  * 配置相关需要注入的类
@@ -48,7 +44,7 @@ public class SpringBeanConfig {
     /**
      * 配置redisTemplate
      * @param lettuceConnectionFactory lettuceConnection工厂
-     * @return 配置成功返回可以使用RedisTempalte<String, Object> 类型
+     * @return 配置成功返回可以使用RedisTemplate<String, Object> 类型
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
