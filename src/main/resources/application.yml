@@ -59,10 +59,7 @@ mybatis:
 
 # 配置tomcat服务器相关
 server:
-  port: 80
   servlet:
     context-path: /re
-# 配置日志相关
-#logging:
-#  config: classpath:/logback.xml
-#  level: info
+#  port: 8080
+  port: 80

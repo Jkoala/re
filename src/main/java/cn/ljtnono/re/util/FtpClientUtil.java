@@ -2,20 +2,9 @@ package cn.ljtnono.re.util;
 
 import cn.ljtnono.re.ftp.ReFtpClient;
 import cn.ljtnono.re.ftp.ReFtpClientPool;
-import cn.ljtnono.re.ftp.ReFtpClientPooledObjectFactory;
-import org.apache.commons.pool2.impl.GenericObjectPool;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.io.*;
 
 /**

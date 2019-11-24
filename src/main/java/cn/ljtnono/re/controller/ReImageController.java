@@ -4,10 +4,13 @@ package cn.ljtnono.re.controller;
 import cn.ljtnono.re.entity.ReImage;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.ljtnono.re.controller.common.AbstractReController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
@@ -20,6 +23,23 @@ import java.io.Serializable;
 @RestController
 @RequestMapping("/image")
 public class ReImageController extends AbstractReController<ReImage> {
+
+    /**
+     * 普通的上传文件接口
+     * @param multipartFile 封装的文件信息
+     * @return {@link JsonResult}
+     */
+    @PostMapping("/upload")
+    public JsonResult uploadImage(MultipartFile multipartFile) {
+
+        return null;
+    }
+
+    @PostMapping("/upload/md")
+    public JsonResult uploadImageFromMarkdownEditor(@RequestParam("") MultipartFile multipartFile) {
+        return null;
+    }
+
 
     /**
      * 获取实体类的所有列表
