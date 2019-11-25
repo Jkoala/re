@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +18,7 @@ public class ReLink implements Serializable {
     private static final long serialVersionUID = 2713285364411129741L;
 
     /** 链接id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 链接url */

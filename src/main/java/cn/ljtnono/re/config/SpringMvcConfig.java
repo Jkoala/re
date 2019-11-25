@@ -19,27 +19,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/fore/css/**",
-                "/static/fore/js/**",
-                "/static/fore/images/**",
-                "/static/fore/font/**",
-                "/static/fore/lib/**",
-                "/static/fore/json/**",
-                "/static/back/css/**",
-                "/static/back/js/**",
-                "/static/back/images/**",
-                "/static/back/fonts/**",
-                "/static/back/lib/**")
-                .addResourceLocations("classpath:/static/fore/css/",
-                "classpath:/static/fore/js/",
-                "classpath:/static/fore/images/",
-                "classpath:/static/fore/font/",
-                "classpath:/static/fore/lib/",
-                "classpath:/static/fore/json/",
-                "classpath:/static/back/css/",
-                "classpath:/static/back/js/",
-                "classpath:/static/back/images/",
-                "classpath:/static/back/fonts/",
-                "classpath:/static/back/lib/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
     }
 }

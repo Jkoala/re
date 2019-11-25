@@ -5,11 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- *  @author 凌家童
- *  @date 2019/7/7
- *  @version 1.0
- *
-*/
+ * springboot 启动类
+ * @author ljt
+ * @date 2019/11/23
+ * @version 1.1
+ */
 @SpringBootApplication
 @MapperScan(value = {"cn.ljtnono.re.mapper"})
 public class ReApplication {

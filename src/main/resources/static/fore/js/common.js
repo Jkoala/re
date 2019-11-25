@@ -1,5 +1,5 @@
 "use strict";
-// 计算初始页面元素的offsetTop TODO 这里还是只能用于index页面的side部分，其他部分存在bug
+// 计算初始页面元素的offsetTop
 let $scroll_fixed = $("[scroll-fixed]");
 let scroll_fixed_offsetTop = [];
 let scroll_fixed_top = [];
@@ -65,4 +65,47 @@ $(".roll-top").on("click", function (e) {
     }, "ease");
 });
 
+/** 侧边栏导航点击事件 */
+$("#header .side-nav-header .side-nav-bar").on("click", function () {
+   // 直接toggle
+    $("#header .side-nav").toggle();
+});
+
+// 封装Jquery ajax请求
+function ajax(requestObj, withLoading) {
+    // 默认不开启
+    let loading = withLoading || false;
+    $.ajax({
+        data: requestObj.data,
+        method: requestObj.method,
+        dataType: requestObj.dataType || "json",
+        success: requestObj.success || function(){}
+    });
+}
+
+// markdown编辑器配置
+const editorConfig = {
+    width: "100%",
+    height: 730,
+    path: '/re/static/fore/lib/editor.md-1.5.0/lib/',
+    codeFold: true,
+    saveHTMLToTextarea: true,
+    searchReplace: true,
+    htmlDecode: "style,script,iframe|on*",
+    emoji: true,
+    taskList: true,
+    theme: "dark",
+    editorTheme: "rubyblue",
+    previewTheme: "dark",
+    tocm: true,
+    tex: true,
+    flowChart: true,
+    sequenceDiagram: true,
+    imageUpload: true,
+    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+    imageUploadURL: "examples/php/upload.php",
+    onload: function () {
+
+    }
+};
 

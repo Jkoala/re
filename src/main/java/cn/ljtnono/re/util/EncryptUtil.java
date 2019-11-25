@@ -1,13 +1,12 @@
 package cn.ljtnono.re.util;
 
 /**
- *  文本加解密工具
+ *  文本加解密工具，TODO 改成单例模式
  *  @author ljt
  *  @date 2018/12/9
- *  @version 1.0
+ *  @version 1.1
 */
 public class EncryptUtil {
-
 
     /**
      * 工具类不允许实例化
@@ -70,5 +69,4 @@ public class EncryptUtil {
     public static String getMd5UpperCase(String source) {
         return getMd5(source).toUpperCase();
     }
-
 }

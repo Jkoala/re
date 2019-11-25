@@ -1,8 +1,8 @@
 package cn.ljtnono.re.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -10,29 +10,35 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-
 /**
  *  @author ljt
- *  @date 2019/1/11
- *  @version 1.0
+ *  @date 2019/11/10
+ *  @version 1.0.9
  * 基于spring和redis的redisTemplate工具类
  * 针对所有的hash 都是以h开头的方法
- * 针对所有的Set 都是以s开头的方法                    不含通用方法
+ * 针对所有的Set 都是以s开头的方法  不含通用方法
  * 针对所有的List 都是以l开头的方法
  */
+@Component
 public class RedisUtil {
 
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    private Logger logger = LoggerFactory.getLogger(RedisUtil.class);
-    /**
-     * 默认缓存时间 1天
-     */
-    public static Integer EXPIRE_TIME_DEFAULT = 24 * 60 * 60;
+    /** 默认缓存时间30d */
+    public static Integer EXPIRE_TIME_DEFAULT = 24 * 60 * 60 * 30;
+
+    /** 分页查询缓存时间为2h */
+    public static Integer EXPIRE_TIME_PAGE_QUERY = 60 * 60 * 2;
 
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
+    public RedisTemplate<String, Object> getRedisTemplate() {
+        return redisTemplate;
+    }
+
     /**
      * 指定缓存失效时间
      * @param key 键
@@ -96,7 +102,37 @@ public class RedisUtil {
      * @return 值
      */
     public Object get(String key){
-        return key==null?null:redisTemplate.opsForValue().get(key);
+        return key == null ? null : redisTemplate.opsForValue().get(key);
+    }
+
+    /**
+     * 普通缓存获取
+     * @param pattern 键,带有正则表达式
+     * @return 值
+     */
+    public Object getByPattern(String pattern) {
+        Set<String> keys = redisTemplate.keys(pattern);
+        if (keys == null || keys.size() == 0) {
+            return null;
+        }
+        List<Object> objects = redisTemplate.opsForValue().multiGet(keys);
+        if (objects == null || objects.size() == 0) {
+            return null;
+        } else if(objects.size() == 1) {
+            return objects.get(0);
+        } else {
+            return objects;
+        }
+    }
+
+    /**
+     * 正则表达式匹配是否存在该key
+     * @param pattern 正则表达式
+     * @return true 存在 false 不存在
+     */
+    public boolean hasKeyByPattern(String pattern) {
+        Set<String> keys = redisTemplate.keys(pattern);
+        return keys != null && !keys.isEmpty();
     }
 
     /**
@@ -139,7 +175,6 @@ public class RedisUtil {
     /**
      * 递增
      * @param key 键
-     * @param by 要增加几(大于0)
      * @return
      */
     public long incr(String key, long delta){
@@ -152,7 +187,6 @@ public class RedisUtil {
     /**
      * 递减
      * @param key 键
-     * @param by 要减少几(小于0)
      * @return
      */
     public long decr(String key, long delta){
@@ -442,7 +476,6 @@ public class RedisUtil {
      * 将list放入缓存
      * @param key 键
      * @param value 值
-     * @param time 时间(秒)
      * @return
      */
     public boolean lSet(String key, Object value) {
@@ -465,7 +498,9 @@ public class RedisUtil {
     public boolean lSet(String key, Object value, long time) {
         try {
             redisTemplate.opsForList().rightPush(key, value);
-            if (time > 0) expire(key, time);
+            if (time > 0) {
+                expire(key, time);
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -477,7 +512,6 @@ public class RedisUtil {
      * 将list放入缓存
      * @param key 键
      * @param value 值
-     * @param time 时间(秒)
      * @return
      */
     public boolean lSet(String key, List<Object> value) {
@@ -500,7 +534,9 @@ public class RedisUtil {
     public boolean lSet(String key, List<Object> value, long time) {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
-            if (time > 0) expire(key, time);
+            if (time > 0) {
+                expire(key, time);
+            }
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -541,4 +577,6 @@ public class RedisUtil {
             return 0;
         }
     }
+
+
 }

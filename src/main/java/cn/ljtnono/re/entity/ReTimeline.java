@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,9 +15,9 @@ import java.util.Date;
  */
 public class ReTimeline implements Serializable {
 
-
     private static final long serialVersionUID = -3919934196588131827L;
     /** 技能id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 时间轴内容 */

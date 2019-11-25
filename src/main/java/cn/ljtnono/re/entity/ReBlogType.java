@@ -1,6 +1,8 @@
 package cn.ljtnono.re.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,6 +19,7 @@ public class ReBlogType implements Serializable {
     private static final long serialVersionUID = -1997697590986661638L;
 
     /** 博客类型id */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /** 是否删除 0删除 1正常*/
@@ -154,5 +157,17 @@ public class ReBlogType implements Serializable {
         public ReBlogType build() {
             return new ReBlogType(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ReBlogType{" +
+                "id=" + id +
+                ", delete=" + delete +
+                ", modifyTime=" + modifyTime +
+                ", createTime=" + createTime +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

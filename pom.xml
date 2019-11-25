@@ -19,12 +19,21 @@
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <commons-logging.version>1.0.4</commons-logging.version>
         <commons-net.version>3.6</commons-net.version>
-        <commons-pool.version>1.6</commons-pool.version>
+        <commons-pool2.version>2.7.0</commons-pool2.version>
+        <alibaba-fastjson.version>1.2.52.sec06</alibaba-fastjson.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,6 +70,11 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba-fastjson.version}</version>
+        </dependency>
         <!-- apache commons-net  -->
         <dependency>
             <groupId>commons-net</groupId>
@@ -69,9 +83,9 @@
         </dependency>
         <!-- apache commons pool -->
         <dependency>
-            <groupId>commons-pool</groupId>
-            <artifactId>commons-pool</artifactId>
-            <version>${commons-pool.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,6 +132,9 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>/static/**</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>

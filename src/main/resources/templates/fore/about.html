@@ -6,16 +6,23 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Root Element 根元素</title>
-    <link rel="stylesheet" href="../../static/fore/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../static/fore/lib/swiper4.5.1/css/swiper.min.css">
-    <link rel="stylesheet" href="../../static/fore/css/style.min.css">
-    <script src="../../static/fore/lib/jquery-1.11.0.min.js"></script>
-    <script src="../../static/fore/lib/swiper4.5.1/js/swiper.min.js"></script>
-    <script src="../../static/fore/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../static/fore/lib/echarts.min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script src="../../static/fore/js/utils.js"></script>
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/bootstrap/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/swiper4.5.1/css/swiper.min.css}">-->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/fore/css/style.min.css}">
+<!--    <script th:src="@{/static/fore/lib/jquery-1.11.0.min.js}"></script>-->
+<!--    <script th:src="@{/static/fore/lib/swiper4.5.1/js/swiper.min.js}"></script>-->
+<!--    <script th:src="@{/static/fore/lib/bootstrap/js/bootstrap.min.js}"></script>-->
+<!--    <script th:src="@{/static/fore/lib/echarts.min.js}"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script th:src="@{/static/fore/js/utils.js}"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
@@ -32,9 +39,9 @@
             <h1 class="f16 fb p10 name">个人简介</h1>
             <div class="flex flex-direction-column flex-align-items-center">
                 <a href="javascript:" class="mt10"><img class="avatar"
-                                                        src="http://www.ljtnono.cn:80/myblog/images/album/me.jpg"
-                                                        alt="最后的疼爱" title="最后的疼爱"></a>
-                <p class="nick-name fb f20 m10">最后的疼爱</p>
+                                                        th:src="${application.avatar.url}"
+                                                        th:alt="${application.author_nick_name}" th:title="application.author_nick_name"></a>
+                <p class="nick-name fb f20 m10" th:text="${application.author_nick_name}">最后的疼爱</p>
                 <p class="m10">Java菜鸟一枚</p>
                 <p class="m10">喜欢折腾各种技术，web、linux、数据库、前端等</p>
                 <p class="m10">爱生活、爱科学、爱设计、爱编程</p>
@@ -51,8 +58,8 @@
             <h1 class="f16 fb p10 name">与我联系</h1>
             <div class="icons">
                 <a href="javascript:"><i class="fa fa-weibo" aria-hidden="true"></i></a>
-                <a href="javascript:"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
-                <a href="javascript:"><i class="fa fa-github" aria-hidden="true"></i></a>
+                <a href="https://mail.qq.com/cgi-bin/loginpage" data-toggle="tooltip" data-placement="top" title="给我发送邮件"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                <a href="https://github.com/ljtnono" data-toggle="tooltip" data-placement="top" title="https://github.com/ljtnono"><i class="fa fa-github" aria-hidden="true"></i></a>
                 <a href="javascript:"><i class="fa fa-rss" aria-hidden="true"></i></a>
             </div>
             <div class="apply-btn f16 cursor-pointer">
@@ -65,7 +72,7 @@
     </section>
 </div>
 <div th:include="fore/footer.html"></div>
-<script src="../../static/fore/js/common.js"></script>
+<script th:src="@{/static/fore/js/common.js}"></script>
 <script>
     // 初始化评论系统
     new Valine({
@@ -121,6 +128,7 @@
     $(window).resize(function () {
         myChart.resize();
     });
+    $('[data-toggle="tooltip"]').tooltip();
 </script>
 </body>
 </html>
