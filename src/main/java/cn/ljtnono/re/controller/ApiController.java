@@ -4,6 +4,7 @@ import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.service.IReBlogTypeService;
+import cn.ljtnono.re.util.FtpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ApiController {
 
     @Autowired
     private IReBlogService iReBlogService;
+
+    @Autowired
+    private FtpClientUtil ftpClientUtil;
 
     @Autowired
     private IReBlogTypeService iReBlogTypeService;
@@ -70,5 +74,10 @@ public class ApiController {
     @GetMapping("/listBlogTypeAll")
     public JsonResult listBlogTypeAll() {
         return iReBlogTypeService.listBlogTypeAll();
+    }
+
+    @GetMapping("/test")
+    public void test() throws Exception {
+        ftpClientUtil.uploadFile(null, null, null);
     }
 }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.Optional;
 
 /**
  * 封装ftpClient的对象
@@ -69,8 +70,8 @@ public class ReFtpClient {
      */
     public void disConnect() throws IOException {
         if (isActive()) {
-            ftpClient.disconnect();
             ftpClient.logout();
+            ftpClient.disconnect();
         }
     }
 
@@ -150,6 +151,7 @@ public class ReFtpClient {
      * @return 上传成功返回图片的url，上传失败返回空字符串
      */
     public String uploadFile(final String filePath, final String fileName, final MultipartFile multipartFile) {
+        Optional<MultipartFile> optionalMultipartFile = Optional.ofNullable(multipartFile);
 
         return "";
     }
@@ -169,9 +171,9 @@ public class ReFtpClient {
 
 
     /**
-     * 文件上传方法
+     * 基础文件上传方法
      *
-     * @param filePath 上传的文件路径 例如 /images/abc.png  /abc.doc
+     * @param filePath 上传的文件路径 例如 /images/  /abc
      * @param fileName 存储在文件服务器中的文件名 例如 abc.png
      * @param input    上传的文件输入流
      * @throws IOException 出现IO异常时抛出
@@ -183,8 +185,8 @@ public class ReFtpClient {
         if (!connect()) {
             throw new RuntimeException("ftp服务器连接失败");
         }
-        //切换到上传目录
-        if (changeWorkingDirectory(filePath)) {
+        //切换到上传目录 这里只允许传到re目录下
+        if (changeWorkingDirectory("/re" + filePath)) {
             throw new RuntimeException("ftp服务器连接失败");
         }
         //设置上传文件的类型为二进制类型
@@ -205,7 +207,18 @@ public class ReFtpClient {
             input.close();
         }
         disConnect();
-        return "";
+        return contractPath(filePath, fileName);
+    }
+
+    /**
+     * 如果filePath 为空串或者/ 那么会上传到vsftpd的根目录下，那么就代理不到了
+     * @param filePath 上传的文件路径 例如 /images/abc/  /re/images/abc
+     * @param fileName 上传的完整文件名（包括文件的后缀）
+     * @return 资源的完整url访问路径
+     */
+    private String contractPath(final String filePath, final String fileName) {
+        String ftpPrefix = "https://www.ljtnono.cn/re";
+        return ftpPrefix + filePath + fileName;
     }
 
     public static void main(String[] args) throws IOException {

@@ -24,13 +24,14 @@ import java.io.Serializable;
 @RequestMapping("/image")
 public class ReImageController extends AbstractReController<ReImage> {
 
+
     /**
-     * 普通的上传文件接口
+     * 普通的上传图片接口
      * @param multipartFile 封装的文件信息
      * @return {@link JsonResult}
      */
     @PostMapping("/upload")
-    public JsonResult uploadImage(MultipartFile multipartFile) {
+    public JsonResult uploadImage(@RequestParam("file") MultipartFile multipartFile) {
 
         return null;
     }
