@@ -13,28 +13,25 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
 
     private static final long serialVersionUID = 7050205319517825883L;
 
-    /** 配置文件路径 */
-    private String ftpConfigPath;
-
     /** ftp服务器ip地址 */
     private String ftpServerAddr = "139.9.73.191";
 
-    /** ftp服务器端口 */
+    /** ftp服务器端口，默认21端口 */
     private int ftpServerPort = 21;
 
-    /** ftp服务器用户名*/
+    /** ftp服务器用户名 */
     private String ftpServerUser = "ftpadmin";
 
-    /** ftp服务器密码*/
+    /** ftp服务器密码 */
     private String ftpServerPassword = "ljtLJT715336";
 
-    /** ftp服务器基础目录*/
-    private String ftpServerDirBase = "/home/ftpadmin";
+    /** ftp服务器基础目录 默认是/home/ftpadmin/re 目录 这里对于不同项目的文件精确分类*/
+    private String ftpServerDirBase = "/home/ftpadmin/re";
 
-    /** ftp连接超时时间 毫秒 */
+    /** ftp连接超时时间 毫秒 默认5000毫秒*/
     private int connectTimeOut = 5000;
 
-    /** ftp上传文件的编码 */
+    /** ftp上传文件的编码 默认UTF-8*/
     private String controlEncoding = "UTF-8";
 
     /** 上传的缓冲区大小 10M*/
@@ -46,13 +43,12 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
     /** 上传超时时间 */
     private int dataTimeout = 120000;
 
-    /** 是否开启被动模式 */
+    /** 是否开启被动模式，默认开启 */
     private boolean passiveMode = true;
 
     public ReFtpClientConfig() {}
 
     private ReFtpClientConfig(Builder builder) {
-        setFtpConfigPath(builder.ftpConfigPath);
         setFtpServerAddr(builder.ftpServerAddr);
         setFtpServerPort(builder.ftpServerPort);
         setFtpServerUser(builder.ftpServerUser);
@@ -72,7 +68,6 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
 
     public static Builder newBuilder(ReFtpClientConfig copy) {
         Builder builder = new Builder();
-        builder.ftpConfigPath = copy.getFtpConfigPath();
         builder.ftpServerAddr = copy.getFtpServerAddr();
         builder.ftpServerPort = copy.getFtpServerPort();
         builder.ftpServerUser = copy.getFtpServerUser();
@@ -85,14 +80,6 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
         builder.dataTimeout = copy.getDataTimeout();
         builder.passiveMode = copy.getPassiveMode();
         return builder;
-    }
-
-    public String getFtpConfigPath() {
-        return ftpConfigPath;
-    }
-
-    public void setFtpConfigPath(String ftpConfigPath) {
-        this.ftpConfigPath = ftpConfigPath;
     }
 
     public String getFtpServerAddr() {
