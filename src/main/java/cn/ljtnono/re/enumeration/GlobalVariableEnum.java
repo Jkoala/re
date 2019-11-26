@@ -9,7 +9,10 @@ package cn.ljtnono.re.enumeration;
 public enum GlobalVariableEnum {
 
     /** 博客默认图片的url地址 */
-    RE_IMAGE_DEFAULT_URL("https://www.ljtnono.cn/re/images/default_img.jpg");
+    RE_IMAGE_DEFAULT_URL("https://www.ljtnono.cn/re/images/default_img.jpg"),
+
+    /** 本项目ftp服务器的基础存储地址 */
+    RE_FTP_SAVE_PREFIX("https://www.ljtnono.cn/re");
 
     private Object value;
 
