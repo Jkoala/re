@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ReFtpClientPooledObjectFactory extends BasePooledObjectFactory<ReFtpClient> {
 
+    /** 日志记录器 */
     private static Logger logger = LoggerFactory.getLogger(ReFtpClientPooledObjectFactory.class);
 
     @Override
@@ -32,13 +33,6 @@ public class ReFtpClientPooledObjectFactory extends BasePooledObjectFactory<ReFt
         return new DefaultPooledObject<ReFtpClient>(obj);
     }
 
-
-    @Override
-    public void destroyObject(PooledObject<ReFtpClient> p) throws Exception {
-        p.getObject().destroy();
-    }
-
-
     @Override
     public boolean validateObject(PooledObject<ReFtpClient> p) {
         ReFtpClient reFtpClient = p.getObject();
@@ -46,13 +40,11 @@ public class ReFtpClientPooledObjectFactory extends BasePooledObjectFactory<ReFt
         return reFtpClient.isActive();
     }
 
-
     @Override
     public void activateObject(PooledObject<ReFtpClient> p) throws Exception {
         // 重新初始化新的ftpClient对象
         p.getObject().connect();
     }
-
 
     @Override
     public void passivateObject(PooledObject<ReFtpClient> p) throws Exception {
