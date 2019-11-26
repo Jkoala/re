@@ -34,5 +34,4 @@ public class StringUtil {
     public static boolean isBlank(final String str) {
         return isEmpty(str.trim());
     }
-
 }
