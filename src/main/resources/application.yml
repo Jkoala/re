@@ -66,5 +66,5 @@ mybatis:
 server:
   servlet:
     context-path: /re
-  #  port: 8080
+#  port: 8080
   port: 80
