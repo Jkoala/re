@@ -182,6 +182,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
                     .replace(":author", ":" + entity.getAuthor())
                     .replace(":title", ":" + entity.getTitle())
                     .replace(":type", ":" + entity.getType()), entity, RedisUtil.EXPIRE_TIME_DEFAULT);
+            // 删除分页查询的缓存
             return JsonResult.successForMessage("操作成功", 200);
         } else {
             throw new GlobalToJsonException(GlobalErrorEnum.SYSTEM_ERROR);
@@ -248,7 +249,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         if (blogId >= 10001) {
             boolean updateResult = update(entity, new UpdateWrapper<ReBlog>().eq("id", blogId));
             if (updateResult) {
-                // 如果缓存中有的话，那么更新缓存中的数据
+                // 如果缓存中有的话，那么淘汰缓存
                 String key = ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
                         .replace(":id", ":" + entity.getId())
                         .replace(":author", ":" + entity.getAuthor())
@@ -256,7 +257,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
                         .replace(":type", ":" + entity.getType());
                 boolean b = redisUtil.hasKey(key);
                 if (b) {
-                    redisUtil.set(key, entity, RedisUtil.EXPIRE_TIME_DEFAULT);
+                    redisUtil.del(key);
                 }
                 return JsonResult.successForMessage("操作成功", 200);
             } else {
