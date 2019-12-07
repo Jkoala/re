@@ -172,7 +172,6 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
 
 
     public static final class Builder {
-        private String ftpConfigPath;
         private String ftpServerAddr;
         private int ftpServerPort;
         private String ftpServerUser;
@@ -186,11 +185,6 @@ public class ReFtpClientConfig extends GenericObjectPoolConfig<ReFtpClient> impl
         private boolean passiveMode;
 
         private Builder() {
-        }
-
-        public Builder ftpConfigPath(String val) {
-            ftpConfigPath = val;
-            return this;
         }
 
         public Builder ftpServerAddr(String val) {

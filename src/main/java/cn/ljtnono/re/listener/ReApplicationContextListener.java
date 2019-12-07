@@ -3,7 +3,6 @@ package cn.ljtnono.re.listener;
 import cn.ljtnono.re.entity.*;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.*;
-import cn.ljtnono.re.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -31,9 +30,6 @@ public class ReApplicationContextListener implements ApplicationListener<Context
     private IReBlogService iReBlogService;
 
     @Autowired
-    private RedisUtil redisUtil;
-
-    @Autowired
     private IReLinkService iReLinkService;
 
     @Autowired
@@ -58,10 +54,7 @@ public class ReApplicationContextListener implements ApplicationListener<Context
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        // 防止application没有加载完就注入出现npe
-        if (applicationContext != null) {
-            this.applicationContext = applicationContext;
-        }
+        this.applicationContext = applicationContext;
     }
 
     /**
