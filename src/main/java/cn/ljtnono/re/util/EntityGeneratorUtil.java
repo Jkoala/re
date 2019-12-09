@@ -1,15 +1,27 @@
 package cn.ljtnono.re.util;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.util.List;
+
 /**
  * 根据数据库表自动生成实体类
  * @author ljt
  * @date 2019/10/27
  * @version 1.0
  */
+@Component
 public class EntityGeneratorUtil {
 
+    /**
+     * 私有构造函数
+     */
     private EntityGeneratorUtil(){}
 
+    /** 实例对象 */
     private static EntityGeneratorUtil instance = null;
 
     /**
@@ -34,7 +46,20 @@ public class EntityGeneratorUtil {
      * @param path 生成类的路径
      *
      */
-    public static void generatorEntity(String tableName, Class<?> entity, String path) {
+    public void generatorEntity(JdbcTemplate jdbcTemplate, String tableName, Class<?> entity, String path) {
+        if (StringUtil.isEmpty(tableName)) {
+            throw new RuntimeException("表名不能为" + tableName);
+        }
+        // 对单表进行操作
+        String sql = "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = database() AND table_name = '"+tableName+"'";
+        List<Object> query = jdbcTemplate.query(sql, (RowMapper<Object>) ResultSet::getString);
+        try {
+            String name = entity.getName();
+            
+            // 获取类名，对类进行实例化
+        } catch (Exception e) {
+
+        }
 
     }
 }
