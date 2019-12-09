@@ -4,9 +4,12 @@ import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.service.IReBlogTypeService;
+import cn.ljtnono.re.util.EntityGeneratorUtil;
+import cn.ljtnono.re.util.FtpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +34,9 @@ public class ApiController {
 
     @Autowired
     private IReBlogTypeService iReBlogTypeService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private static Logger logger = LoggerFactory.getLogger(ApiController.class);
 
@@ -70,5 +76,12 @@ public class ApiController {
     @GetMapping("/listBlogTypeAll")
     public JsonResult listBlogTypeAll() {
         return iReBlogTypeService.listBlogTypeAll();
+    }
+
+
+    @RequestMapping("/testGenerator")
+    public void test() {
+        FtpClientUtil instance = FtpClientUtil.getInstance();
+        EntityGeneratorUtil.getInstance().generatorEntity(jdbcTemplate, "re_blog", null, null);
     }
 }
