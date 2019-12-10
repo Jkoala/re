@@ -23,21 +23,6 @@ public interface IReBlogService extends IService<ReBlog>, IReEntityService<ReBlo
      */
     JsonResult listBlogPageReturnJsonResult(Integer page, Integer count);
 
-    /**
-     * 根据博客类型分页查询博客列表
-     * @param page 当前页
-     * @param count 每页查询的条数
-     * @param type 博客类型
-     * @return 返回根据类型查询的博客分页数据,并且封装在JsonResult中 {@link JsonResult}
-     */
-    JsonResult listBlogPageByTypeReturnJsonResult(Integer page, Integer count, String type);
-
-    /**
-     * 根据博客id获取博客的信息，并封装在JsonResult中
-     * @param blogId 博客的id
-     * @return 博客详细信息
-     */
-    JsonResult getByIdReturnJsonResult(Integer blogId);
 
 
     /**
@@ -46,4 +31,12 @@ public interface IReBlogService extends IService<ReBlog>, IReEntityService<ReBlo
      */
     List<ReBlog> listGuessYouLike();
 
+    /**
+     *
+     * @param type 类型
+     * @param page 页码
+     * @param count 每页显示的条数
+     * @return JsonResult
+     */
+    JsonResult listBlogPageByType(Integer page, Integer count, final String type);
 }

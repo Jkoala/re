@@ -66,6 +66,26 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
     }
 
     /**
+     * @param page  页码
+     * @param count 每页显示的条数
+     * @param type  类型
+     * @return JsonResult
+     */
+    @Override
+    public JsonResult listBlogPageByType(Integer page, Integer count, final String type) {
+        Optional<Integer> optionalPage = Optional.ofNullable(page);
+        Optional<Integer> optionalCount = Optional.ofNullable(count);
+        optionalPage.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
+        optionalCount.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
+        optionalPage.filter(p -> p >= 0 && p <= 1000)
+                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
+        optionalCount.filter(c -> c >= 0 && c <= 60)
+                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
+        
+        return null;
+    }
+
+    /**
      * 无条件分页查询博客信息
      *
      * @param page  页数
@@ -103,62 +123,6 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             return JsonResult.success(pageResult.getRecords(), pageResult.getRecords().size()).addField("totalPages", pageResult.getPages()).addField("totalCount", pageResult.getTotal());
         }
     }
-
-    /**
-     * 根据博客类型分页查询博客列表
-     * TODO 还未完成
-     *
-     * @param page  当前页
-     * @param count 每页查询的条数
-     * @param type  博客类型
-     * @return 返回根据类型查询的博客分页数据, 并且封装在JsonResult中 {@link JsonResult}
-     */
-    @Override
-    public JsonResult listBlogPageByTypeReturnJsonResult(Integer page, Integer count, String type) {
-        // 首先从缓存中获取
-        Optional.ofNullable(page);
-        String redisKey = ReEntityRedisKeyEnum.RE_BLOG_PAGE_TYPE_KEY.getKey()
-                .replace(":page", ":" + page)
-                .replace(":count", ":" + count)
-                .replace(":type", type);
-        return null;
-    }
-
-    /**
-     * 根据博客id获取博客的信息，并封装在JsonResult中
-     *
-     * @param blogId 博客的id
-     * @return 博客详细信息
-     */
-    @Override
-    public JsonResult getByIdReturnJsonResult(Integer blogId) {
-        // 首先从缓存获取，如果缓存不存在，那么从数据库获取
-        Optional<Integer> optionalBlogId = Optional.ofNullable(blogId);
-        optionalBlogId.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
-        optionalBlogId.filter(id -> id >= 10001)
-                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
-        ReBlog byPattern = (ReBlog) redisUtil
-                .getByPattern(ReEntityRedisKeyEnum.RE_BLOG_KEY
-                        .getKey().replace(":id", ":" + blogId)
-                        .replace(":author", ":*")
-                        .replace(":title", ":*")
-                        .replace(":type", ":*"));
-        Optional<ReBlog> optionalByPattern = Optional.ofNullable(byPattern);
-        optionalByPattern.ifPresent(reBlog -> logger.info("从缓存中获取博客数据: id = " + blogId));
-        ReBlog reBlogByOptional = optionalByPattern.orElseGet(() -> {
-            ReBlog reBlog = getBaseMapper().selectById(blogId);
-            if (reBlog == null) {
-                throw new GlobalToJsonException(GlobalErrorEnum.NOTFOUND_ERROR);
-            }
-            redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()
-                    .replace(":id", ":" + reBlog.getId())
-                    .replace(":author", ":" + reBlog.getAuthor()), reBlog, RedisUtil.EXPIRE_TIME_DEFAULT);
-            logger.info("从数据库中获取博客数据: id = " + blogId);
-            return reBlog;
-        });
-        return JsonResult.success(Collections.singletonList(reBlogByOptional), 1);
-    }
-
 
     /**
      * 新增单个实体类
