@@ -1,6 +1,5 @@
 package cn.ljtnono.re.service.impl;
 
-import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.entity.ReBlogType;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.enumeration.ReEntityRedisKeyEnum;
@@ -9,7 +8,10 @@ import cn.ljtnono.re.mapper.ReBlogTypeMapper;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogTypeService;
 import cn.ljtnono.re.util.RedisUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +64,46 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
             return list;
         });
         return JsonResult.success(reBlogTypeList, reBlogTypeList.size());
+    }
+
+    /**
+     * 分页获取博客类型
+     *
+     * @param page  页码
+     * @param count 每页显示的条数
+     * @return JsonResult 对象
+     */
+    @Override
+    public JsonResult listBlogTypePage(Integer page, Integer count) {
+        Optional<Integer> optionalPage = Optional.ofNullable(page);
+        Optional<Integer> optionalCount = Optional.ofNullable(count);
+        optionalPage.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
+        optionalCount.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
+        optionalPage.filter(p -> p >= 0 && p <= 1000)
+                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
+        optionalCount.filter(c -> c >= 0 && c <= 60)
+                .orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_INVALID_ERROR));
+        // 首先从缓存中获取，如果缓存中没有，那么从数据库中获取
+        String redisKey = ReEntityRedisKeyEnum.RE_BLOG_TYPE_PAGE_KEY.getKey()
+                .replace(":page", ":" + page)
+                .replace(":count", ":" + count);
+        String totalRedisKey = ReEntityRedisKeyEnum.RE_BLOG_TYPE_PAGE_TOTAL_KEY.getKey()
+                .replace(":page", ":" + page)
+                .replace(":count", ":" + count);
+        // 首先从缓存中拿 这里lGet如果查询不到，会自动返回空集合
+        List<?> objects = redisUtil.lGet(redisKey, 0, -1);
+        if (!objects.isEmpty()) {
+            logger.info("从缓存中获取" + page + "页ReBlogType数据，每页获取" + count + "条");
+            String getByPattern = (String) redisUtil.getByPattern(totalRedisKey);
+            return JsonResult.success((Collection<?>) objects.get(0), ((Collection<?>) objects.get(0)).size()).addField("totalPages", getByPattern.split("_")[0]).addField("totalCount", getByPattern.split("_")[1]);
+        } else {
+            // 按照时间降序排列
+            IPage<ReBlogType> pageResult = page(new Page<>(page, count), new QueryWrapper<ReBlogType>().orderByDesc("modify_time"));
+            logger.info("获取" + page + "页ReBlogType数据，每页获取" + count + "条");
+            redisUtil.lSet(redisKey, pageResult.getRecords(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
+            redisUtil.set(totalRedisKey, pageResult.getPages() + "_" + pageResult.getTotal(), RedisUtil.EXPIRE_TIME_PAGE_QUERY);
+            return JsonResult.success(pageResult.getRecords(), pageResult.getRecords().size()).addField("totalPages", pageResult.getPages()).addField("totalCount", pageResult.getTotal());
+        }
     }
 
     /**

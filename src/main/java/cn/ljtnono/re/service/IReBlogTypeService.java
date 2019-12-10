@@ -18,4 +18,12 @@ public interface IReBlogTypeService extends IService<ReBlogType>, IReEntityServi
      * @return 所有的博客类型
      */
     JsonResult listBlogTypeAll();
+
+    /**
+     * 分页获取博客类型
+     * @param page 页码
+     * @param count 每页显示的条数
+     * @return JsonResult 对象
+     */
+    JsonResult listBlogTypePage(Integer page, Integer count);
 }
