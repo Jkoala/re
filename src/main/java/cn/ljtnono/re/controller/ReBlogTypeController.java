@@ -4,10 +4,13 @@ package cn.ljtnono.re.controller;
 import cn.ljtnono.re.entity.ReBlogType;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
+import cn.ljtnono.re.service.IReBlogTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import cn.ljtnono.re.controller.common.AbstractReController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -20,6 +23,8 @@ import java.io.Serializable;
 @RequestMapping("/blog_type")
 public class ReBlogTypeController extends AbstractReController<ReBlogType> {
 
+    @Autowired
+    private IReBlogTypeService iReBlogTypeService;
 
     /**
      * 获取实体类的所有列表
@@ -99,4 +104,23 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
     public JsonResult getEntityById(Serializable id) {
         return null;
     }
+
+
+    /**
+     * 分页查询，如果分页查询带有type参数，那么是按照类型的分页查询
+     * @param page 页码
+     * @param count 每页显示的条数
+     * @return JsonResult 格式对象
+     */
+    @GetMapping("/listBlogTypePage")
+    public JsonResult listBlogTypePage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count, HttpServletRequest request) {
+        // 判断是否有type字段
+        StringBuffer url = request.getRequestURL();
+        // 处理不同根据type字段来查询的相关业务
+        if (url.toString().contains("type")) {
+
+        }
+        return iReBlogTypeService.listBlogTypePage(page, count);
+    }
+
 }
