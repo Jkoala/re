@@ -2,7 +2,6 @@ package cn.ljtnono.re.entity.common;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
@@ -23,7 +22,7 @@ public class BaseEntity {
     protected Date modifyTime;
 
     /** 状态 0已经删除 1正常 */
-    @TableField("`delete`")
-    protected byte delete;
+    @TableField("status")
+    protected byte status;
 
 }

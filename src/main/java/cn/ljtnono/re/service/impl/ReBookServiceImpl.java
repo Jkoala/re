@@ -171,14 +171,14 @@ public class ReBookServiceImpl extends ServiceImpl<ReBookMapper, ReBook> impleme
             ReBook reBook;
             if (b) {
                 reBook = (ReBook) redisUtil.getByPattern(key);
-                if (reBook == null || reBook.getDelete() == 0) {
+                if (reBook == null || reBook.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reBook), 1);
             } else {
                 reBook = getById(bookId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reBook == null || reBook.getDelete() == 0) {
+                if (reBook == null || reBook.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BOOK_KEY.getKey()

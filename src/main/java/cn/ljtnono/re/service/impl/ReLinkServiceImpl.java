@@ -189,14 +189,14 @@ public class ReLinkServiceImpl extends ServiceImpl<ReLinkMapper, ReLink> impleme
             ReLink reLink;
             if (b) {
                 reLink = (ReLink) redisUtil.getByPattern(key);
-                if (reLink == null || reLink.getDelete() == 0) {
+                if (reLink == null || reLink.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reLink), 1);
             } else {
                 reLink = getById(linkId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reLink == null || reLink.getDelete() == 0) {
+                if (reLink == null || reLink.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_LINK_KEY.getKey()

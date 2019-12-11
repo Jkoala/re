@@ -163,14 +163,14 @@ public class ReConfigServiceImpl extends ServiceImpl<ReConfigMapper, ReConfig> i
             ReConfig reConfig;
             if (b) {
                 reConfig = (ReConfig) redisUtil.getByPattern(key);
-                if (reConfig == null || reConfig.getDelete() == 0) {
+                if (reConfig == null || reConfig.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reConfig), 1);
             } else {
                 reConfig = getById(configId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reConfig == null || reConfig.getDelete() == 0) {
+                if (reConfig == null || reConfig.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_CONFIG_KEY.getKey()

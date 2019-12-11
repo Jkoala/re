@@ -163,14 +163,14 @@ public class ReLinkTypeServiceImpl extends ServiceImpl<ReLinkTypeMapper, ReLinkT
             ReLinkType reLinkType;
             if (b) {
                 reLinkType = (ReLinkType) redisUtil.getByPattern(key);
-                if (reLinkType == null || reLinkType.getDelete() == 0) {
+                if (reLinkType == null || reLinkType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reLinkType), 1);
             } else {
                 reLinkType = getById(linkTypeId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reLinkType == null || reLinkType.getDelete() == 0) {
+                if (reLinkType == null || reLinkType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_LINK_TYPE_KEY.getKey()

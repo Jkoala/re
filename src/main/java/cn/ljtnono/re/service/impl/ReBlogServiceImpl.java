@@ -260,14 +260,14 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
             ReBlog reBlog;
             if (b) {
                 reBlog = (ReBlog) redisUtil.getByPattern(key);
-                if (reBlog == null || reBlog.getDelete() == 0) {
+                if (reBlog == null || reBlog.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reBlog), 1);
             } else {
                 reBlog = getById(blogId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reBlog == null || reBlog.getDelete() == 0) {
+                if (reBlog == null || reBlog.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_KEY.getKey()

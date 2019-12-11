@@ -163,14 +163,14 @@ public class RePermissionServiceImpl extends ServiceImpl<RePermissionMapper, ReP
             RePermission rePermission;
             if (b) {
                 rePermission = (RePermission) redisUtil.getByPattern(key);
-                if (rePermission == null || rePermission.getDelete() == 0) {
+                if (rePermission == null || rePermission.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(rePermission), 1);
             } else {
                 rePermission = getById(permissionId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (rePermission == null || rePermission.getDelete() == 0) {
+                if (rePermission == null || rePermission.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_LINK_TYPE_KEY.getKey()

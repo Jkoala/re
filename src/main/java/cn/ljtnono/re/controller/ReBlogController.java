@@ -8,7 +8,6 @@ import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,14 +63,13 @@ public class ReBlogController extends AbstractReController<ReBlog> {
     @PostMapping
     public JsonResult saveEntity(ReBlog entity) {
         // TODO 这里使用DTO参数，并且校验参数
-        ReBlog build = ReBlog.newBuilder()
-                .delete((byte) 1)
+        ReBlog build = ReBlog.newBuilder(entity)
+                .status((byte) 1)
                 .createTime(new Date())
                 .modifyTime(new Date())
                 .view(0)
                 .comment(0)
                 .build();
-        BeanUtils.copyProperties(entity, build);
         if (build.getCoverImage() == null || build.getCoverImage().isEmpty()) {
             build.setCoverImage(GlobalVariableEnum.RE_IMAGE_DEFAULT_URL.getValue().toString());
         }

@@ -234,14 +234,14 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
             ReBlogType reBlogType;
             if (b) {
                 reBlogType = (ReBlogType) redisUtil.getByPattern(key);
-                if (reBlogType == null || reBlogType.getDelete() == 0) {
+                if (reBlogType == null || reBlogType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reBlogType), 1);
             } else {
                 reBlogType = getById(blogTypeId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reBlogType == null || reBlogType.getDelete() == 0) {
+                if (reBlogType == null || reBlogType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_TYPE_KEY.getKey()

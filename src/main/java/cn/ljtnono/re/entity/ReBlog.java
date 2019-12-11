@@ -57,7 +57,7 @@ public class ReBlog extends BaseEntity implements Serializable {
     private ReBlog(Builder builder) {
         setCreateTime(builder.createTime);
         setModifyTime(builder.modifyTime);
-        setDelete(builder.delete);
+        setStatus(builder.status);
         setId(builder.id);
         setTitle(builder.title);
         setAuthor(builder.author);
@@ -78,7 +78,7 @@ public class ReBlog extends BaseEntity implements Serializable {
         Builder builder = new Builder();
         builder.createTime = copy.getCreateTime();
         builder.modifyTime = copy.getModifyTime();
-        builder.delete = copy.getDelete();
+        builder.status = copy.getStatus();
         builder.id = copy.getId();
         builder.title = copy.getTitle();
         builder.author = copy.getAuthor();
@@ -96,7 +96,7 @@ public class ReBlog extends BaseEntity implements Serializable {
     public static final class Builder {
         private Date createTime;
         private Date modifyTime;
-        private byte delete;
+        private byte status;
         private Integer id;
         private String title;
         private String author;
@@ -121,8 +121,8 @@ public class ReBlog extends BaseEntity implements Serializable {
             return this;
         }
 
-        public Builder delete(byte val) {
-            delete = val;
+        public Builder status(byte val) {
+            status = val;
             return this;
         }
 
