@@ -5,46 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed9e5a56-8977-4acd-b69b-2f5e176ff0c6" name="Default Changelist" comment="新增文件类型枚举">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/back/blogType-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/dto/ReBlogSaveDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/dto/Validator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c3c3177-e39e-4a8a-b7ac-095ab85376e8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_52_sec06.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_52_sec06.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_javax_persistence_api_2_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_transaction_javax_transaction_api_1_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_7_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_7_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_1_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_4_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_4_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_3_10_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_3_10_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_23_2_GA.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_23_2_GA.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_5_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_5_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_6_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_cache_2_1_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_cache_2_1_6_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_1_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_1_6_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_1_9_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_1_9_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_core_2_1_7_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_core_2_1_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_data_redis_2_1_7_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_data_redis_2_1_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_1_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_1_8_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_1_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_1_8_RELEASE.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re.iml" beforeDir="false" afterPath="$PROJECT_DIR$/re.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/controller/ApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/controller/ApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/controller/ReBlogTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/controller/ReBlogTypeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/enumeration/ReEntityRedisKeyEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/enumeration/ReEntityRedisKeyEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/ftp/ReFtpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/ftp/ReFtpClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/IReBlogTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/IReBlogTypeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/impl/ReBlogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/impl/ReBlogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/impl/ReBlogTypeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/service/impl/ReBlogTypeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/util/EntityGeneratorUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/util/EntityGeneratorUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-cate.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-role.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/admin-rule.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/cate.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/city.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/demo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/echarts8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/back/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/member-add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/member-del.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/member-edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/member-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/member-password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/order-add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/order-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/order-list1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/back/role-add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/ljtnono/re/entity/common/Validator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fore/articles.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fore/articles.html" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,9 +83,9 @@
         <option value="JavaScript File" />
         <option value="Interface" />
         <option value="Arquillian JUnit Test Class" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -171,10 +160,10 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -215,6 +204,18 @@
       <select />
     </treeState>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="ReApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="re" />
@@ -237,18 +238,6 @@
         <item itemvalue="Spring Boot.ReApplication" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SpringBeansView">
     <option name="beanDetailsProportion" value="0.3" />
@@ -455,13 +444,7 @@
       <workItem from="1575982173276" duration="730000" />
       <workItem from="1575982944666" duration="1078000" />
       <workItem from="1575984030435" duration="511000" />
-    </task>
-    <task id="LOCAL-00022" summary="编写ftpClientUtil类相关">
-      <created>1572795256209</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1572795256209</updated>
+      <workItem from="1576028083244" duration="6587000" />
     </task>
     <task id="LOCAL-00023" summary="配置logback">
       <created>1572795282950</created>
@@ -799,7 +782,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575982757773</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="新增lombok">
+      <created>1576030232057</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1576030232058</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -851,7 +841,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
-    <MESSAGE value="设置redis相关" />
     <MESSAGE value="首页部分流加载写完" />
     <MESSAGE value="首页添加信息流加载" />
     <MESSAGE value="将静态资源换成cdn" />
@@ -876,7 +865,8 @@
     <MESSAGE value="新增文件类型枚举" />
     <MESSAGE value="新增guava" />
     <MESSAGE value="增加接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加接口" />
+    <MESSAGE value="新增lombok" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增lombok" />
   </component>
   <component name="WindowStateProjectService">
     <state x="733" y="260" key="#com.intellij.ide.util.MemberChooser" timestamp="1575699886194">
