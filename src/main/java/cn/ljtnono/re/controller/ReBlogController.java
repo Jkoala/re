@@ -64,7 +64,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
     @PostMapping
     public JsonResult saveEntity(ReBlog entity) {
         // TODO 这里使用DTO参数，并且校验参数
-        ReBlog build = ReBlog.builder()
+        ReBlog build = ReBlog.newBuilder()
                 .delete((byte) 1)
                 .createTime(new Date())
                 .modifyTime(new Date())

@@ -13,7 +13,7 @@ import java.util.Date;
  * @version 1.0
  */
 @Data
-@SuperBuilder
+@NoArgsConstructor
 public class BaseEntity {
 
     /** 创建时间 */

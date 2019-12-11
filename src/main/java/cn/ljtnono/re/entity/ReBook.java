@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
 public class ReBook extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -5908659796059572626L;

@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
 public class ReBlogType extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -1997697590986661638L;

@@ -4,7 +4,6 @@ import cn.ljtnono.re.entity.common.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -18,7 +17,7 @@ import java.io.Serializable;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
 public class ReBookType extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -2561242836029170847L;
