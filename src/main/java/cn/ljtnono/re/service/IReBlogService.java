@@ -21,7 +21,7 @@ public interface IReBlogService extends IService<ReBlog>, IReEntityService<ReBlo
      * @param count 每页条数
      * @return 返回分页数据
      */
-    JsonResult listBlogPageReturnJsonResult(Integer page, Integer count);
+    JsonResult listBlogPage(Integer page, Integer count);
 
 
 

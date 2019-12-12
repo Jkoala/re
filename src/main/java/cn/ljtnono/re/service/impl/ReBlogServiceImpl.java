@@ -93,7 +93,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
      * @return 返回分页数据
      */
     @Override
-    public JsonResult listBlogPageReturnJsonResult(Integer page, Integer count) {
+    public JsonResult listBlogPage(Integer page, Integer count) {
         Optional<Integer> optionalPage = Optional.ofNullable(page);
         Optional<Integer> optionalCount = Optional.ofNullable(count);
         optionalPage.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
