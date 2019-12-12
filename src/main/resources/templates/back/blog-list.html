@@ -122,9 +122,9 @@
                         }
                     },
                     {
-                        field: 'delete', title: '状态', width: 80, sort: true,
+                        field: 'status', title: '状态', width: 80, sort: true,
                         templet: function (d) {
-                            if (d.delete === 1) {
+                            if (d.status === 1) {
                                 return "正常";
                             } else if (d.delete === 0) {
                                 return "删除";
