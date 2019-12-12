@@ -93,11 +93,10 @@ public class PageController {
 
         ReBlog byId = iReBlogService.getById(id);
 
-        if (byId == null) {
-            // 如果没有查询到，那么返回404页面
+        if (byId == null || byId.getStatus() == 0) {
+            // 如果没有查询到或者该博客已经删除，那么返回404页面
             return "forward:/error/404";
         }
-        // TODO 检查博客是否删除
         // 每访问一次，将该博客的浏览量 + 1
         modelMap.addAttribute("blog", byId);
         ReBlog next = iReBlogService.getById(Integer.parseInt(id) + 1);
