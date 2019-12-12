@@ -149,8 +149,8 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         optionalId.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
         Integer blogTypeId = Integer.parseInt(id.toString());
         if (blogTypeId >= 1) {
-            // 在数据库中更新
-            boolean updateResult = update(new UpdateWrapper<ReBlogType>().set("`delete`", 0).eq("id", blogTypeId));
+            // 在数据库中更新相关标签
+            boolean updateResult = update(new UpdateWrapper<ReBlogType>().set("status", 0).eq("id", blogTypeId));
             if (updateResult) {
                 // 删除缓存中的相关数据
                 ReBlogType reBlogType = getById(blogTypeId);
