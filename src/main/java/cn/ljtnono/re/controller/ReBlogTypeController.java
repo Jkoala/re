@@ -36,7 +36,7 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
     @Override
     @GetMapping
     public JsonResult listEntityAll() {
-        return null;
+        return iReBlogTypeService.listEntityAll();
     }
 
     /**
@@ -52,10 +52,6 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
     @Override
     @PostMapping
     public JsonResult saveEntity(ReBlogType entity) {
-        ReBlogType reBlogType;
-        System.out.println(entity.toString());
-        reBlogType = (ReBlogType) entity;
-        System.out.println(entity.toString());
         return null;
     }
 
@@ -86,8 +82,9 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
      */
     @Override
-    public JsonResult deleteEntityById(Serializable id) {
-        return null;
+    @DeleteMapping("/{id}")
+    public JsonResult deleteEntityById(@PathVariable(value = "id", required = false) Serializable id) {
+        return iReBlogTypeService.deleteEntityById(id);
     }
 
     /**
@@ -113,7 +110,9 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
      * @return JsonResult 格式对象
      */
     @GetMapping("/listBlogTypePage")
-    public JsonResult listBlogTypePage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count, HttpServletRequest request) {
+    public JsonResult listBlogTypePage(@RequestParam(value = "page", required = false) Integer page,
+                                       @RequestParam(value = "count", required = false) Integer count,
+                                       HttpServletRequest request) {
         // 判断是否有type字段
         StringBuffer url = request.getRequestURL();
         // 处理不同根据type字段来查询的相关业务
