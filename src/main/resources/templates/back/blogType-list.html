@@ -37,7 +37,7 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="title" placeholder="请输入关键字" autocomplete="off"
+                            <input type="text" name="name" placeholder="请输入关键字" autocomplete="off"
                                    class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
@@ -132,6 +132,7 @@
             console.log(data.form);
             //当前容器的全部表单字段，名值对形式：{name: value}
             console.log(data.field);
+            // 数据表格动态渲染
             //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             return false;
         });
@@ -141,10 +142,17 @@
             let layEvent = obj.event;
             let data = obj.data;
             if (layEvent === "edit") {
-                // 打开详情窗口进行编辑
-                // window.parent.xadmin.add_tab(data.title, "/re/admin/blog-detail?blogId=" + data.id);
-            } else if (layEvent === "delete") {
 
+            } else if (layEvent === "delete") {
+                // 首先弹出询问窗口进行打击
+                layer.confirm('此操作将会删除该分类下所有的博客，确认删除？', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    $.ajax({
+                        url: [[${#servletContext.contextPath}]] + "/blog_type/deleteEntityById",
+                    });
+                    layer.close(index);
+                });
             }
         });
     });

@@ -79,7 +79,7 @@
         table.render({
             elem: '.layui-table',
             height: 450,
-            url: [[${#servletContext.contextPath}]] + "/api/listBlogPage",
+            url: [[${#servletContext.contextPath}]] + "/blog/listBlogPage",
             page: true,
             method: "get",
             toolbar: true,
@@ -139,7 +139,7 @@
         });
         // 获取下拉选择框的值
         $.ajax({
-            url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
+            url: [[${#servletContext.contextPath}]] + "/blog_type",
             method: "GET",
             dataType: "json",
             success: function (res) {

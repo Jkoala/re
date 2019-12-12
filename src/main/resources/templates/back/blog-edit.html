@@ -129,7 +129,7 @@
                 content: publishLayerHtml,
                 success: function () {
                     $.ajax({
-                        url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
+                        url: [[${#servletContext.contextPath}]] + "/blog_type",
                         method: "GET",
                         dataType: "json",
                         success: function (res) {

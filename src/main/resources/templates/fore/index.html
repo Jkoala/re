@@ -158,7 +158,7 @@
             done: function (page, next) {
                 let lis = [];
                 $.ajax({
-                    url: [[${#servletContext.contextPath}]] + "/api/listBlogPage",
+                    url: [[${#servletContext.contextPath}]] + "/blog/listBlogPage",
                     method: "GET",
                     data: {
                         page: page + 1,
