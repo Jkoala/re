@@ -1,7 +1,7 @@
 package cn.ljtnono.re.controller;
 
+import cn.ljtnono.re.dto.ReBlogListPageDTO;
 import cn.ljtnono.re.entity.ReBlog;
-import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.enumeration.GlobalVariableEnum;
 import cn.ljtnono.re.pojo.JsonResult;
 import cn.ljtnono.re.service.IReBlogService;
@@ -84,7 +84,7 @@ public class ReBlogController extends AbstractReController<ReBlog> {
 
 
     @GetMapping("/listBlogPage")
-    public JsonResult listBlogPage(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "count", required = false) Integer count) {
-        return iReBlogService.listBlogPage(page, count);
+    public JsonResult listBlogPage(ReBlogListPageDTO reBlogListPageDTO) {
+        return iReBlogService.listBlogPage(reBlogListPageDTO.getPage(), reBlogListPageDTO.getCount());
     }
 }

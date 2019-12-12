@@ -58,6 +58,17 @@ public class RedisUtil {
     }
 
     /**
+     * 根据正则表达式删除key
+     * @param pattern 正则表达式
+     */
+    public void deleteByPattern(String pattern) {
+        Set<String> keys = redisTemplate.keys(pattern);
+        if (keys != null && !keys.isEmpty()) {
+            redisTemplate.delete(keys);
+        }
+    }
+
+    /**
      * 根据key 获取过期时间
      * @param key 键 不能为null
      * @return 时间(秒) 返回0代表为永久有效
