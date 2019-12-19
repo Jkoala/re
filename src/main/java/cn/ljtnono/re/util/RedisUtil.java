@@ -470,13 +470,16 @@ public class RedisUtil {
      * 根据key获取Set中的所有值
      *
      * @param key 键
-     * @return
+     * @return 如果该键不存在，那么返回null,如果存在，那么返回Set
      */
     public Set<Object> sGet(final String key) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForSet().members(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取set中的所有值失败，原因：" + e.getMessage());
             return null;
         }
     }
@@ -488,11 +491,17 @@ public class RedisUtil {
      * @param value 值
      * @return true 存在 false不存在
      */
-    public boolean sHasKey(String key, Object value) {
+    public boolean sHasKey(final String key, final Object value) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (value == null) {
+                    throw new IllegalArgumentException("value值不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForSet().isMember(key, value);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("查询value失败，原因" + e.getMessage());
             return false;
         }
     }
@@ -502,13 +511,19 @@ public class RedisUtil {
      *
      * @param key    键
      * @param values 值 可以是多个
-     * @return 成功个数
+     * @return 成功个数， 失败返回0
      */
-    public long sSet(String key, Object... values) {
+    public long sSet(final String key, final Object... values) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (values == null) {
+                    throw new IllegalArgumentException("values值不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForSet().add(key, values);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个set类型值失败，原因" + e.getMessage());
             return 0;
         }
     }
@@ -519,17 +534,23 @@ public class RedisUtil {
      * @param key    键
      * @param time   时间(秒)
      * @param values 值 可以是多个
-     * @return 成功个数
+     * @return 成功个数 失败返回0
      */
-    public long sSetAndTime(String key, long time, Object... values) {
+    public long sSetAndTime(final String key, final long time, final Object... values) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (values == null) {
+                    throw new IllegalArgumentException("values值不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             Long count = redisTemplate.opsForSet().add(key, values);
             if (time > 0) {
                 expire(key, time);
             }
             return count;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个set类型值失败，原因" + e.getMessage());
             return 0;
         }
     }
@@ -538,13 +559,16 @@ public class RedisUtil {
      * 获取set缓存的长度
      *
      * @param key 键
-     * @return
+     * @return set的长度，如果不存在返回0
      */
-    public long sGetSetSize(String key) {
+    public long sGetSetSize(final String key) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForSet().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取set类型长度失败，原因：" + e.getMessage());
             return 0;
         }
     }
@@ -554,18 +578,25 @@ public class RedisUtil {
      *
      * @param key    键
      * @param values 值 可以是多个
-     * @return 移除的个数
+     * @return 移除的个数，不存在返回0
      */
-    public long setRemove(String key, Object... values) {
+    public long setRemove(final String key, final Object... values) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (values == null) {
+                    throw new IllegalArgumentException("values值不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             Long count = redisTemplate.opsForSet().remove(key, values);
             return count;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("移除多个set值失败，原因：" + e.getMessage());
             return 0;
         }
     }
-    //===============================list相关=================================
+
+    //===============================list相关=================================//
 
     /**
      * 获取list缓存的内容
@@ -575,7 +606,7 @@ public class RedisUtil {
      * @param end   结束  0 到 -1代表所有值
      * @return
      */
-    public List<Object> lGet(String key, long start, long end) {
+    public List<Object> lGet(final String key, final long start, final long end) {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
@@ -590,7 +621,7 @@ public class RedisUtil {
      * @param key 键
      * @return
      */
-    public long lGetListSize(String key) {
+    public long lGetListSize(final String key) {
         try {
             return redisTemplate.opsForList().size(key);
         } catch (Exception e) {
