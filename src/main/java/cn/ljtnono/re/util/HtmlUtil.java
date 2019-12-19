@@ -5,9 +5,10 @@ import java.util.regex.Pattern;
 
 
 /**
+ * html工具类
  * @author ljt
- * @date 2019/10/13
- * @version 1.0
+ * @date 2019/12/19
+ * @version 1.0.0
  */
 public class HtmlUtil {
 

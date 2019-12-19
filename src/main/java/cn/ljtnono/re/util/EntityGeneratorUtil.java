@@ -68,6 +68,5 @@ public class EntityGeneratorUtil {
         // 创建文件
         builder.append("package cn.ljtnono.re.entity;");
         builder.append("\r\n");
-
     }
 }
