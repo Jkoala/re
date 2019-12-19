@@ -297,10 +297,16 @@ public class RedisUtil {
      */
     public boolean hMultiSet(final String key, final Map<String, Object> map) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
+            if (map == null) {
+                throw new IllegalArgumentException("map不能为null");
+            }
             redisTemplate.opsForHash().putAll(key, map);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个hash值失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -313,15 +319,21 @@ public class RedisUtil {
      * @param time 时间(秒)
      * @return true成功 false失败
      */
-    public boolean hMultiSet(String key, Map<String, Object> map, long time) {
+    public boolean hMultiSet(final String key, final Map<String, Object> map, final long time) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
+            if (map == null) {
+                throw new IllegalArgumentException("map不能为null");
+            }
             redisTemplate.opsForHash().putAll(key, map);
             if (time > 0) {
                 expire(key, time);
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个hash值失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -334,12 +346,18 @@ public class RedisUtil {
      * @param value 值
      * @return true 成功 false失败
      */
-    public boolean hSet(String key, String item, Object value) {
+    public boolean hSet(final String key, final String item, final Object value) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (item == null || item.isEmpty()) {
+                    throw new IllegalArgumentException("item值不能为" + key);
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForHash().put(key, item, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个hash值失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -353,15 +371,21 @@ public class RedisUtil {
      * @param time  时间(秒)  注意:如果已存在的hash表有时间,这里将会替换原有的时间
      * @return true 成功 false失败
      */
-    public boolean hSet(String key, String item, Object value, long time) {
+    public boolean hSet(final String key, final String item, final Object value, final long time) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (item == null || item.isEmpty()) {
+                    throw new IllegalArgumentException("item值不能为" + key);
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForHash().put(key, item, value);
             if (time > 0) {
                 expire(key, time);
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置多个hash值失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -372,8 +396,16 @@ public class RedisUtil {
      * @param key  键 不能为null
      * @param item 项 可以使多个 不能为null
      */
-    public void hDel(String key, Object... item) {
-        redisTemplate.opsForHash().delete(key, item);
+    public void hDel(final String key, final Object... item) {
+        if (key == null || key.isEmpty()) {
+            if (item == null) {
+                throw new IllegalArgumentException("item值不能为null");
+            }
+            throw new IllegalArgumentException("key值不能为" + key);
+        }
+        if (item.length > 0) {
+            redisTemplate.opsForHash().delete(key, item);
+        }
     }
 
     /**
@@ -381,9 +413,16 @@ public class RedisUtil {
      *
      * @param key  键 不能为null
      * @param item 项 不能为null
+     * @throws IllegalArgumentException 当key或者item为null或者空串的时候抛出该异常
      * @return true 存在 false不存在
      */
-    public boolean hHasKey(String key, String item) {
+    public boolean hHasKey(final String key, final String item) {
+        if (key == null || key.isEmpty()) {
+            if (item == null) {
+                throw new IllegalArgumentException("item值不能为null");
+            }
+            throw new IllegalArgumentException("key值不能为" + key);
+        }
         return redisTemplate.opsForHash().hasKey(key, item);
     }
 
@@ -392,10 +431,17 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项
+     * @throws IllegalArgumentException 当key或者item为null或者空串时抛出此异常
      * @param by   要增加几(大于0)
-     * @return
+     * @return 增加后的值
      */
-    public double hIncr(String key, String item, double by) {
+    public double hIncr(final String key, final String item, final double by) {
+        if (key == null || key.isEmpty()) {
+            if (item == null) {
+                throw new IllegalArgumentException("item值不能为null");
+            }
+            throw new IllegalArgumentException("key值不能为" + key);
+        }
         return redisTemplate.opsForHash().increment(key, item, by);
     }
 
@@ -404,14 +450,21 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项
+     * @throws IllegalArgumentException 当key或者item为null或者空串时抛出此异常
      * @param by   要减少记(小于0)
-     * @return
+     * @return 减少后的值
      */
-    public double hDecr(String key, String item, double by) {
+    public double hDecr(final String key, final String item, final double by) {
+        if (key == null || key.isEmpty()) {
+            if (item == null) {
+                throw new IllegalArgumentException("item值不能为null");
+            }
+            throw new IllegalArgumentException("key值不能为" + key);
+        }
         return redisTemplate.opsForHash().increment(key, item, -by);
     }
 
-    //============================set=============================
+    //============================set相关=============================//
 
     /**
      * 根据key获取Set中的所有值
@@ -419,7 +472,7 @@ public class RedisUtil {
      * @param key 键
      * @return
      */
-    public Set<Object> sGet(String key) {
+    public Set<Object> sGet(final String key) {
         try {
             return redisTemplate.opsForSet().members(key);
         } catch (Exception e) {
@@ -512,7 +565,7 @@ public class RedisUtil {
             return 0;
         }
     }
-    //===============================list=================================
+    //===============================list相关=================================
 
     /**
      * 获取list缓存的内容

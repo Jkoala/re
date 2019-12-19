@@ -12,10 +12,9 @@ import java.util.List;
  * 根据数据库表自动生成实体类
  *
  * @author ljt
- * @version 1.0
+ * @version 1.1.0
  * @date 2019/10/27
  */
-@Component
 public class EntityGeneratorUtil {
 
     /**

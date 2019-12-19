@@ -3,8 +3,6 @@ package cn.ljtnono.re.dto;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**

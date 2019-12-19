@@ -4,7 +4,7 @@ package cn.ljtnono.re.enumeration;
  * 全局变量
  * @author ljt
  * @date 2019/11/23
- * @version 1.0
+ * @version 1.0.1
  */
 public enum GlobalVariableEnum {
 

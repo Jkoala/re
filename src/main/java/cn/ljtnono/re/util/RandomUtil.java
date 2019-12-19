@@ -7,10 +7,11 @@ import java.util.UUID;
 
 /**
  * 随机工具类
+ *
  * @author ljt
- * @date 2019/12/19
  * @version 1.0.0
  * 随机数工具类
+ * @date 2019/12/19
  */
 public class RandomUtil {
 
@@ -62,17 +63,16 @@ public class RandomUtil {
      */
     public static String getRandomNumWordStr(int length) {
         String val = "";
-
         Random random = new Random();
         for (int i = 0; i < length; i++) {
-            String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num"; // 输出字母还是数字
-
-            if ("char".equalsIgnoreCase(charOrNum)) // 字符串
-            {
-                int choice = random.nextInt(2) % 2 == 0 ? 65 : 97; // 取得大写字母还是小写字母
+            // 输出字母还是数字
+            String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+            if ("char".equalsIgnoreCase(charOrNum)) {
+                // 取得大写字母还是小写字母
+                int choice = random.nextInt(2) % 2 == 0 ? 65 : 97;
                 val += (char) (choice + random.nextInt(26));
-            } else if ("num".equalsIgnoreCase(charOrNum)) // 数字
-            {
+                // 数字
+            } else if ("num".equalsIgnoreCase(charOrNum)) {
                 val += String.valueOf(random.nextInt(10));
             }
         }
@@ -121,8 +121,7 @@ public class RandomUtil {
      * 生产不带横线的UUID
      */
     public static String getUuidNoLine() {
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        return uuid;
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     public static String creatid(int endIndex) {
