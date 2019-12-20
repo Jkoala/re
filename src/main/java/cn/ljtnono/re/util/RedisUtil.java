@@ -604,13 +604,17 @@ public class RedisUtil {
      * @param key   键
      * @param start 开始
      * @param end   结束  0 到 -1代表所有值
-     * @return
+     * @return 指定范围内的元素列表。
+     * 超出范围的索引不会产生错误。如果start大于列表的末尾，则返回一个空列表。如果stop大于列表的实际末尾，则Redis会将其视为列表的最后一个元素。
      */
     public List<Object> lGet(final String key, final long start, final long end) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取list缓存内容失败，原因：" + e.getMessage());
             return null;
         }
     }
@@ -619,13 +623,16 @@ public class RedisUtil {
      * 获取list缓存的长度
      *
      * @param key 键
-     * @return
+     * @return list缓存的长度
      */
     public long lGetListSize(final String key) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForList().size(key);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取list缓存长度失败，原因：" + e.getMessage());
             return 0;
         }
     }
@@ -641,7 +648,7 @@ public class RedisUtil {
         try {
             return redisTemplate.opsForList().index(key, index);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取list缓存长度失败，原因：" + e.getMessage());
             return null;
         }
     }

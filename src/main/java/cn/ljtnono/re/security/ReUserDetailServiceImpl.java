@@ -5,7 +5,6 @@ import cn.ljtnono.re.entity.ReUser;
 import cn.ljtnono.re.service.IReUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,9 +26,12 @@ import java.util.Optional;
 @Component("reUserDetailService")
 public class ReUserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
     private IReUserService iReUserService;
 
+    @Autowired
+    public ReUserDetailServiceImpl(IReUserService iReUserService) {
+        this.iReUserService = iReUserService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
