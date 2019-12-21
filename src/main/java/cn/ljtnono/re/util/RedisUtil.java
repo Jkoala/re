@@ -642,10 +642,13 @@ public class RedisUtil {
      *
      * @param key   键
      * @param index 索引  index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
-     * @return
+     * @return 成功返回list中指定索引的侄，失败返回null
      */
-    public Object lGetIndex(String key, long index) {
+    public Object lGetIndex(final String key, final long index) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             return redisTemplate.opsForList().index(key, index);
         } catch (Exception e) {
             logger.error("获取list缓存长度失败，原因：" + e.getMessage());
@@ -658,14 +661,17 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @return
+     * @return 成功返回true，失败返回false
      */
-    public boolean lSet(String key, Object value) {
+    public boolean lSet(final String key, final Object value) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForList().rightPush(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取list缓存失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -676,17 +682,20 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return 成功返回true， 失败返回false
      */
-    public boolean lSet(String key, Object value, long time) {
+    public boolean lSet(final String key, final Object value, final long time) {
         try {
+            if (key == null || key.isEmpty()) {
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForList().rightPush(key, value);
             if (time > 0) {
                 expire(key, time);
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置list缓存失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -696,14 +705,20 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @return
+     * @return 成功返回true，失败返回false
      */
-    public boolean lSet(String key, List<Object> value) {
+    public boolean lSet(final String key, final List<Object> value) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (value == null) {
+                    throw new IllegalArgumentException("value不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForList().rightPushAll(key, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置list缓存失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -714,17 +729,23 @@ public class RedisUtil {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return 成功返回true，失败返回false
      */
-    public boolean lSet(String key, List<Object> value, long time) {
+    public boolean lSet(final String key, final List<Object> value, final long time) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (value == null) {
+                    throw new IllegalArgumentException("value不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForList().rightPushAll(key, value);
             if (time > 0) {
                 expire(key, time);
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置list缓存失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -735,14 +756,20 @@ public class RedisUtil {
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @return
+     * @return 成功返回true，失败返回false
      */
-    public boolean lUpdateIndex(String key, long index, Object value) {
+    public boolean lUpdateIndex(final String key, final long index, final Object value) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (value == null) {
+                    throw new IllegalArgumentException("value不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             redisTemplate.opsForList().set(key, index, value);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("设置list缓存失败，原因：" + e.getMessage());
             return false;
         }
     }
@@ -755,12 +782,18 @@ public class RedisUtil {
      * @param value 值
      * @return 移除的个数
      */
-    public long lRemove(String key, long count, Object value) {
+    public long lRemove(final String key, final long count, final Object value) {
         try {
+            if (key == null || key.isEmpty()) {
+                if (value == null) {
+                    throw new IllegalArgumentException("value不能为null");
+                }
+                throw new IllegalArgumentException("key值不能为" + key);
+            }
             Long remove = redisTemplate.opsForList().remove(key, count, value);
             return remove;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("移除list缓存失败，原因：" + e.getMessage());
             return 0;
         }
     }
