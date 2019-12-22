@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class ReBlogListPageDTO implements Serializable {
+public class PageDTO implements Serializable {
 
     private static final long serialVersionUID = -3320275112750620130L;
 

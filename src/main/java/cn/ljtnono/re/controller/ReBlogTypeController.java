@@ -1,6 +1,7 @@
 package cn.ljtnono.re.controller;
 
 
+import cn.ljtnono.re.dto.PageDTO;
 import cn.ljtnono.re.entity.ReBlogType;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.pojo.JsonResult;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import cn.ljtnono.re.controller.common.AbstractReController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -105,21 +105,12 @@ public class ReBlogTypeController extends AbstractReController<ReBlogType> {
 
     /**
      * 分页查询，如果分页查询带有type参数，那么是按照类型的分页查询
-     * @param page 页码
-     * @param count 每页显示的条数
+     * @param pageDTO 分页DTO对象
      * @return JsonResult 格式对象
      */
     @GetMapping("/listBlogTypePage")
-    public JsonResult listBlogTypePage(@RequestParam(value = "page", required = false) Integer page,
-                                       @RequestParam(value = "count", required = false) Integer count,
-                                       HttpServletRequest request) {
-        // 判断是否有type字段
-        StringBuffer url = request.getRequestURL();
-        // 处理不同根据type字段来查询的相关业务
-        if (url.toString().contains("type")) {
-
-        }
-        return iReBlogTypeService.listBlogTypePage(page, count);
+    public JsonResult listBlogTypePage(PageDTO pageDTO) {
+        return iReBlogTypeService.listBlogTypePage(pageDTO.getPage(), pageDTO.getCount());
     }
 
 }
