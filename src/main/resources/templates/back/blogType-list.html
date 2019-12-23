@@ -59,6 +59,7 @@
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">编辑</button>
         <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</button>
+        <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="restore">恢复</button>
     </div>
 </script>
 <script th:inline="javascript">
@@ -141,9 +142,9 @@
         table.on('tool(blogType)', function (obj) {
             let layEvent = obj.event;
             let data = obj.data;
-            if (layEvent === "edit") {
+            if ("edit" === layEvent) {
 
-            } else if (layEvent === "delete") {
+            } else if ("delete" === layEvent) {
                 // 首先弹出询问窗口进行确认
                 if (data.status === 0) {
                     layer.msg("不能删除已经删除的项！" , {icon: 2});
@@ -163,6 +164,12 @@
                         });
                         layer.close(index);
                     });
+                }
+            } else if ("restore" === layEvent) {
+                if (data.status === 1) {
+                    layer.msg("不能删恢复正常的项！" , {icon: 2});
+                } else {
+
                 }
             }
         });
