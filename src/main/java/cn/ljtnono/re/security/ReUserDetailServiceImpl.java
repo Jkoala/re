@@ -45,9 +45,7 @@ public class ReUserDetailServiceImpl implements UserDetailsService {
         Optional.ofNullable(reRoleList)
                 .orElseThrow(() -> new RuntimeException("权限异常"));
         List<GrantedAuthority> authorities = new ArrayList<>(10);
-        reRoleList.forEach(reRole -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + reRole.getName()));
-        });
+        reRoleList.forEach(reRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + reRole.getName())));
         // 根据角色查询出所有的权限
 //        List<RePermission> permissionList = new ArrayList<>(8);
 //        reRoleList.forEach(reRole -> {
@@ -62,6 +60,4 @@ public class ReUserDetailServiceImpl implements UserDetailsService {
 //        String password = passwordEncoder.encode(reUser.getPassword());
         return new User(username, reUser.getPassword(), authorities);
     }
-
-
 }
