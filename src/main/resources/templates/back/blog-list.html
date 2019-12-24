@@ -126,8 +126,8 @@
                         templet: function (d) {
                             if (d.status === 1) {
                                 return "正常";
-                            } else if (d.delete === 0) {
-                                return "删除";
+                            } else if (d.status === 0) {
+                                return "已删除";
                             }
                         }
                     },
@@ -177,22 +177,13 @@
                 // 打开详情窗口进行编辑
                 window.parent.xadmin.add_tab(data.title, "/re/admin/blog-detail?blogId=" + data.id);
             } else if (layEvent === "delete") {
-                layer.confirm('确认删除？', {
+                layer.confirm('确认删除此博客？', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     // 发送ajax请求删除
                     $.ajax({
-                        url: "",
-                        data: {
-
-                        },
+                        url: [[${#servletContext.contextPath}]] + "/blog/" + data.id,
                         method: "DELETE",
-                        beforeSend: function () {
-                            loadIndex = layer.load(0, {
-                                shade: [0.8, '#262626'],
-                                shadeClose: true
-                            });
-                        },
                         success: function (res) {
                             if (res.request === "success" && res.status === 200) {
                                 layer.msg(res.message , {icon: 1});
@@ -202,9 +193,6 @@
                         },
                         error: function () {
                             layer.msg("请求失败，请检查网络", {icon: 2});
-                        },
-                        complete: function () {
-                            layer.close(loadIndex);
                         }
                     });
                     layer.close(index);
