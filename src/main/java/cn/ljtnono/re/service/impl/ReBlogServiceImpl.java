@@ -97,16 +97,6 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         }
     }
 
-    /**
-     * 新增单个实体类
-     *
-     * @param entity 具体的实体类
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult saveEntity(ReBlog entity) {
         Optional<ReBlog> optionalReBlog = Optional.ofNullable(entity);
@@ -130,23 +120,13 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         }
     }
 
-    /**
-     * 根据id删除一个实体类
-     *
-     * @param id 实体类id
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“, data: {删除的实体类}}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult deleteEntityById(Serializable id) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
         optionalId.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
         Integer blogId = Integer.parseInt(id.toString());
         if (blogId >= 10001) {
-            boolean deleteResult = update(new UpdateWrapper<ReBlog>().set("`delete`", 0).eq("id", blogId));
+            boolean deleteResult = update(new UpdateWrapper<ReBlog>().set("status", 0).eq("id", blogId));
             if (deleteResult) {
                 // 查出来
                 ReBlog byId = getById(blogId);
@@ -165,17 +145,6 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         }
     }
 
-    /**
-     * 根据id更新一个实体类
-     *
-     * @param id     实体类的id
-     * @param entity 要更新的实体类
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult updateEntityById(Serializable id, ReBlog entity) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
@@ -201,16 +170,7 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         }
     }
 
-    /**
-     * 根据id获取一个实体类
-     *
-     * @param id 实体类id
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“, data: {实体类}}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
+
     @Override
     public JsonResult getEntityById(Serializable id) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
@@ -253,13 +213,6 @@ public class ReBlogServiceImpl extends ServiceImpl<ReBlogMapper, ReBlog> impleme
         }
     }
 
-    /**
-     * 获取实体类的所有列表
-     *
-     * @return 实体类所有列表
-     * 操作成功{request: "success", status: 200, message: "操作成功“, data: {列表}}
-     * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult listEntityAll() {
         // 直接从数据库中获取所有 这里mybatis-plus 会返回空集合
