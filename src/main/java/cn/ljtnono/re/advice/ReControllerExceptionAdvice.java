@@ -7,12 +7,13 @@ import cn.ljtnono.re.pojo.JsonResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+
 /**
  * 配置springRest风格错误
  *
  * @author 凌家童
- * @version 1.0
- * @date 2019/10/6
+ * @version 1.0.2
+ * @date 2019/12/23
  */
 @ControllerAdvice
 public class ReControllerExceptionAdvice {

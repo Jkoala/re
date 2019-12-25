@@ -158,7 +158,7 @@
             done: function (page, next) {
                 let lis = [];
                 $.ajax({
-                    url: [[${#servletContext.contextPath}]] + "/api/listBlogPage",
+                    url: [[${#servletContext.contextPath}]] + "/blog/listBlogPage",
                     method: "GET",
                     data: {
                         page: page + 1,
@@ -168,41 +168,43 @@
                     success: function (res) {
                         if (res.request === "success" && res.status === 200) {
                             layui.each(res.data, function (index, item) {
-                                let text = "";
-                                text += "<article class=\"article mb10 p10\">";
-                                text += "                <header class=\"article-header mb10\">";
-                                text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/articles/" + item.type + "\">";
-                                text += "                    <span class=\"article-label f12 mr5\">";
-                                text += item.type;
-                                text += "                <i class=\"label-arrow\"></i>";
-                                text += "</a>";
-                                text += "            </span>";
-                                text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">";
-                                text += "                    <span class=\"article-title f14\">" + item.title + "</span>";
-                                text += "</a>";
-                                text += "                </header>";
-                                text += "                <section class=\"article-detail flex\">";
-                                text += "                    <div class=\"mr10 article-thumb cursor-pointer\">";
-                                text += "                        <img src=\"" + item.coverImage + "\"";
-                                text += "                             alt=\"" + item.title + "\"";
-                                text += "                             title=\"" + item.title + "\">";
-                                text += "                    </div>";
-                                text += "                    <div class=\"article-summary flex flex-direction-column flex-justify-content-space-between\">";
-                                text += "                        <a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">" + item.summary + "</a>";
-                                text += "                        <div class=\"article-info\">";
-                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-user pr5\" aria-hidden=\"true\"></i><span class=\"\"";
-                                text += "                                                                                                        style=\"color: #00A67C;\">" + item.author + "</span></a>";
-                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i><span";
-                                text += "                                    class=\"\">" + util.toDateString(item.modifyTime, "yyyy-MM-dd") + "</span></a>";
-                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i><span";
-                                text += "                                    class=\"\">" + item.view + "浏览</span></a>";
-                                text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-comment\" aria-hidden=\"true\"></i><span";
-                                text += "                                    class=\"\">" + item.comment + "评论</span></a>";
-                                text += "                        </div>";
-                                text += "                    </div>";
-                                text += "                </section>";
-                                text += "            </article>";
-                                lis.push(text);
+                                if (item.status === 1) {
+                                    let text = "";
+                                    text += "<article class=\"article mb10 p10\">";
+                                    text += "                <header class=\"article-header mb10\">";
+                                    text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/articles/" + item.type + "\">";
+                                    text += "                    <span class=\"article-label f12 mr5\">";
+                                    text += item.type;
+                                    text += "                <i class=\"label-arrow\"></i>";
+                                    text += "</a>";
+                                    text += "            </span>";
+                                    text += "<a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">";
+                                    text += "                    <span class=\"article-title f14\">" + item.title + "</span>";
+                                    text += "</a>";
+                                    text += "                </header>";
+                                    text += "                <section class=\"article-detail flex\">";
+                                    text += "                    <div class=\"mr10 article-thumb cursor-pointer\">";
+                                    text += "                        <img src=\"" + item.coverImage + "\"";
+                                    text += "                             alt=\"" + item.title + "\"";
+                                    text += "                             title=\"" + item.title + "\">";
+                                    text += "                    </div>";
+                                    text += "                    <div class=\"article-summary flex flex-direction-column flex-justify-content-space-between\">";
+                                    text += "                        <a href=\"" + [[${#servletContext.contextPath}]] + "/article/" + item.id + "\">" + item.summary + "</a>";
+                                    text += "                        <div class=\"article-info\">";
+                                    text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-user pr5\" aria-hidden=\"true\"></i><span class=\"\"";
+                                    text += "                                                                                                        style=\"color: #00A67C;\">" + item.author + "</span></a>";
+                                    text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i><span";
+                                    text += "                                    class=\"\">" + util.toDateString(item.modifyTime, "yyyy-MM-dd") + "</span></a>";
+                                    text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i><span";
+                                    text += "                                    class=\"\">" + item.view + "浏览</span></a>";
+                                    text += "                            <a href=\"#\" class=\"\"><i class=\"fa fa-comment\" aria-hidden=\"true\"></i><span";
+                                    text += "                                    class=\"\">" + item.comment + "评论</span></a>";
+                                    text += "                        </div>";
+                                    text += "                    </div>";
+                                    text += "                </section>";
+                                    text += "            </article>";
+                                    lis.push(text);
+                                }
                             });
                             next(lis.join(''), page < res.fields.totalPages);
                         }

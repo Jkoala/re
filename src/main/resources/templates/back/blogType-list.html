@@ -37,7 +37,7 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="title" placeholder="请输入关键字" autocomplete="off"
+                            <input type="text" name="name" placeholder="请输入关键字" autocomplete="off"
                                    class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
@@ -59,6 +59,7 @@
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">编辑</button>
         <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</button>
+        <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="restore">恢复</button>
     </div>
 </script>
 <script th:inline="javascript">
@@ -110,12 +111,12 @@
                         }
                     },
                     {
-                        field: 'delete', title: '状态', width: 80, sort: true,
+                        field: 'status', title: '状态', width: 80, sort: true,
                         templet: function (d) {
-                            if (d.delete === 1) {
+                            if (d.status === 1) {
                                 return "正常";
-                            } else if (d.delete === 0) {
-                                return "删除";
+                            } else if (d.status === 0) {
+                                return "已删除";
                             }
                         }
                     },
@@ -132,6 +133,7 @@
             console.log(data.form);
             //当前容器的全部表单字段，名值对形式：{name: value}
             console.log(data.field);
+            // 数据表格动态渲染
             //阻止表单跳转。如果需要表单跳转，去掉这段即可。
             return false;
         });
@@ -140,11 +142,35 @@
         table.on('tool(blogType)', function (obj) {
             let layEvent = obj.event;
             let data = obj.data;
-            if (layEvent === "edit") {
-                // 打开详情窗口进行编辑
-                // window.parent.xadmin.add_tab(data.title, "/re/admin/blog-detail?blogId=" + data.id);
-            } else if (layEvent === "delete") {
+            if ("edit" === layEvent) {
 
+            } else if ("delete" === layEvent) {
+                // 首先弹出询问窗口进行确认
+                if (data.status === 0) {
+                    layer.msg("不能删除已经删除的项！" , {icon: 2});
+                } else {
+                    layer.confirm('此操作将会删除该分类下所有的博客，确认删除？', {
+                        btn: ['确认', '取消']
+                    }, function (index) {
+                        $.ajax({
+                            url: [[${#servletContext.contextPath}]] + "/blog_type/" + data.id,
+                            method: "DELETE",
+                            success: function (res) {
+                                console.log(res);
+                            },
+                            error: function (res) {
+                                console.log(res);
+                            }
+                        });
+                        layer.close(index);
+                    });
+                }
+            } else if ("restore" === layEvent) {
+                if (data.status === 1) {
+                    layer.msg("不能删恢复正常的项！" , {icon: 2});
+                } else {
+
+                }
             }
         });
     });

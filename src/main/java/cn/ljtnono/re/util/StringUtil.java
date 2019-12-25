@@ -35,4 +35,15 @@ public class StringUtil {
         return isEmpty(str.trim());
     }
 
+    /**
+     * 删除
+     * @param str 需要删除空格的字符串
+     * @return 已经删除空格的字符串, 如果为null 则返回null
+     */
+    public static String deleteBlank(String str) {
+        if (!isEmpty(str)) {
+            return str.replaceAll(" ", "");
+        }
+        return str;
+    }
 }

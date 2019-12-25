@@ -79,7 +79,7 @@
         table.render({
             elem: '.layui-table',
             height: 450,
-            url: [[${#servletContext.contextPath}]] + "/api/listBlogPage",
+            url: [[${#servletContext.contextPath}]] + "/blog/listBlogPage",
             page: true,
             method: "get",
             toolbar: true,
@@ -122,12 +122,12 @@
                         }
                     },
                     {
-                        field: 'delete', title: '状态', width: 80, sort: true,
+                        field: 'status', title: '状态', width: 80, sort: true,
                         templet: function (d) {
-                            if (d.delete === 1) {
+                            if (d.status === 1) {
                                 return "正常";
-                            } else if (d.delete === 0) {
-                                return "删除";
+                            } else if (d.status === 0) {
+                                return "已删除";
                             }
                         }
                     },
@@ -139,7 +139,7 @@
         });
         // 获取下拉选择框的值
         $.ajax({
-            url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
+            url: [[${#servletContext.contextPath}]] + "/blog_type",
             method: "GET",
             dataType: "json",
             success: function (res) {
@@ -177,7 +177,26 @@
                 // 打开详情窗口进行编辑
                 window.parent.xadmin.add_tab(data.title, "/re/admin/blog-detail?blogId=" + data.id);
             } else if (layEvent === "delete") {
-
+                layer.confirm('确认删除此博客？', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    // 发送ajax请求删除
+                    $.ajax({
+                        url: [[${#servletContext.contextPath}]] + "/blog/" + data.id,
+                        method: "DELETE",
+                        success: function (res) {
+                            if (res.request === "success" && res.status === 200) {
+                                layer.msg(res.message , {icon: 1});
+                            } else {
+                                layer.msg(res.message , {icon: 2});
+                            }
+                        },
+                        error: function () {
+                            layer.msg("请求失败，请检查网络", {icon: 2});
+                        }
+                    });
+                    layer.close(index);
+                });
             }
         });
     });

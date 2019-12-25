@@ -123,7 +123,7 @@
         if (blogId) {
             // ajax请求获取文章类型
             $.ajax({
-                url: [[${#servletContext.contextPath}]] + "/api/listBlogTypeAll",
+                url: [[${#servletContext.contextPath}]] + "/blog_type",
                 method: "GET",
                 dataType: "json",
                 success: function (res) {
@@ -133,37 +133,37 @@
                             $('#type').append(new Option(item.name, item.name));
                             options.push(item);
                         });
-                    }
-                },
-                error: function (res) {
-                    layer.msg("请求错误，请检查网络", {icon: 2});
-                }
-            });
-            $.ajax({
-                url: [[${#servletContext.contextPath}]] + "/blog/" + blogId,
-                method: "GET",
-                dataType: "json",
-                success: function (res) {
-                    if (res.request === "success" && res.status === 200 && res.data) {
-                        //给表单的各项属性赋值
-                        let blog = res.data[0];
-                        blogEntity = blog;
-                        $("#type option").each(function (index, item) {
-                            if ($(item).text() === blog.type) {
-                                let typeValue = $(item).text();
-                                $(item).attr("selected", "selected");
+                        $.ajax({
+                            url: [[${#servletContext.contextPath}]] + "/blog/" + blogId,
+                            method: "GET",
+                            dataType: "json",
+                            success: function (res) {
+                                if (res.request === "success" && res.status === 200 && res.data) {
+                                    //给表单的各项属性赋值
+                                    let blog = res.data[0];
+                                    blogEntity = blog;
+                                    $("#type option").each(function (index, item) {
+                                        if ($(item).text() === blog.type) {
+                                            let typeValue = $(item).text();
+                                            $(item).attr("selected", "selected");
+                                        }
+                                    });
+                                    form.val("form-blog", {
+                                        "id": blog.id,
+                                        "title": blog.title,
+                                        "author": blog.author,
+                                        "summary": blog.summary,
+                                        "contentMarkdown": blog.contentMarkdown
+                                    });
+                                    // 初始化markdown编辑器
+                                    blogEditor = editormd("blog-editormd", editorConfig);
+                                    form.render();
+                                }
+                            },
+                            error: function (res) {
+                                layer.msg("请求错误，请检查网络", {icon: 2});
                             }
                         });
-                        form.val("form-blog", {
-                            "id": blog.id,
-                            "title": blog.title,
-                            "author": blog.author,
-                            "summary": blog.summary,
-                            "contentMarkdown": blog.contentMarkdown
-                        });
-                        // 初始化markdown编辑器
-                        blogEditor = editormd("blog-editormd", editorConfig);
-                        form.render();
                     }
                 },
                 error: function (res) {
@@ -208,7 +208,7 @@
                             type: blog.type,
                             contentMarkdown: blogEditor.getMarkdown(),
                             contentHtml: blogEditor.getHTML(),
-                            delete: blogEntity.delete,
+                            status: blogEntity.status,
                             coverImage: blogEntity.coverImage
                         },
                         method: "PUT",

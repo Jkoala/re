@@ -1,11 +1,13 @@
 package cn.ljtnono.re.service.impl;
 
+import cn.ljtnono.re.entity.ReBlog;
 import cn.ljtnono.re.entity.ReBlogType;
 import cn.ljtnono.re.enumeration.GlobalErrorEnum;
 import cn.ljtnono.re.enumeration.ReEntityRedisKeyEnum;
 import cn.ljtnono.re.exception.GlobalToJsonException;
 import cn.ljtnono.re.mapper.ReBlogTypeMapper;
 import cn.ljtnono.re.pojo.JsonResult;
+import cn.ljtnono.re.service.IReBlogService;
 import cn.ljtnono.re.service.IReBlogTypeService;
 import cn.ljtnono.re.util.RedisUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -28,22 +30,29 @@ import java.util.Optional;
  * 博客类型服务实现类
  *
  * @author ljt
- * @version 1.0
- * @date 2019/11/16
+ * @version 1.0.2
+ * @date 2019/12/23
  */
 @Service
 public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogType> implements IReBlogTypeService {
 
-    @Autowired
     private RedisUtil redisUtil;
+
+    private IReBlogService iReBlogService;
+
+    @Autowired
+    public void setReBlogTypeServiceImpl(IReBlogService iReBlogService) {
+        this.iReBlogService = iReBlogService;
+    }
+
+    @Autowired
+    public void setRedisUtil(RedisUtil redisUtil) {
+        this.redisUtil = redisUtil;
+    }
 
     private static Logger logger = LoggerFactory.getLogger(ReBlogServiceImpl.class);
 
-    /**
-     * 获取所有的博客类型
-     *
-     * @return 所有的博客类型
-     */
+
     @Override
     public JsonResult listBlogTypeAll() {
         // 首先从缓存中获取，如果缓存中没有的话从数据库获取
@@ -66,13 +75,6 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         return JsonResult.success(reBlogTypeList, reBlogTypeList.size());
     }
 
-    /**
-     * 分页获取博客类型
-     *
-     * @param page  页码
-     * @param count 每页显示的条数
-     * @return JsonResult 对象
-     */
     @Override
     public JsonResult listBlogTypePage(Integer page, Integer count) {
         Optional<Integer> optionalPage = Optional.ofNullable(page);
@@ -106,16 +108,6 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         }
     }
 
-    /**
-     * 新增单个实体类
-     *
-     * @param entity 具体的实体类
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult saveEntity(ReBlogType entity) {
         Optional<ReBlogType> optionalReBlogType = Optional.ofNullable(entity);
@@ -133,34 +125,27 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         }
     }
 
-    /**
-     * 根据id删除一个实体类
-     *
-     * @param id 实体类id
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“, data: {删除的实体类}}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult deleteEntityById(Serializable id) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
         optionalId.orElseThrow(() -> new GlobalToJsonException(GlobalErrorEnum.PARAM_MISSING_ERROR));
         Integer blogTypeId = Integer.parseInt(id.toString());
         if (blogTypeId >= 1) {
-            // 在数据库中更新
-            boolean updateResult = update(new UpdateWrapper<ReBlogType>().set("`delete`", 0).eq("id", blogTypeId));
-            if (updateResult) {
-                // 删除缓存中的相关数据
-                ReBlogType reBlogType = getById(blogTypeId);
-                String key = ReEntityRedisKeyEnum.RE_BLOG_TYPE_KEY.getKey()
-                        .replace(":id", ":" + reBlogType.getId())
-                        .replace(":name", ":" + reBlogType.getName());
-                boolean b = redisUtil.hasKey(key);
-                if (b) {
-                    redisUtil.del(key);
-                }
+            // 在数据库中更新相关标签的状态
+            boolean updateResult = update(new UpdateWrapper<ReBlogType>().set("status", 0).eq("id", blogTypeId));
+            ReBlogType reBlogType = getById(blogTypeId);
+            boolean update = iReBlogService.update(new UpdateWrapper<ReBlog>().set("status", 0).eq("type", reBlogType.getName()));
+            if (updateResult && update) {
+                // 删除所有相关缓存
+                redisUtil.deleteByPattern(ReEntityRedisKeyEnum.RE_BLOG_TYPE_KEY
+                        .getKey().replace(":id", ":*")
+                        .replace(":name", ":*"));
+                redisUtil.deleteByPattern(ReEntityRedisKeyEnum.RE_BLOG_TYPE_PAGE_KEY
+                        .getKey().replace(":page", ":*")
+                        .replace(":count", ":*"));
+                redisUtil.deleteByPattern(ReEntityRedisKeyEnum.RE_BLOG_TYPE_PAGE_TOTAL_KEY
+                        .getKey().replace(":page", ":*")
+                        .replace(":count", ":*"));
                 return JsonResult.success(Collections.singletonList(reBlogType), 1);
             } else {
                 throw new GlobalToJsonException(GlobalErrorEnum.SYSTEM_ERROR);
@@ -170,17 +155,6 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         }
     }
 
-    /**
-     * 根据id更新一个实体类
-     *
-     * @param id 实体类的id
-     * @param entity 需要更新的实体类
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult updateEntityById(Serializable id, ReBlogType entity) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
@@ -208,16 +182,6 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         }
     }
 
-    /**
-     * 根据id获取一个实体类
-     *
-     * @param id 实体类id
-     * @return 返回操作结果
-     * 操作成功返回（如果有附加信息，那么通过fields字段带回，其中特别注意如果data为null，那么不返回)
-     * {request: "success", status: 200, message: "操作成功“, data: {实体类}}
-     * 操作失败返回
-     * {request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult getEntityById(Serializable id) {
         Optional<Serializable> optionalId = Optional.ofNullable(id);
@@ -234,14 +198,14 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
             ReBlogType reBlogType;
             if (b) {
                 reBlogType = (ReBlogType) redisUtil.getByPattern(key);
-                if (reBlogType == null || reBlogType.getDelete() == 0) {
+                if (reBlogType == null || reBlogType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reBlogType), 1);
             } else {
                 reBlogType = getById(blogTypeId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reBlogType == null || reBlogType.getDelete() == 0) {
+                if (reBlogType == null || reBlogType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BLOG_TYPE_KEY.getKey()
@@ -256,13 +220,6 @@ public class ReBlogTypeServiceImpl extends ServiceImpl<ReBlogTypeMapper, ReBlogT
         }
     }
 
-    /**
-     * 获取实体类的所有列表
-     *
-     * @return 实体类所有列表
-     * 操作成功{request: "success", status: 200, message: "操作成功“, data: {列表}}
-     * 操作失败{request: "fail", status: 具体错误码{@link GlobalErrorEnum}, message: 具体错误信息{@link GlobalErrorEnum}}
-     */
     @Override
     public JsonResult listEntityAll() {
         List<ReBlogType> reBlogTypeList = list();

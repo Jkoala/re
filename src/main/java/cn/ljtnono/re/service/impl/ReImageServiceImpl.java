@@ -260,14 +260,14 @@ public class ReImageServiceImpl extends ServiceImpl<ReImageMapper, ReImage> impl
             ReImage reImage;
             if (b) {
                 reImage = (ReImage) redisUtil.getByPattern(key);
-                if (reImage == null || reImage.getDelete() == 0) {
+                if (reImage == null || reImage.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reImage), 1);
             } else {
                 reImage = getById(imageId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reImage == null || reImage.getDelete() == 0) {
+                if (reImage == null || reImage.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_IMAGE_KEY.getKey()

@@ -167,14 +167,14 @@ public class ReSkillServiceImpl extends ServiceImpl<ReSkillMapper, ReSkill> impl
             ReSkill reSkill;
             if (b) {
                 reSkill = (ReSkill) redisUtil.getByPattern(key);
-                if (reSkill == null || reSkill.getDelete() == 0) {
+                if (reSkill == null || reSkill.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reSkill), 1);
             } else {
                 reSkill = getById(skillId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reSkill == null || reSkill.getDelete() == 0) {
+                if (reSkill == null || reSkill.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_SKILL_KEY.getKey()

@@ -182,14 +182,14 @@ public class ReRoleServiceImpl extends ServiceImpl<ReRoleMapper, ReRole> impleme
             ReRole reRole;
             if (b) {
                 reRole = (ReRole) redisUtil.getByPattern(key);
-                if (reRole == null || reRole.getDelete() == 0) {
+                if (reRole == null || reRole.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reRole), 1);
             } else {
                 reRole = getById(roleId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reRole == null || reRole.getDelete() == 0) {
+                if (reRole == null || reRole.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_LINK_TYPE_KEY.getKey()

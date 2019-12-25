@@ -54,7 +54,7 @@
     </ul>
     <ul class="layui-nav right">
         <li class="layui-nav-item">
-            <a href="javascript:">admin</a>
+            <a href="javascript:" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}"></a>
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd><a href="javascript:" onclick="xadmin.add_tab('编写博客','/re/admin/blog-edit')">编写博客</a></dd>

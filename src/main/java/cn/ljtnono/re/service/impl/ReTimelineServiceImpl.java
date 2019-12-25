@@ -159,14 +159,14 @@ public class ReTimelineServiceImpl extends ServiceImpl<ReTimelineMapper, ReTimel
             ReTimeline reTimeline;
             if (b) {
                 reTimeline = (ReTimeline) redisUtil.getByPattern(key);
-                if (reTimeline == null || reTimeline.getDelete() == 0) {
+                if (reTimeline == null || reTimeline.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reTimeline), 1);
             } else {
                 reTimeline = getById(timelineId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reTimeline == null || reTimeline.getDelete() == 0) {
+                if (reTimeline == null || reTimeline.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_TIMELINE_KEY.getKey()

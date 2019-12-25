@@ -185,14 +185,14 @@ public class ReUserServiceImpl extends ServiceImpl<ReUserMapper, ReUser> impleme
             ReUser reUser;
             if (b) {
                 reUser = (ReUser) redisUtil.getByPattern(key);
-                if (reUser == null || reUser.getDelete() == 0) {
+                if (reUser == null || reUser.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reUser), 1);
             } else {
                 reUser = getById(userId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reUser == null || reUser.getDelete() == 0) {
+                if (reUser == null || reUser.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_USER_KEY.getKey()

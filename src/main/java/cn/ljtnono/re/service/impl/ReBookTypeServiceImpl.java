@@ -162,14 +162,14 @@ public class ReBookTypeServiceImpl extends ServiceImpl<ReBookTypeMapper, ReBookT
             ReBookType reBookType;
             if (b) {
                 reBookType = (ReBookType) redisUtil.getByPattern(key);
-                if (reBookType == null || reBookType.getDelete() == 0) {
+                if (reBookType == null || reBookType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 jsonResult = JsonResult.success(Collections.singletonList(reBookType), 1);
             } else {
                 reBookType = getById(bookTypeId);
                 // 如果不存在，那么返回 找不到资源错误
-                if (reBookType == null || reBookType.getDelete() == 0) {
+                if (reBookType == null || reBookType.getStatus() == 0) {
                     throw new GlobalToJsonException(GlobalErrorEnum.NOT_EXIST_ERROR);
                 }
                 redisUtil.set(ReEntityRedisKeyEnum.RE_BOOK_TYPE_KEY.getKey()

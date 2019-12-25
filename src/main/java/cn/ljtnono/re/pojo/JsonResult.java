@@ -9,8 +9,8 @@ import java.util.Map;
 
 /** 请求JSON数据的模板
  *  @author ljt
- *  @date 2019/10/13
- *  @version 1.1
+ *  @date 2019/12/19
+ *  @version 1.0.2
 */
 public class JsonResult implements Serializable {
 

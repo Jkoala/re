@@ -25,7 +25,6 @@ public class FtpClientUtil {
     /** 单例模式 */
     private FtpClientUtil(){}
 
-
     /**
      * 单例模式获取实例
      * @return 返回工具类实例
@@ -50,19 +49,11 @@ public class FtpClientUtil {
      * @return 上传成功返回true，上传失败返回false
      * @see ReFtpClient#uploadFile(String, String, InputStream)
      */
-    public boolean uploadFile(String filePath, String fileName, InputStream input) throws Exception {
+    public String uploadFile(String filePath, String fileName, InputStream input) throws Exception {
         ReFtpClient reFtpClient = reFtpClientPool.borrowObject();
-//        boolean result = reFtpClient.uploadFile(filePath, fileName, input);
-//        reFtpClientPool.returnObject(reFtpClient);
-        System.out.println(reFtpClient);
-        return false;
+        String s = reFtpClient.uploadFile("/files", "demo.txt", new FileInputStream("C:\\Users\\ljt\\Desktop\\demo.txt"));
+        reFtpClientPool.returnObject(reFtpClient);
+        return s;
     }
 
-//    public boolean uploadFile(String filePath, String filename, byte[] b) {
-//        return false;
-//    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(new FtpClientUtil().uploadFile(null, null, null));
-    }
 }

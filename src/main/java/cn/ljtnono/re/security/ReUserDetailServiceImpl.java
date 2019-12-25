@@ -5,7 +5,6 @@ import cn.ljtnono.re.entity.ReUser;
 import cn.ljtnono.re.service.IReUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,9 +26,12 @@ import java.util.Optional;
 @Component("reUserDetailService")
 public class ReUserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
     private IReUserService iReUserService;
 
+    @Autowired
+    public ReUserDetailServiceImpl(IReUserService iReUserService) {
+        this.iReUserService = iReUserService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,9 +45,7 @@ public class ReUserDetailServiceImpl implements UserDetailsService {
         Optional.ofNullable(reRoleList)
                 .orElseThrow(() -> new RuntimeException("权限异常"));
         List<GrantedAuthority> authorities = new ArrayList<>(10);
-        reRoleList.forEach(reRole -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + reRole.getName()));
-        });
+        reRoleList.forEach(reRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + reRole.getName())));
         // 根据角色查询出所有的权限
 //        List<RePermission> permissionList = new ArrayList<>(8);
 //        reRoleList.forEach(reRole -> {
@@ -60,6 +60,4 @@ public class ReUserDetailServiceImpl implements UserDetailsService {
 //        String password = passwordEncoder.encode(reUser.getPassword());
         return new User(username, reUser.getPassword(), authorities);
     }
-
-
 }

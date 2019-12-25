@@ -3,9 +3,10 @@ package cn.ljtnono.re.ftp;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 
 /**
+ * 包装连接池对象
  * @author ljt
- * @date 2019/11/3
- * @version 1.0
+ * @date 2019/11/27
+ * @version 1.1
  */
 public class ReFtpClientPool {
 
