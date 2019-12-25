@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Root Element 根元素</title>
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/bootstrap/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/font-awesome-4.7.0/css/font-awesome.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/static/fore/lib/swiper4.5.1/css/swiper.min.css}">-->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/fore/css/style.min.css}">
+<!--    <script th:src="@{/static/fore/lib/jquery-1.11.0.min.js}"></script>-->
+<!--    <script th:src="@{/static/fore/lib/swiper4.5.1/js/swiper.min.js}"></script>-->
+<!--    <script th:src="@{/static/fore/lib/bootstrap/js/bootstrap.min.js}"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/Swiper/4.5.1/js/swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script th:src="@{/static/fore/js/utils.js}"></script>
+    <!-- editor.md编辑器相关 -->
+    <link rel="stylesheet" th:href="@{/static/fore/lib/editor.md-1.5.0/css/editormd.preview.min.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/google-code-prettify/prettify.css}">
+    <link rel="stylesheet" th:href="@{/static/fore/lib/google-code-prettify/skins/tomorrow.min.css}">
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/marked.min.js}"></script>
+    <script th:src="@{/static/fore/lib/google-code-prettify/prettify.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/raphael.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/underscore.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/sequence-diagram.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/flowchart.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/lib/jquery.flowchart.min.js}"></script>
+    <script th:src="@{/static/fore/lib/editor.md-1.5.0/editormd.min.js}"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+    <style>
+        @media screen and (max-width: 768px){
+            .message {
+                display: none;
+            }
+            .content-main .content-detail {
+                margin-top: 0;
+            }
+        }
+        .detail-content ul, .detail-content ol {
+            list-style: initial;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fore/header.html"></div>
+<!-- 内容区 -->
+<div class="content pr">
+    <!-- 文章详情部分 -->
+    <div class="content-main">
+        <section class="content-detail mt15">
+            <nav class="detail-nav p10">
+                <a th:href="${#servletContext.contextPath}"><i class="fa fa-home"></i></a>
+                <i class="fa fa-angle-double-right"></i>
+                <a th:href="${#servletContext.contextPath} + '/articles'"><span>技术文章</span></a>
+                <i class="fa fa-angle-double-right"></i>
+                <a th:href="${#servletContext.contextPath} + '/articles/' + ${blog.type}"><span th:text="${blog.type}">python</span></a>
+                <i class="fa fa-angle-double-right"></i>
+                <a th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}"><span th:text="${blog.title}">python2爬虫系列教程</span></a>
+            </nav>
+            <header class="detail-header p10">
+                <p class="article-title f14 mb5" th:text="${blog.title}">Java教程</p>
+                <a href="javascript:"><i class="fa fa-list"></i><span th:text="${blog.type}">Java</span></a>
+                <a href="javascript:"><i class="fa fa-user"></i><span th:text="${blog.author}">ljtnono</span></a>
+                <a href="javascript:"><i class="fa fa-calendar-times-o"></i><span th:text="${#dates.format(blog.createTime,'yyyy-MM-dd HH:mm')}">2015-02-21 14:14</span></a>
+                <a href="javascript:"><i class="fa fa-eye"></i><span th:text="${blog.view} + '浏览'">1565274浏览</span></a>
+                <a href="javascript:"><i class="fa fa-comment"></i><span th:text="${blog.comment} + '评论'">21评论</span></a>
+            </header>
+            <section class="detail-content p20" id="detail-content" style="min-height: 1000px">
+                <textarea cols="30" rows="10" style="display: none" th:text="${blog.contentMarkdown}"></textarea>
+            </section>
+            <section class="detail-label p10">
+                <i class="fa fa-tag f20"></i>
+                <a class="label" th:href="${#servletContext.contextPath} + '/articles/' + ${blog.type}" th:text="${blog.type}">
+                    python
+                </a>
+            </section>
+            <section class="detail-pre-next p10 flex flex-justify-content-space-between">
+                <div class="pre" th:if="${prev != null}">
+                    <a th:href="${#servletContext.contextPath} + '/article/' + ${prev.id}" th:inline="text"><i class="fa fa-angle-double-left"></i>[[${prev.title}]]</a>
+                </div>
+                <div class="next" th:if="${next != null}">
+                    <a th:href="${#servletContext.contextPath} + '/article/' + ${next.id}" th:inline="text">[[${next.title}]]<i class="fa fa-angle-double-right"></i></a>
+                </div>
+            </section>
+            <section class="detail-hot-list p10">
+                <ul>
+                    <li class="mb10 mr10" th:each="blog : ${application.guessYouLikeList}"><i class="fa fa-minus"></i><a th:href="${#servletContext.contextPath} + '/article/' + ${blog.id}" class="ml5" th:text="${blog.title}">[Python3 网络爬虫开发实战]9.5-使用代理爬取微信</a></li>
+                </ul>
+            </section>
+            <!--留言区-->
+            <div class="title p10">网友留言</div>
+            <section class="mb20 p10" id="comments" style="background-color:#FFFFFF;"></section>
+        </section>
+    </div>
+    <div th:replace="fore/content_side.html"></div>
+</div>
+<div th:replace="fore/footer.html"></div>
+</body>
+<script th:src="@{/static/fore/js/common.js}"></script>
+<script>
+    // 初始化评论系统
+    new Valine({
+        el: '#comments',
+        appId: 'iyTC528gHvHe09Qg8b5HPrvj-gzGzoHsz',
+        appKey: '8ndLNYwjGS7FPLKdzgRKCfeL',
+        notify: false,
+        verify: false,
+        avatar: 'wavatar',
+        placeholder: '评论请留下您的邮箱和昵称....'
+    });
+
+    editormd.markdownToHTML("detail-content", {
+        htmlDecode: "style,script,iframe",
+        emoji: true,
+        taskList: true,
+        tocm: true,
+        tex: true, // 默认不解析
+        flowChart: true, // 默认不解析
+        sequenceDiagram: true, // 默认不解析
+        codeFold: true
+    });
+</script>
+</html>

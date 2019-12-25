@@ -1,0 +1,61 @@
+<!-- 头部分 -->
+<header id="header" th:fragment="header">
+    <div class="logo">
+        <a href="/re" class="cursor-pointer">
+            <h1>
+                <img th:src="@{/static/fore/images/logo_word.png}" src="fore/images/logo_word.png" alt="RootElement根元素" class="logo-word"
+                     title="RootElement根元素">
+            </h1>
+        </a>
+    </div>
+    <!-- 导航按钮和搜索按钮 -->
+    <div class="side-nav-header">
+        <div class="side-nav-bar cursor-pointer fl">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </div>
+        <div class="side-nav-search cursor-pointer fr">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+    </div>
+    <!-- 导航栏 -->
+    <nav class="nav pr">
+        <ul class="nav-menu">
+            <li class="nav-item fl">
+                <a th:href="${#servletContext.contextPath}" th:if="${currentPage == 'index'}" class="nav-active"><i class="fa fa-home" aria-hidden="true"></i>首页</a>
+                <a th:href="${#servletContext.contextPath}" th:if="${currentPage != 'index'}"><i class="fa fa-home" aria-hidden="true"></i>首页</a>
+            </li>
+            <li class="nav-item fl">
+                <a th:href="${#servletContext.contextPath} + '/articles'" th:if="${currentPage == 'articles'}" class="nav-active"><i class="fa fa-wrench" aria-hidden="true"></i>技术文章</a>
+                <a th:href="${#servletContext.contextPath} + '/articles'" th:if="${currentPage != 'articles'}"><i class="fa fa-wrench" aria-hidden="true"></i>技术文章</a>
+            </li>
+            <li class="nav-item fl">
+                <a th:href="${#servletContext.contextPath} + '/support'" th:if="${currentPage == 'support'}" class="nav-active"><i class="fa fa-thumbs-up" aria-hidden="true"></i>支持我</a>
+                <a th:href="${#servletContext.contextPath} + '/support'" th:if="${currentPage != 'support'}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>支持我</a>
+            </li>
+            <li class="nav-item fl">
+                <a th:href="${#servletContext.contextPath} + '/about'" th:if="${currentPage == 'about'}" class="nav-active"><i class="fa fa-info-circle" aria-hidden="true"></i>关于作者</a>
+                <a th:href="${#servletContext.contextPath} + '/about'" th:if="${currentPage != 'about'}"><i class="fa fa-info-circle" aria-hidden="true"></i>关于作者</a>
+            </li>
+            <li class="nav-item nav-search fr">
+                <a href="#" style="padding: 20px 22px;">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="line h10" style="opacity: 0.9"></div>
+    <!-- 侧边导航栏 -->
+    <div class="side-nav flex flex-direction-column flex-align-items-center">
+        <a th:href="${#servletContext.contextPath}" style="margin-top: 40px;">首页</a>
+        <a th:href="${#servletContext.contextPath} + '/articles'">技术文章</a>
+        <a th:href="${#servletContext.contextPath} + '/support'">支持我</a>
+        <a th:href="${#servletContext.contextPath} + '/about'">关于作者</a>
+    </div>
+</header>
+<!-- 消息通知栏 -->
+<div class="w message" th:fragment="message">
+    <div class="message-content">
+        <i class="fa fa-volume-up"></i>
+        <span class="f16">看到网上新闻美国的贴吧将成为中国公司</span>
+    </div>
+</div>
