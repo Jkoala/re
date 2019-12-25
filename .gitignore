@@ -10,3 +10,7 @@ gen
 /target/
 !/re.iml
 !/.idea/
+!/HELP.md
+!/mvnw.cmd
+!/mvnw
+/.idea/
